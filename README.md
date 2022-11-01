@@ -61,6 +61,20 @@ dca09761-57a0-40f1-95e7-83f60b0c49ee|{"command_timestamp":"2020-11-23T09:12:00.0
 docker-compose exec aan-kafka bash -c "kafka-console-consumer --bootstrap-server kafka:9092 --topic aurora-aan-events --property print.timestamp=true --property print.key=true --property print.value=true --from-beginning"
 ```
 
+#### Visualizar la blockchain por HTTP
+
+```
+curl http://localhost:15001/event/all
+```
+
+#### Visualizar registros desde el proyector por HTTP
+
+
+```
+# Visualizar todos los registros para una entidad. Reemplazar [entidad] por el identificador de la entidad.
+curl http://localhost:15002/[entidad]/all
+```
+
 ### Limpieza
 
 #### Reiniciar cluster
