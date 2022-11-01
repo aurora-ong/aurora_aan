@@ -216,6 +216,7 @@
     <configuration default="false" name="ProcessorKSA" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ong.aurora.processor.ProcessorKSA" />
       <module name="aan-processor-ksa.main" />
+      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -223,6 +224,7 @@
     <configuration default="false" name="ProjectorKSA" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ong.aurora.projector.ProjectorKSA" />
       <module name="aan-projector-ksa.main" />
+      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
