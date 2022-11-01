@@ -1,0 +1,10 @@
+8eec4171-8010-49d4-acdd-2bf8fd75b8d7|{"command_timestamp": "2020-11-23T09:12:00.000Z", "command_name": "ou.create", "command_data": { "ou_id": "aurora.ong", "ou_name": "Aurora ONG", "ou_goal": "Levantar Iniciativa Aurora" } }
+
+
+
+8eec4171-8010-49d4-acdd-2bf8fd75b8d7|{"command_timestamp": "2020-11-23T09:12:00.000Z", "command_name": "ou.create", "command_data": { "ou_id": "aurora.ong", "ou_name": "Aurora ONG 2", "ou_goal": "Levantar Iniciativa Aurora y otros" } }
+
+8eec4171-8010-49d4-acdd-2bf8fd75b8d7|{"command_timestamp": "2020-11-23T09:12:00.000Z", "command_name": "ou.create", "command_data": { "ou_id": "aurora.ong", "ou_name": "Aurora ONG 3", "ou_goal": "Ninguno" } }
+
+
+5f2db178-4110-4996-bcd4-984c34d1b172|{"command_timestamp": "2020-11-23T09:12:00.000Z", "command_name": "ou.create", "command_data": { "ou_id": "aurora.ong.head", "ou_name": "Departamento de estrategia", "ou_goal": "Diseñar y ejecutar estrategias" } }

@@ -1,0 +1,7 @@
+d88fe6a1-fda0-4663-be8d-8f91c42fa253|{"command_timestamp": "2020-11-23T09:12:00.000Z", "command_name": "person.create", "command_data": {"person_id": "d30fb777-4f8d-4c9f-91e6-31db890c9fa3", "person_name": "Pedro", "person_lastname": "Mora", "person_mail": "pedro@gmail.com"}}
+
+adccb525-ce2a-42d2-8830-4f1e2ec879c1|{"command_timestamp": "2020-11-23T09:12:00.000Z", "command_name": "person.create", "command_data": {"person_id": "ba25b853-19cb-4d0a-a7d6-42739ccdbd94", "person_name": "Pablo", "person_lastname": "Rogriguez", "person_mail": "pablo@gmail.com"}}
+
+
+
+adccb525-ce2a-42d2-8830-4f1e2ec879c1|{"command_timestamp": "2020-11-23T09:12:00.000Z", "command_name": "person.create", "command_data": {"person_id": "ba25b853-19cb-4d0a-a7d6-42739ccdbd94", "person_name": "Pablotox", "person_lastname": "Rogriguez", "person_mail": "pablotox@gmail.com"} }

@@ -1,0 +1,3 @@
+rootProject.name = 'aan-projector-ksa'
+
+includeBuild('../aan-commons')
