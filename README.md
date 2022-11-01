@@ -1,17 +1,75 @@
-### Para desplegar utilizar: 
 
-docker-compose up
+# AURORA-AAN
 
-### Para producir eventos al tópico de comandos ingresar al contenedor de kafka y ejecutar
+Proyecto de implementación del Modelo Aurora de la Iniciativa Aurora (https://aurora.ong).     
 
-`kafka-console-producer --bootstrap-server kafka:9092  --topic aurora-aan-commands --property 'parse.key=true' --property 'key.separator=|'`
- 
+<b>Responsable del proyecto:</b><br /> 
+Pavel Delgado (p.delgadohurtado@gmail.com)
 
-### Para ver los eventos procesados ingresar al contenedor de kafka y ejecutar
-  
-`kafka-console-consumer --bootstrap-server localhost:9092 --topic aurora-aan-events --property print.timestamp=true --property print.key=true --property print.value=true --from-beginning`
- 
 
-### Producir comandos de prueba
+<hr />
 
-`kafka-console-producer --bootstrap-server kafka:9092 --topic aurora-aan-commands --property 'parse.key=true' --property 'key.separator=|' < aan-command-seed-[entidad].json`
+### Módulos del proyecto
+
+
+
+### Pre-requisitos
+
+- Docker (https://www.docker.com/)
+- Java 17 (https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+
+### Ejecutar proyecto (dev)
+
+#### 1. Desplegar cluster kafka:
+
+`docker-compose up`
+
+#### 2. Ejecutar procesador  
+
+```
+cd /aan-commands/
+./gradlew run
+```
+
+#### 3. Ejecutar projector
+
+```
+cd /aan-projector/`
+./gradlew run
+```
+
+### Producir eventos
+
+#### Ejecutar comandos por consola
+
+```
+docker-compose exec aan-kafka bash -c "kafka-console-producer --bootstrap-server kafka:9092 --topic aurora-aan-commands --property 'parse.key=true' --property 'key.separator=|'"
+```
+
+Los comandos deben ingresarse con el siguiente formato: `key|value`. 
+
+Ejemplos: 
+```
+dca09761-57a0-40f1-95e7-83f60b0c49ee|{"command_timestamp":"2020-11-23T09:12:00.000Z","command_name":"authorization.consume","command_data":{"authorization_id":"ecc8b131-26b7-4723-8943-984e65f155be"}}
+```
+
+<small><b>Nota: Puedes encontrar comandos de prueba en el directorio `/ann-kafka/seed-data/aan-command/`</small></b>. 
+
+#### Visualizar comandos por consola
+
+```
+docker-compose exec aan-kafka bash -c "kafka-console-consumer --bootstrap-server kafka:9092 --topic aurora-aan-events --property print.timestamp=true --property print.key=true --property print.value=true --from-beginning"
+```
+
+### Limpieza
+
+#### Reiniciar cluster
+
+`docker-compose down`
+
+<small><b>Nota: Esto eliminará la información ingresada previamente.</small></b>
+
+### Contribución
+
+Si deseas contribuir o reportar errores contacta con el responsable del proyecto.
+
