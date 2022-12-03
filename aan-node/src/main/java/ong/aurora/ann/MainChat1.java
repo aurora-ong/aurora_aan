@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 
@@ -30,23 +31,26 @@ public class MainChat1 {
 
         Chat chat = new Chat();
 
+        Chat chat1 = new Chat();
+
+
+
         Host thisNode = new HostBuilder()
-                .protocol(new Chat())
+                .protocol(chat1)
 //                .transport(WsTransport::new)
-                .listen("/ip4/127.0.0.1/tcp/3000")
+                .listen("/ip4/192.168.4.22/tcp/3000")
                 .build();
 
         thisNode.start().get();
         log.info("Escuchando en: {}", thisNode.listenAddresses());
 
 
-        Chat chat1 = new Chat();
-        StreamPromise<Chatter> streamPromise = (StreamPromise<Chatter>) chat1.dial(thisNode, Multiaddr.fromString("/ip4/127.0.0.1/tcp/4000/p2p/QmSzHfcV8brJXG7NqFHPmRogynT7Ka7eNyyKaMxa4tnYjh"));
+        StreamPromise<Chatter> streamPromise = (StreamPromise<Chatter>) chat1.dial(thisNode, Multiaddr.fromString("/ip4/192.168.4.22/tcp/4000/p2p/QmVqy45nk9TE8WGZ8sKxRACXYkSJBMy97VHSJJ9DjPppFw"));
 
         Chatter chatter = streamPromise.getController().get();
+Thread.sleep(10000);
 
         chatter.send("Hola mundo");
-
 
 
 

@@ -26,14 +26,30 @@ public class MainChat2 {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         System.out.println("Hello world!");
 
+        Chat chat = new Chat();
+
         Host thisNode = new HostBuilder()
-                .protocol(new Chat())
+                .protocol(chat)
 //                .transport(WsTransport::new)
-                .listen("/ip4/127.0.0.1/tcp/4000")
+                .listen("/ip4/192.168.4.22/tcp/4000")
                 .build();
 
         thisNode.start().get();
         log.info("Escuchando en: {}", thisNode.listenAddresses());
+
+        thisNode.addConnectionHandler(conn -> {
+
+            log.info("Nueva conexión remote: {} local: {} peerId {}", conn.remoteAddress(), conn.localAddress(), conn.secureSession().getRemoteId());
+            try {
+                chat.dial(thisNode, conn.secureSession().getRemoteId(), conn.remoteAddress()).getController().get().send("GG");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+
 
     }
 }

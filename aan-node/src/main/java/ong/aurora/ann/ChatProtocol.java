@@ -17,7 +17,7 @@ public class ChatProtocol extends ProtocolHandler<ChatController> {
 
 
     public ChatProtocol(long initiatorTrafficLimit, long responderTrafficLimit) {
-        super(initiatorTrafficLimit, responderTrafficLimit);
+        super(Long.MAX_VALUE, Long.MAX_VALUE);
     }
 
     @NotNull
@@ -39,6 +39,7 @@ public class ChatProtocol extends ProtocolHandler<ChatController> {
         CompletableFuture<Void> completableFuture = new CompletableFuture<>();
         Chatter chatController = new Chatter(completableFuture);
         stream.pushHandler(chatController);
-        return completableFuture.thenApply(unused -> chatController);
+
+        return CompletableFuture.completedFuture(chatController);
     }
 }

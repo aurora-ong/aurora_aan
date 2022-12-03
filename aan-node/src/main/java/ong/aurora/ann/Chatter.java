@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.Charset;
 import java.util.concurrent.CompletableFuture;
 
-public class Chatter implements ProtocolMessageHandler<ByteBuf>, ChatController {
+public class Chatter implements ProtocolMessageHandler<String>, ChatController {
 
     private static final Logger log = LoggerFactory.getLogger(Chatter.class);
 
@@ -33,15 +33,22 @@ public class Chatter implements ProtocolMessageHandler<ByteBuf>, ChatController 
     public void onActivated(@NotNull Stream stream) {
 
 //        ProtocolMessageHandler.super.onActivated(stream);
-        log.info("onActivated");
+        log.info("onActivated {}", stream.remotePeerId());
+        stream.getProtocol().thenAccept(s -> log.info("Get Protocol: {}", s));
         this.stream = stream;
+        stream.writeAndFlush("LALA");
+
         this.ready.complete(null);
     }
 
+
+
     @Override
-    public void onMessage(@NotNull Stream stream, ByteBuf msg) {
+    public void onMessage(@NotNull Stream stream, String msg) {
+        log.info("onMessage");
+
 //        ProtocolMessageHandler.super.onMessage(stream, msg);
-        log.info("Mensaje recibido de {} {}", this.stream.getConnection().secureSession().getLocalId(), msg.toString(Charset.defaultCharset()));
+        log.info("Mensaje recibido de {} {}", this.stream.getConnection().secureSession().getLocalId(), msg);
     }
 
     @Override
