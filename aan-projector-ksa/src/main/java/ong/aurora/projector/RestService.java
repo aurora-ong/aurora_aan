@@ -73,6 +73,8 @@ class RestService {
 
     <K, V extends EntityValue<V>> void entityOne(Context context, AANEntity<K, V> entity) {
 
+
+
         ReadOnlyKeyValueStore<K, MaterializedEntity<V>> keyValueStore = streams.store(
                 StoreQueryParameters.fromNameAndType(
                         "projector-".concat(entity.entityName).concat("-table"), QueryableStoreTypes.keyValueStore()));

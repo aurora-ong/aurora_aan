@@ -3,8 +3,10 @@ package ong.aurora.projector;
 import ong.aurora.commons.entity.AANEntity;
 import ong.aurora.commons.event.Event;
 import ong.aurora.commons.model.AANModel;
+import ong.aurora.commons.peer.node.ANNNodeEntity;
 import ong.aurora.commons.serialization.JsonSerdes;
 import ong.aurora.model.v_0_0_1.AuroraOM;
+import ong.aurora.model.v_0_0_1.entity.person.PersonEntity;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -14,6 +16,7 @@ import org.apache.kafka.streams.state.HostInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -28,7 +31,12 @@ public class ProjectorKSA {
     public static void main(String[] args) {
         log.info("Cargando projector-ksa");
 
-        List<AANEntity> registeredEntities = aanModel.getModelEntities();
+        List<AANEntity> aanEntities = List.of(new ANNNodeEntity());
+
+        List<AANEntity> proyectorEntities = new ArrayList<>();
+        proyectorEntities.addAll(aanEntities);
+        proyectorEntities.addAll(aanModel.getModelEntities());
+
 
         Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "projector-ksa");
@@ -49,14 +57,14 @@ public class ProjectorKSA {
         BranchedKStream<String, Event> branchedEvents2 =
                 eventKStream.split(Named.as("projector-"));
 
-        registeredEntities.forEach(entity -> {
+        proyectorEntities.forEach(entity -> {
             Predicate<String, Event> createPredicate =
                     (key, event) -> event.eventName().equals(entity.entityName.concat(".created"));
             branchedEvents2.branch(createPredicate, Branched.as(entity.entityName));
         });
 
         Map<String, KStream<String, Event>> branchedEvents = branchedEvents2.noDefaultBranch();
-        registeredEntities.forEach(entity -> EntityProjector.configureBranch(entity, branchedEvents));
+        proyectorEntities.forEach(entity -> EntityProjector.configureBranch(entity, branchedEvents));
 
         KafkaStreams streams = new KafkaStreams(builder.build(), props);
 
@@ -67,7 +75,7 @@ public class ProjectorKSA {
 
         HostInfo hostInfo = new HostInfo("localhost", 15002);
 //        RestService service = new RestService(hostInfo, streams);
-        RestService service = new RestService(hostInfo, streams, registeredEntities);
+        RestService service = new RestService(hostInfo, streams, proyectorEntities);
         log.info("Starting Digital Twin REST Service");
         service.start();
 
