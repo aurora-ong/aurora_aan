@@ -12,8 +12,11 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    jcenter()
     maven { url "https://artifacts.consensys.net/public/maven/maven/" }
+
+    maven {
+        url "https://dl.cloudsmith.io/public/libp2p/jvm-libp2p/maven/"
+    }
 }
 
 
@@ -21,9 +24,7 @@ dependencies {
 // https://mvnrepository.com/artifact/io.libp2p/jvm-libp2p-minimal
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
 
-    implementation group: 'io.libp2p', name: 'jvm-libp2p-minimal', version: '0.10.0-RELEASE'
-
-//    implementation files('libs/jvm-libp2p-minimal-0.10.0-RELEASE.jar')
+    implementation 'io.libp2p:jvm-libp2p-minimal:0.10.0-RELEASE'
 
     // logging
     implementation 'org.slf4j:slf4j-api:1.7.36'

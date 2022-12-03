@@ -14,11 +14,18 @@
       <module name="aan-projector-ksa" target="17" />
       <module name="aan-projector-ksa.main" target="17" />
       <module name="aan-projector-ksa.test" target="17" />
-      <module name="jvm-libp2p-minimal" target="1.8" />
-      <module name="jvm-libp2p-minimal.jmh" target="1.8" />
-      <module name="jvm-libp2p-minimal.main" target="1.8" />
-      <module name="jvm-libp2p-minimal.test" target="1.8" />
-      <module name="jvm-libp2p-minimal.testFixtures" target="1.8" />
+      <module name="aurora-aan.aan-commons" target="17" />
+      <module name="aurora-aan.aan-commons.main" target="17" />
+      <module name="aurora-aan.aan-commons.test" target="17" />
+      <module name="aurora-aan.aan-node" target="17" />
+      <module name="aurora-aan.aan-node.main" target="17" />
+      <module name="aurora-aan.aan-node.test" target="17" />
+      <module name="aurora-aan.aan-processor-ksa" target="17" />
+      <module name="aurora-aan.aan-processor-ksa.main" target="17" />
+      <module name="aurora-aan.aan-processor-ksa.test" target="17" />
+      <module name="aurora-aan.aan-projector-ksa" target="17" />
+      <module name="aurora-aan.aan-projector-ksa.main" target="17" />
+      <module name="aurora-aan.aan-projector-ksa.test" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
@@ -34,27 +41,18 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/aan-commons" />
+            <option value="$PROJECT_DIR$/aan-processor-ksa" />
+            <option value="$PROJECT_DIR$/aan-projector-ksa" />
           </set>
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT">
-            <builds>
-              <build path="$PROJECT_DIR$/jvm-libp2p" name="jvm-libp2p-minimal">
-                <projects>
-                  <project path="$PROJECT_DIR$/jvm-libp2p" />
-                </projects>
-              </build>
-            </builds>
-          </compositeBuild>
-        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/aan-node" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/aan-node" />
-            <option value="$PROJECT_DIR$/jvm-libp2p" />
           </set>
         </option>
       </GradleProjectSettings>
@@ -107,12 +105,6 @@
       <option name="myName" value="Project Default" />
     </profile>
     <version value="1.0" />
-  </component>
-  <component name="Kotlin2JvmCompilerArguments">
-    <option name="jvmTarget" value="17" />
-  </component>
-  <component name="KotlinJpsPluginSettings">
-    <option name="version" value="1.6.10" />
   </component>
   <component name="Palette2">
     <group name="Swing">
@@ -243,7 +235,7 @@
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/1425428233/aan-commons.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/1425428233/aan-commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/1425428233/aan-commons.main.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/1425428233/aan-commons.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/1425428233/aan-commons.test.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/1425428233/aan-commons.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aan-node.iml" filepath="$PROJECT_DIR$/aan-node.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-node/aan-node.iml" filepath="$PROJECT_DIR$/aan-node/aan-node.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-node/aan-node.main.iml" filepath="$PROJECT_DIR$/aan-node/aan-node.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-node/aan-node.test.iml" filepath="$PROJECT_DIR$/aan-node/aan-node.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" />
@@ -252,12 +244,16 @@
       <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.main.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aurora_aan.iml" filepath="$PROJECT_DIR$/aurora_aan.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.iml" filepath="$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.jmh.iml" filepath="$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.jmh.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.main.iml" filepath="$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.test.iml" filepath="$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.testFixtures.iml" filepath="$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.testFixtures.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aurora-aan.iml" filepath="$PROJECT_DIR$/aurora-aan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-commons/aurora-aan.aan-commons.iml" filepath="$PROJECT_DIR$/aan-commons/aurora-aan.aan-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-commons/aurora-aan.aan-commons.main.iml" filepath="$PROJECT_DIR$/aan-commons/aurora-aan.aan-commons.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-commons/aurora-aan.aan-commons.test.iml" filepath="$PROJECT_DIR$/aan-commons/aurora-aan.aan-commons.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aurora-aan.aan-processor-ksa.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aurora-aan.aan-processor-ksa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aurora-aan.aan-processor-ksa.main.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aurora-aan.aan-processor-ksa.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aurora-aan.aan-processor-ksa.test.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aurora-aan.aan-processor-ksa.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aurora-aan.aan-projector-ksa.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aurora-aan.aan-projector-ksa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aurora-aan.aan-projector-ksa.main.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aurora-aan.aan-projector-ksa.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aurora-aan.aan-projector-ksa.test.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aurora-aan.aan-projector-ksa.test.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="17" project-jdk-type="JavaSDK">
@@ -360,11 +356,6 @@
     <remote-repository>
       <option name="id" value="maven" />
       <option name="name" value="maven" />
-      <option name="url" value="https://dl.cloudsmith.io/public/libp2p/jvm-libp2p/maven/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
       <option name="url" value="https://artifacts.consensys.net/public/maven/maven/" />
     </remote-repository>
     <remote-repository>
@@ -372,10 +363,14 @@
       <option name="name" value="BintrayJCenter" />
       <option name="url" value="https://jcenter.bintray.com/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="https://dl.cloudsmith.io/public/libp2p/jvm-libp2p/maven/" />
+    </remote-repository>
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/jvm-libp2p" vcs="Git" />
   </component>
   <component name="libraryTable">
     <library name="Gradle: ch.qos.logback:logback-classic:1.2.11">
@@ -492,15 +487,6 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.11.0/d060e42b6aa896a3abe2ec612e1cf8cc307f8a49/error_prone_annotations-2.11.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: com.google.errorprone:error_prone_annotations:2.7.1">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.7.1/458d9042f7aa6fa9a634df902b37f544e15aacac/error_prone_annotations-2.7.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.7.1/2ca80bf7ac820fce6c743561b550c8bfb6c87c57/error_prone_annotations-2.7.1-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Gradle: com.google.guava:failureaccess:1.0.1">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.1/1dcf1de382a0bf95a3d8b0849546c88bac1292c9/failureaccess-1.0.1.jar!/" />
@@ -508,15 +494,6 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.1/1d064e61aad6c51cc77f9b59dc2cccc78e792f5a/failureaccess-1.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: com.google.guava:guava:31.0.1-jre">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/31.0.1-jre/119ea2b2bc205b138974d351777b20f02b92704b/guava-31.0.1-jre.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/31.0.1-jre/d34772c01bd6637982d1aafe895c4fcd8b42e139/guava-31.0.1-jre-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: com.google.guava:guava:31.1-jre">
@@ -571,67 +548,13 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.javalin/javalin/4.6.1/3134a58dbd160927d376585e3e70ead5a77f2764/javalin-4.6.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: io.mockk:mockk-agent-api:1.12.2">
+    <library name="Gradle: io.libp2p:jvm-libp2p-minimal:0.10.0-RELEASE">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-agent-api/1.12.2/cb503ff5296ae388b8df2642d6ea794100a44db0/mockk-agent-api-1.12.2.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.libp2p/jvm-libp2p-minimal/0.10.0-RELEASE/25503a4d50910b6c0b84e452c39f67bf5d7902e0/jvm-libp2p-minimal-0.10.0-RELEASE.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-agent-api/1.12.2/8e9393b32113456e3e449e4be570e815520eaa93/mockk-agent-api-1.12.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: io.mockk:mockk-agent-common:1.12.2">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-agent-common/1.12.2/17a99b630120fe5f15c5ff01a11142c3daa0354d/mockk-agent-common-1.12.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-agent-common/1.12.2/cef5938dd3221f0cf789591f1e57776ec9abb46b/mockk-agent-common-1.12.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: io.mockk:mockk-agent-jvm:1.12.2">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-agent-jvm/1.12.2/a03722a5526becface47dae2993aa206ea35a85d/mockk-agent-jvm-1.12.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-agent-jvm/1.12.2/fa4ef9d084fd2730e2bd4666fc38fb6776f88adc/mockk-agent-jvm-1.12.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: io.mockk:mockk-common:1.12.2" type="kotlin.common">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-common/1.12.2/f0139541e683909513c211dac4c048f898f886b7/mockk-common-1.12.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-common/1.12.2/618fcb78fba865955af2f99c5d938442b6489438/mockk-common-1.12.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: io.mockk:mockk-dsl-jvm:1.12.2">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-dsl-jvm/1.12.2/ee1891316a7a5e326a1da514c6447e74579f4547/mockk-dsl-jvm-1.12.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-dsl-jvm/1.12.2/90c4807e5727b7dfb15c229770d0ad74c9f92887/mockk-dsl-jvm-1.12.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: io.mockk:mockk-dsl:1.12.2">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-dsl/1.12.2/c57af451b7609f680a0a916f1629a1b488b31267/mockk-dsl-1.12.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-dsl/1.12.2/42fde1aa26c37a3f75643cefad3f30960acb74dd/mockk-dsl-1.12.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: io.mockk:mockk:1.12.2">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk/1.12.2/5c5e2192c8c2304e1036062c9d6da3789fd635ff/mockk-1.12.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk/1.12.2/47f1c23d2e026577394d29f3c611b23e7a04c58d/mockk-1.12.2-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.libp2p/jvm-libp2p-minimal/0.10.0-RELEASE/e4b43082647a3e0102a31c74b661d42fb268b26b/jvm-libp2p-minimal-0.10.0-RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: io.netty:netty-all:4.1.69.Final">
@@ -968,41 +891,10 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.xml.bind/jaxb-api/2.3.1/e47264d065cecbc572ba99856fcc7da19a470ae3/jaxb-api-2.3.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: net.bytebuddy:byte-buddy-agent:1.12.16">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.12.16/c2d5dd150c17028c494e7f02a17f4a995dcb4e9f/byte-buddy-agent-1.12.16.jar!/" />
-      </CLASSES>
+    <library name="Gradle: ong.aurora:aan-commons:1.0-SNAPSHOT">
+      <CLASSES />
       <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.12.16/492a4c02672837baf688e861fcc1f8b1038106b5/byte-buddy-agent-1.12.16-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: net.bytebuddy:byte-buddy:1.12.16">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.12.16/7817a8128b38ff8cb8570c8f3c85c1a41002a09d/byte-buddy-1.12.16.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.12.16/914526e4313fb525501615fd4f533298866a5256/byte-buddy-1.12.16-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: net.sf.jopt-simple:jopt-simple:5.0.4">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/5.0.4/4fdac2fbe92dfad86aa6e9301736f6b4342a3f5c/jopt-simple-5.0.4.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/5.0.4/950831646d014c9162999019a3cb17d5fc01ac0d/jopt-simple-5.0.4-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.apache.commons:commons-math3:3.2">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-math3/3.2/ec2544ab27e110d2d431bdad7d538ed509b21e62/commons-math3-3.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-math3/3.2/cd098e055bf192a60c81d81893893e6e31a6482f/commons-math3-3.2-sources.jar!/" />
-      </SOURCES>
+      <SOURCES />
     </library>
     <library name="Gradle: org.apache.kafka:kafka-clients:3.1.0">
       <CLASSES>
@@ -1047,15 +939,6 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apiguardian/apiguardian-api/1.1.2/e0787a997746ac32639e0bf3cb27af8dce8a3428/apiguardian-api-1.1.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.assertj:assertj-core:3.23.1">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.23.1/d2bb60570f5b3d7ffa8f8000118c9c07b86eca93/assertj-core-3.23.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.23.1/157b30660c8be702e3b5ba4f73311578c6333635/assertj-core-3.23.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: org.bouncycastle:bcpkix-jdk15on:1.70">
@@ -1238,15 +1121,6 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-xml/9.4.46.v20220331/eafa9c5a5ad7db3e2b3c32fb028af5ac706e2067/jetty-xml-9.4.46.v20220331-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.3.72">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.3.72/86613e1a669a701b0c660bfd2af4f82a7ae11fca/kotlin-reflect-1.3.72.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.3.72/fbbf32ddf5a870c4d43d949319d9bab2796406d8/kotlin-reflect-1.3.72-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.5.32" type="kotlin.common">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.5.32/8befc4a20c17094a148f1409c1bac163bc3ca630/kotlin-stdlib-common-1.5.32.jar!/" />
@@ -1256,16 +1130,7 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.5.32/15f47c41cca2ac10716e5085cb3b97a3a650f651/kotlin-stdlib-common-1.5.32-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.6.10" type="kotlin.common">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.6.10/c118700e3a33c8a0d9adc920e9dec0831171925/kotlin-stdlib-common-1.6.10.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.6.10/884efb386c94b1ee8e2ca37335264a0ffb155250/kotlin-stdlib-common-1.6.10-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10" type="kotlin.common">
+    <library name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.7.10/bac80c520d0a9e3f3673bc2658c6ed02ef45a76a/kotlin-stdlib-common-1.7.10.jar!/" />
       </CLASSES>
@@ -1319,15 +1184,6 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.5.32/70f4e47092d0158a39aafc634ad60b6320c3d6ce/kotlin-stdlib-1.5.32-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.6.10">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.6.10/b8af3fe6f1ca88526914929add63cf5e7c5049af/kotlin-stdlib-1.6.10.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.6.10/a6284476c56bd752eb0020e062c78c930abdc168/kotlin-stdlib-1.6.10-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.7.10">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.7.10/d2abf9e77736acc4450dc4a3f707fa2c10f5099d/kotlin-stdlib-1.7.10.jar!/" />
@@ -1373,15 +1229,6 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.8.2/429d353563c5fb35a3d47076bedbf75161e976c2/junit-jupiter-api-5.8.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.junit.jupiter:junit-jupiter-api:5.9.1">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.9.1/7bb53fbc0173e9f6a9d21d58297af94b1f2f9ce1/junit-jupiter-api-5.9.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.9.1/ba8516b330a32b4957cdc6ad0cd1a594ec154fd2/junit-jupiter-api-5.9.1-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.8.1">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.8.1/21b86e08aae2720bbf017703669948be96d1388c/junit-jupiter-engine-5.8.1.jar!/" />
@@ -1398,24 +1245,6 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.8.2/ea87fe3d752e24397f71f347872e79a89c61a704/junit-jupiter-engine-5.8.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.9.1">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.9.1/1bf771097bde296c3ab174861954e8aafaaf2e94/junit-jupiter-engine-5.9.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.9.1/bc082b8e8a1f40d6846fccb59867c6524bf08155/junit-jupiter-engine-5.9.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.junit.jupiter:junit-jupiter-params:5.9.1">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-params/5.9.1/ffcd1013edaeee112be11fcddeb38882d79238de/junit-jupiter-params-5.9.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-params/5.9.1/f48e6a3bc9ac5acdde88951f83beb44adc78c8c5/junit-jupiter-params-5.9.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: org.junit.platform:junit-platform-commons:1.8.1">
@@ -1436,15 +1265,6 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.8.2/386b61876dd33d0ef0381189d3c1db9455d99659/junit-platform-commons-1.8.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.junit.platform:junit-platform-commons:1.9.1">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.9.1/3145f821b5cd10abcdc5f925baa5fffa6f1b628f/junit-platform-commons-1.9.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.9.1/5d2f1078b36f69b0cbacc1efdbf073517c0c7d33/junit-platform-commons-1.9.1-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Gradle: org.junit.platform:junit-platform-engine:1.8.1">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.8.1/e6c63bf990dc88a6527b4ed617b23e47048f07e0/junit-platform-engine-1.8.1.jar!/" />
@@ -1463,15 +1283,6 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.8.2/ef25ff956479198a71a7d1b23e11f27fb09393b6/junit-platform-engine-1.8.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.junit.platform:junit-platform-engine:1.9.1">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.9.1/83591e5089d6cea5f324aa3ecca9b19d5a275803/junit-platform-engine-1.9.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.9.1/bda902e43fe1f62674224452defd31f4c251e29d/junit-platform-engine-1.9.1-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Gradle: org.lz4:lz4-java:1.8.0">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lz4/lz4-java/1.8.0/4b986a99445e49ea5fbf5d149c4b63f6ed6c6780/lz4-java-1.8.0.jar!/" />
@@ -1479,42 +1290,6 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lz4/lz4-java/1.8.0/7609c362f37f0c0bd3743bc1976df2daa28ad19e/lz4-java-1.8.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.mockito:mockito-core:4.8.1">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-core/4.8.1/d8eb9dec8747d08645347bb8c69088ac83197975/mockito-core-4.8.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-core/4.8.1/9dddd37cdd2f673a51b286a1d6ee156931fd93b1/mockito-core-4.8.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.mockito:mockito-junit-jupiter:4.8.1">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-junit-jupiter/4.8.1/e393aa62eca2244a535b03842843f2f199343d1f/mockito-junit-jupiter-4.8.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-junit-jupiter/4.8.1/6aa189452f42167be3dc9ce5ac029df0f15ba0e5/mockito-junit-jupiter-4.8.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.objenesis:objenesis:3.2">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.objenesis/objenesis/3.2/7fadf57620c8b8abdf7519533e5527367cb51f09/objenesis-3.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.objenesis/objenesis/3.2/9f5da90020a255f25b6d8da8db273e2d38ce9805/objenesis-3.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.openjdk.jmh:jmh-core:1.35">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjdk.jmh/jmh-core/1.35/c14d712be8e423969fcd344bc801cf5d3ea3b62a/jmh-core-1.35.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjdk.jmh/jmh-core/1.35/743eb34aef147ddc26af5209fa82395a41df36cb/jmh-core-1.35-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: org.opentest4j:opentest4j:1.2.0">

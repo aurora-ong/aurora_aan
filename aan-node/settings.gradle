@@ -1,3 +1,1 @@
 rootProject.name = 'aan-node'
-
-includeBuild('../jvm-libp2p')
