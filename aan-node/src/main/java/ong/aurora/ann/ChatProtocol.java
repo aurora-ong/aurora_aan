@@ -1,5 +1,6 @@
 package ong.aurora.ann;
 
+import io.libp2p.core.P2PChannel;
 import io.libp2p.core.Stream;
 import io.libp2p.protocol.ProtocolHandler;
 import io.libp2p.protocol.ProtocolMessageHandler;
@@ -24,6 +25,7 @@ public class ChatProtocol extends ProtocolHandler<ChatController> {
     @Override
     protected CompletableFuture<ChatController> onStartInitiator(@NotNull Stream stream) {
 //        return super.onStartInitiator(stream);
+        log.info("onStartInitiator");
         return onStart(stream);
     }
 
@@ -31,15 +33,23 @@ public class ChatProtocol extends ProtocolHandler<ChatController> {
     @Override
     protected CompletableFuture<ChatController> onStartResponder(@NotNull Stream stream) {
 //        return super.onStartResponder(stream);
+        log.info("onStartResponder");
         return onStart(stream);
     }
 
     CompletableFuture<ChatController> onStart(Stream stream) {
         log.info("onStart");
-        CompletableFuture<Void> completableFuture = new CompletableFuture<>();
-        Chatter chatController = new Chatter(completableFuture);
+        CompletableFuture<ChatController> ready = new CompletableFuture<>();
+        Chatter chatController = new Chatter(ready);
         stream.pushHandler(chatController);
 
-        return CompletableFuture.completedFuture(chatController);
+        return ready;
+    }
+
+    @NotNull
+    @Override
+    public CompletableFuture<ChatController> initChannel(@NotNull P2PChannel ch) {
+        log.info("initChannel");
+        return super.initChannel(ch);
     }
 }

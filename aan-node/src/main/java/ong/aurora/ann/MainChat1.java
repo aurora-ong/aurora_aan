@@ -29,34 +29,38 @@ public class MainChat1 {
 
         Gossip gossip = new Gossip();
 
-        Chat chat = new Chat();
-
         Chat chat1 = new Chat();
 
+        String otherNodeAddr = "/ip4/127.0.0.1/tcp/4000/p2p/QmQjMSGMPN1Gh9rBmVuaAfPvVfXB6pusMgTJnY1PiaSK7U";
 
 
         Host thisNode = new HostBuilder()
                 .protocol(chat1)
 //                .transport(WsTransport::new)
-                .listen("/ip4/192.168.4.22/tcp/3000")
+                .listen("/ip4/127.0.0.1/tcp/3000")
                 .build();
 
         thisNode.start().get();
         log.info("Escuchando en: {}", thisNode.listenAddresses());
 
 
-        StreamPromise<Chatter> streamPromise = (StreamPromise<Chatter>) chat1.dial(thisNode, Multiaddr.fromString("/ip4/192.168.4.22/tcp/4000/p2p/QmVqy45nk9TE8WGZ8sKxRACXYkSJBMy97VHSJJ9DjPppFw"));
+//        StreamPromise<Chatter> streamPromise = (StreamPromise<Chatter>) chat1.dial(thisNode, Multiaddr.fromString("/ip4/127.0.0.1/tcp/4000/p2p/QmZYoyMLjV4tYhetNzd1uxEM26sxHLdheJL8PABF1LpBgM"));
 
-        Chatter chatter = streamPromise.getController().get();
-Thread.sleep(10000);
+        ChatController chatController = chat1.dial(thisNode, Multiaddr.fromString(otherNodeAddr)).getController().get();
 
-        chatter.send("Hola mundo");
-
+        chatController.send("Holiwi");
 
 
-
-
-
+//
+//        streamPromise.getController().thenAccept(chatter1 -> {
+//            log.info("Controller obtenido");
+//            try {
+//                Thread.sleep(2000);
+//                chatter1.send("Hola mundo");
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
 
 
 
