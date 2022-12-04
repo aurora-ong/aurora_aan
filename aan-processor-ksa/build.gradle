@@ -6,7 +6,7 @@ application {
     mainClass = 'ong.aurora.processor.ProcessorKSA'
 }
 
-group 'ong.aurora'
+group 'ong.aurora.ann'
 version '0.1-SNAPSHOT'
 
 ext {
@@ -21,7 +21,7 @@ repositories {
 dependencies {
     implementation "org.apache.kafka:kafka-streams:${kafkaVersion}"
 
-    implementation 'ong.aurora:aan-commons:1.0-SNAPSHOT'
+    implementation 'ong.aurora.ann:aan-commons:1.0-SNAPSHOT'
 
     // logging
     implementation 'org.slf4j:slf4j-api:1.7.36'

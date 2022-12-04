@@ -4,50 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dbf6447-6416-45d9-87fe-959ee115d719" name="Changes" comment="++ refactored project to mono repo">
-      <change afterPath="$PROJECT_DIR$/aan-commons/aurora-aan.aan-commons.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-commons/aurora-aan.aan-commons.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-commons/aurora-aan.aan-commons.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.jmh.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/-575831211/jvm-libp2p-minimal.testFixtures.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/aan-node.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-processor-ksa/1425428233/aan-commons.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-processor-ksa/1425428233/aan-commons.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-processor-ksa/1425428233/aan-commons.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-processor-ksa/aurora-aan.aan-processor-ksa.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-processor-ksa/aurora-aan.aan-processor-ksa.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-processor-ksa/aurora-aan.aan-processor-ksa.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-projector-ksa/aurora-aan.aan-projector-ksa.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-projector-ksa/aurora-aan.aan-projector-ksa.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-projector-ksa/aurora-aan.aan-projector-ksa.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aurora-aan.iml" afterDir="false" />
+    <list default="true" id="2dbf6447-6416-45d9-87fe-959ee115d719" name="Changes" comment="++ graddle project clean">
+      <change beforePath="$PROJECT_DIR$/aan-commons/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-node.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/aan-node.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/aan-node.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/aan-node.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/aan-node.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/ChatProtocol.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/ChatProtocol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/Chatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/Chatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/MSG.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/Main2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/MainChat1.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/MainChat1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/MainChat2.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/MainChat2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/Ping.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/ProtocolB.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/TestP.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/aan-node.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/aan-node.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/-200119265/ong.aurora.aan-commons.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/-200119265/ong.aurora.aan-commons.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/-200119265/ong.aurora.aan-commons.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/aan-processor-ksa/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +57,22 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="aan-node" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="aan-node" type="f1a62948:ProjectNode" />
+                <item name="aan-node" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="aan-node" type="f1a62948:ProjectNode" />
+                <item name="jvm-libp2p-minimal" type="2d1252cf:ModuleNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -90,6 +81,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -108,10 +100,10 @@
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "Z:/AURORA/aurora_aan/aan-node",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.23672883",
-    "settings.editor.selected.configurable": "preferences.sourceCode"
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.31835938",
+    "project.structure.side.proportion": "0.6169297",
+    "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -169,6 +161,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="++ refactored project to mono repo" />
-    <option name="LAST_COMMIT_MESSAGE" value="++ refactored project to mono repo" />
+    <MESSAGE value="++ graddle project clean" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ graddle project clean" />
   </component>
 </project>

@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'ong.aurora'
+group 'ong.aurora.ann'
 version '1.0-SNAPSHOT'
 
 repositories {
