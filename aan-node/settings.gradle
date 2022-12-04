@@ -1,1 +1,2 @@
 rootProject.name = 'aan-node'
+includeBuild('../aan-commons')

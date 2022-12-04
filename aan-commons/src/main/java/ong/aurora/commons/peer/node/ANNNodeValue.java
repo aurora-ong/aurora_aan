@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ong.aurora.commons.entity.EntityValue;
 import ong.aurora.commons.event.Event;
 
+import java.security.PublicKey;
 import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -13,6 +14,7 @@ public record ANNNodeValue(
         @JsonProperty("node_id") String nodeId,
         @JsonProperty("node_name") String nodeName,
         @JsonProperty("node_hostname") String nodeHostname,
+        @JsonProperty("node_signature") PublicKey nodeSignature,
         @JsonProperty("node_status") ANNNodeStatus nodeStatus
 
 ) implements EntityValue<ANNNodeValue> {

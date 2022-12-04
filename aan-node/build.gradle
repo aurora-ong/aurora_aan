@@ -17,6 +17,12 @@ repositories {
     maven {
         url "https://dl.cloudsmith.io/public/libp2p/jvm-libp2p/maven/"
     }
+
+    maven {
+        url "https://maven.scijava.org/content/repositories/public/"
+    }
+
+
 }
 
 
@@ -25,6 +31,16 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
 
     implementation 'io.libp2p:jvm-libp2p-minimal:0.10.0-RELEASE'
+
+    implementation 'ong.aurora.ann:aan-commons:1.0-SNAPSHOT'
+
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.70'
+
+// https://mvnrepository.com/artifact/com.github.multiformats/java-multihash
+    implementation group: 'com.github.multiformats', name: 'java-multihash', version: 'v1.3.2'
+
+
 
     // logging
     implementation 'org.slf4j:slf4j-api:1.7.36'
