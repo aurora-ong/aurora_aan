@@ -47,16 +47,6 @@ public class JacksonDeserializer<T> implements Deserializer<T> {
 
     }
 
-    public T fromJSON2(String json, Class<T> clazz) {
-        try {
-            return objectMapper.readValue(json, clazz);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-
     @Override
     public void close() {
     }

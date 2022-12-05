@@ -4,23 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42501e96-7399-49a3-9e90-9f9e24a94826" name="Changes" comment="gradle update">
-      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/eventsource/ANNEventSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/eventsource/FileEventSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/ANNCore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/ANNNodeIdentity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/P2PNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/PemFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/ANNNodeValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/ANNNodeValue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/aan-node.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/aan-node.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/aan-node.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/aan-node.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/MainChat1.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/MainChat1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/MainChat2.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/MainChat2.java" afterDir="false" />
+    <list default="true" id="42501e96-7399-49a3-9e90-9f9e24a94826" name="Changes" comment="++ ann core&#10;++ ann store &#10;++ ann store file impl&#10;++ ann blockchain">
+      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/ANNBlockchain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/ANNSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/jackson/ANNJacksonSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/store/ANNEventStore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/store/file/FileEventStore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ann-node-identity/events.ann" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/JacksonDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/JacksonDeserializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/aan-node.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/aan-node.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/aan-node.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/ANNCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/ANNNodeIdentity.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNNodeIdentity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/ChatBinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ChatBinding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/ChatProtocol.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ChatProtocol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/Chatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/Chatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/MainChat1.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/MainChat1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/MainChat2.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/MainChat2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/P2PNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/P2PNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-node/src/main/java/ong/aurora/ann/PemFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/PemFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/src/main/java/ong/aurora/processor/AANProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-processor-ksa/src/main/java/ong/aurora/processor/AANProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/src/main/java/ong/aurora/processor/ProcessorKSA.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-processor-ksa/src/main/java/ong/aurora/processor/ProcessorKSA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
     </list>
@@ -36,6 +52,9 @@
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$/aan-commons">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/aan-core">
       <ProjectState />
     </projectState>
     <projectState path="$PROJECT_DIR$/aan-node">
@@ -87,20 +106,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Pavel/Documents/aurora/jvm-libp2p&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.31835938&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.packagesearch.PackageSearchGeneralConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Pavel/Documents/aurora/aurora_aan/aan-core",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.31835938",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.packagesearch.PackageSearchGeneralConfigurable"
   }
-}</component>
-  <component name="RunManager" selected="Application.ANNNode">
+}]]></component>
+  <component name="RunManager" selected="Application.ANNCore">
     <configuration name="MainChat1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.MainChat1" />
       <module name="aan-node.main" />
@@ -127,13 +147,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="aan-node [:ANNCore.main()]" type="GradleRunConfiguration" factoryName="Gradle" editBeforeRun="true" singleton="false">
+    <configuration name="aan-core [:ANNCore.main()]" type="GradleRunConfiguration" factoryName="Gradle" editBeforeRun="true" singleton="false">
       <ExternalSystemSettings>
         <option name="env">
           <map>
             <entry key="ANN_NODE_ID" value="node1" />
           </map>
         </option>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/aan-core" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":ANNCore.main()" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="aan-node [:ANNCore.main()]" type="GradleRunConfiguration" factoryName="Gradle" editBeforeRun="true" singleton="false">
+      <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/aan-node" />
         <option name="externalSystemIdString" value="GRADLE" />
@@ -154,11 +195,12 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.ANNNode" />
+      <item itemvalue="Application.ANNCore" />
       <item itemvalue="Application.ProcessorKSA" />
       <item itemvalue="Application.ProjectorKSA" />
       <item itemvalue="Application.MainChat1" />
       <item itemvalue="Application.MainChat2" />
+      <item itemvalue="Gradle.aan-core [:ANNCore.main()]" />
       <item itemvalue="Gradle.aan-node [:ANNCore.main()]" />
       <item itemvalue="Shell Script.aan-commands producer" />
       <item itemvalue="Shell Script.aan-events consumer" />
@@ -184,7 +226,8 @@
       <workItem from="1670114278280" duration="471000" />
       <workItem from="1670115025700" duration="3416000" />
       <workItem from="1670152707058" duration="5141000" />
-      <workItem from="1670158818578" duration="9045000" />
+      <workItem from="1670158818578" duration="14277000" />
+      <workItem from="1670237226205" duration="4840000" />
     </task>
     <task id="LOCAL-00001" summary="gradle update">
       <created>1670115344299</created>
@@ -193,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670115344299</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="++ ann node identity">
+      <created>1670171077395</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670171077395</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,6 +262,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="gradle update" />
-    <option name="LAST_COMMIT_MESSAGE" value="gradle update" />
+    <MESSAGE value="++ ann node identity" />
+    <MESSAGE value="++ ann core&#10;++ ann store &#10;++ ann store file impl&#10;++ ann blockchain" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ ann core&#10;++ ann store &#10;++ ann store file impl&#10;++ ann blockchain" />
   </component>
 </project>

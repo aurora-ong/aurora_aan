@@ -2,6 +2,7 @@ package ong.aurora.processor;
 
 import ong.aurora.commons.command.Command;
 import ong.aurora.commons.event.Event;
+import ong.aurora.commons.store.file.FileEventStore;
 import ong.aurora.commons.serialization.JsonSerdes;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
@@ -15,6 +16,7 @@ import org.apache.kafka.streams.state.Stores;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.Properties;
 
 
@@ -22,7 +24,13 @@ class ProcessorKSA {
 
     private static final Logger log = LoggerFactory.getLogger(ProcessorKSA.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        // ANN NODE
+        FileEventStore eventStore = new FileEventStore("events.ann");
+        AANProcessor aanProcessor = new AANProcessor(eventStore);
+
+
         log.info("Cargando processor-ksa");
         Topology builder = new Topology();
 
@@ -44,7 +52,7 @@ class ProcessorKSA {
         // PROCESADOR
         builder.addProcessor(
                 "Aurora AAN Command Validator", // name
-                AANProcessor::new, // clase que procesa
+                () -> aanProcessor, // clase que procesa
                 "Aurora AAN Commands"); // parent
 
         StoreBuilder<KeyValueStore<String, Event>> storeBuilder =

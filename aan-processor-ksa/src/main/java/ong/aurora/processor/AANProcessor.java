@@ -5,6 +5,7 @@ import ong.aurora.commons.command.*;
 import ong.aurora.commons.database.AANDatabase;
 import ong.aurora.commons.event.Event;
 import ong.aurora.commons.event.EventData;
+import ong.aurora.commons.store.ANNEventStore;
 import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.projector.AANProjector;
 import ong.aurora.model.v_0_0_1.AuroraOM;
@@ -17,6 +18,7 @@ import org.apache.kafka.streams.state.KeyValueStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Queue;
@@ -38,6 +40,11 @@ public class AANProcessor implements Processor<String, Command, String, Event> {
     private AANProjector aanProjector;
 
     AANModel aanModel;
+    ANNEventStore eventStore;
+
+    public AANProcessor(ANNEventStore annEventStore) {
+        this.eventStore = annEventStore;
+    }
 
 
 
@@ -121,10 +128,10 @@ public class AANProcessor implements Processor<String, Command, String, Event> {
         org.apache.kafka.streams.processor.api.Processor.super.close();
     }
 
-    CompletableFuture<Void> updateStore(Event event) {
+    CompletableFuture<Void> updateStore(Event event) throws IOException {
         logger.info("Actualizando store {}", event);
         kvStore.put(event.eventId(), event);
-        return CompletableFuture.completedFuture(null);
+        return this.eventStore.saveEvent(event);
     }
 
 
