@@ -47,23 +47,23 @@ public class ProjectorKSA {
 
         StreamsBuilder builder = new StreamsBuilder();
 //
-        KStream<String, Event> eventKStream =
+        KStream<Long, Event> eventKStream =
                 builder.stream(
                         "aurora-aan-events",
-                        Consumed.with(Serdes.String(), JsonSerdes.getJSONSerde(Event.class)));
+                        Consumed.with(Serdes.Long(), JsonSerdes.getJSONSerde(Event.class)));
 
-        eventKStream.print(Printed.<String, Event>toSysOut().withLabel("aurora-aan-events"));
+        eventKStream.print(Printed.<Long, Event>toSysOut().withLabel("aurora-aan-events"));
 
-        BranchedKStream<String, Event> branchedEvents2 =
+        BranchedKStream<Long, Event> branchedEvents2 =
                 eventKStream.split(Named.as("projector-"));
 
         proyectorEntities.forEach(entity -> {
-            Predicate<String, Event> createPredicate =
+            Predicate<Long, Event> createPredicate =
                     (key, event) -> event.eventName().equals(entity.entityName.concat(".created"));
             branchedEvents2.branch(createPredicate, Branched.as(entity.entityName));
         });
 
-        Map<String, KStream<String, Event>> branchedEvents = branchedEvents2.noDefaultBranch();
+        Map<String, KStream<Long, Event>> branchedEvents = branchedEvents2.noDefaultBranch();
         proyectorEntities.forEach(entity -> EntityProjector.configureBranch(entity, branchedEvents));
 
         KafkaStreams streams = new KafkaStreams(builder.build(), props);

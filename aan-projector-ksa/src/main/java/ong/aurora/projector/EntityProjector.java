@@ -21,12 +21,12 @@ public class EntityProjector {
     private static final Logger LOGGER = LoggerFactory.getLogger(EntityProjector.class);
 
 
-    public static <K, V extends EntityValue<V>> void configureBranch(AANEntity<K, V> entity, Map<String, KStream<String, Event>> branchedStream) {
+    public static <K, V extends EntityValue<V>> void configureBranch(AANEntity<K, V> entity, Map<String, KStream<Long, Event>> branchedStream) {
         LOGGER.info("Configurando entidad {}", entity.entityName);
 
-        KStream<String, Event> createStream = branchedStream.get("projector-".concat(entity.entityName));
+        KStream<Long, Event> createStream = branchedStream.get("projector-".concat(entity.entityName));
 
-        createStream.print(Printed.<String, Event>toSysOut().withLabel("projector-".concat(entity.entityName)));
+        createStream.print(Printed.<Long, Event>toSysOut().withLabel("projector-".concat(entity.entityName)));
 
         KStream<K, MaterializedEntity<V>> entityStream =
                 createStream.map(

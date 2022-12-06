@@ -28,7 +28,7 @@ class ProcessorKSA {
 
         // ANN NODE
         FileEventStore eventStore = new FileEventStore("events.ann");
-        AANProcessor aanProcessor = new AANProcessor(eventStore);
+//        AANProcessor aanProcessor = ;
 
 
         log.info("Cargando processor-ksa");
@@ -52,13 +52,13 @@ class ProcessorKSA {
         // PROCESADOR
         builder.addProcessor(
                 "Aurora AAN Command Validator", // name
-                () -> aanProcessor, // clase que procesa
+                () -> new AANProcessor(eventStore), // clase que procesa
                 "Aurora AAN Commands"); // parent
 
-        StoreBuilder<KeyValueStore<String, Event>> storeBuilder =
+        StoreBuilder<KeyValueStore<Long, Event>> storeBuilder =
                 Stores.keyValueStoreBuilder(
                         Stores.persistentKeyValueStore("aan-events-store"),
-                        Serdes.String(),
+                        Serdes.Long(),
                         JsonSerdes.getJSONSerde(Event.class));
 
         builder.addStateStore(
@@ -70,7 +70,7 @@ class ProcessorKSA {
         builder.addSink(
                 "Aurora AAN Events", // name
                 "aurora-aan-events", // topic
-                Serdes.String().serializer(), // serializador key
+                Serdes.Long().serializer(), // serializador key
                 JsonSerdes.getJSONSerde(Event.class).serializer(), // serializador value
                 "Aurora AAN Command Validator"); // parent
 

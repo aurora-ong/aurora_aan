@@ -23,6 +23,7 @@
     <file type="web" url="file://$PROJECT_DIR$/aan-processor-ksa" />
     <file type="web" url="file://$PROJECT_DIR$/aan-projector-ksa" />
   </component>
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -123,6 +124,84 @@
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="ProcessorKSA" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ong.aurora.processor.ProcessorKSA" />
+      <module name="aan-processor-ksa.main" />
+      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="false" name="ProjectorKSA" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ong.aurora.projector.ProjectorKSA" />
+      <module name="aan-projector-ksa.main" />
+      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="false" name="aan-commands producer" type="ShConfigurationType">
+      <option name="SCRIPT_TEXT" value="docker-compose exec aan-kafka bash -c &quot;kafka-console-producer --bootstrap-server kafka:9092 --topic aurora-aan-commands --property 'parse.key=true' --property 'key.separator=|'&quot;" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="false" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/aan-kafka" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="false" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration default="false" name="aan-events consumer" type="ShConfigurationType">
+      <option name="SCRIPT_TEXT" value="docker-compose exec aan-kafka bash -c &quot;kafka-console-consumer --bootstrap-server kafka:9092 --topic aurora-aan-events --property print.timestamp=true --property print.key=true --property print.value=true --from-beginning&quot;" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="false" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/aan-kafka" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="false" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration default="false" name="kafka cluster down" type="ShConfigurationType">
+      <option name="SCRIPT_TEXT" value="docker-compose down" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="false" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/aan-kafka" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="false" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration default="false" name="kafka cluster up" type="ShConfigurationType">
+      <option name="SCRIPT_TEXT" value="docker-compose up" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="false" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/aan-kafka" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="false" />
+      <envs />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>

@@ -24,15 +24,15 @@ import java.time.Instant;
 import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 
-public class AANProcessor implements Processor<String, Command, String, Event> {
+public class AANProcessor implements Processor<String, Command, Long, Event> {
 
     private static final Logger logger = LoggerFactory.getLogger(AANProcessor.class);
 
-    private ProcessorContext<String, Event> context;
+    private ProcessorContext<Long, Event> context;
 
-    private KeyValueStore<String, Event> kvStore;
+    private KeyValueStore<Long, Event> kvStore;
 
-    private Integer currentOffset;
+    private Long currentOffset;
     private String currentHash;
 
     private final AANDatabase aanDatabase = new FileDatabase();
@@ -49,12 +49,12 @@ public class AANProcessor implements Processor<String, Command, String, Event> {
 
 
     @Override
-    public void init(ProcessorContext<String, Event> context) {
+    public void init(ProcessorContext<Long, Event> context) {
         org.apache.kafka.streams.processor.api.Processor.super.init(context);
         this.context = context;
         this.kvStore = (KeyValueStore) context.getStateStore("aan-events-store");
 
-        this.currentOffset = 0;
+        this.currentOffset = 0L;
         this.currentHash = "dummy";
         this.aanModel = new AuroraOM();
         this.aanProjector = new KSAProjector("http://localhost:15002");
@@ -96,10 +96,10 @@ public class AANProcessor implements Processor<String, Command, String, Event> {
                         .hashString(body, StandardCharsets.UTF_8)
                         .toString();
 
-                Event event = new Event(this.currentOffset.toString(), eventData.eventName(), eventData.eventData(), validationTime, sha256hex, command);
+                Event event = new Event(this.currentOffset, eventData.eventName(), eventData.eventData(), validationTime, sha256hex, command);
 
                 this.aanDatabase.persistEvent(event).get();
-                Record<String, Event> newRecord = new Record<>(event.eventId(), event, event.eventTimestamp().toEpochMilli()); // CREAR NUEVO EVENTO
+                Record<Long, Event> newRecord = new Record<>(event.eventId(), event, event.eventTimestamp().toEpochMilli()); // CREAR NUEVO EVENTO
                 updateStore(event).get();
 
                 context.forward(newRecord);

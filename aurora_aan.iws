@@ -4,21 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/aan-commons/aan-commons.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/aan-processor-ksa/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/aan-processor-ksa/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/gradlew" afterDir="false" />
+    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ gradle fix">
+      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/event/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-kafka/scripts/create-topics.sh" beforeDir="false" afterPath="$PROJECT_DIR$/aan-kafka/scripts/create-topics.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/src/main/java/ong/aurora/processor/AANProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-processor-ksa/src/main/java/ong/aurora/processor/AANProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/src/main/java/ong/aurora/processor/ProcessorKSA.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-processor-ksa/src/main/java/ong/aurora/processor/ProcessorKSA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/src/main/java/ong/aurora/projector/EntityProjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/src/main/java/ong/aurora/projector/EntityProjector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/src/main/java/ong/aurora/projector/ProjectorKSA.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/src/main/java/ong/aurora/projector/ProjectorKSA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
     </list>
@@ -46,7 +41,20 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="aan-commons" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="aan-core" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="aan-processor-ksa" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -64,19 +72,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Global Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager" selected="Shell Script.aan-commands producer" />
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -86,8 +95,17 @@
       <option name="presentableId" value="Default" />
       <updated>1670287663013</updated>
       <workItem from="1670287664669" duration="151000" />
-      <workItem from="1670287837233" duration="565000" />
+      <workItem from="1670287837233" duration="1920000" />
+      <workItem from="1670292015419" duration="182000" />
     </task>
+    <task id="LOCAL-00001" summary="++ gradle fix">
+      <created>1670288482182</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1670288482182</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,5 +121,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="++ gradle fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ gradle fix" />
   </component>
 </project>
