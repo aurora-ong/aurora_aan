@@ -5,9 +5,9 @@
       <module name="aan-commons" target="17" />
       <module name="aan-commons.main" target="17" />
       <module name="aan-commons.test" target="17" />
-      <module name="aan-node" target="17" />
-      <module name="aan-node.main" target="17" />
-      <module name="aan-node.test" target="17" />
+      <module name="aan-core" target="17" />
+      <module name="aan-core.main" target="17" />
+      <module name="aan-core.test" target="17" />
       <module name="aan-processor-ksa" target="17" />
       <module name="aan-processor-ksa.main" target="17" />
       <module name="aan-processor-ksa.test" target="17" />
@@ -19,17 +19,15 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/aan-commons" />
-    <file type="web" url="file://$PROJECT_DIR$/aan-node" />
+    <file type="web" url="file://$PROJECT_DIR$/aan-core" />
     <file type="web" url="file://$PROJECT_DIR$/aan-processor-ksa" />
     <file type="web" url="file://$PROJECT_DIR$/aan-projector-ksa" />
   </component>
-  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/aan-commons" />
-        <option name="gradleHome" value="$USER_HOME$/gradle-7.6" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/aan-commons" />
@@ -49,12 +47,11 @@
           </compositeBuild>
         </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/aan-node" />
-        <option name="gradleHome" value="$USER_HOME$/gradle-7.6" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/aan-core" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/aan-commons" />
-            <option value="$PROJECT_DIR$/aan-node" />
+            <option value="$PROJECT_DIR$/aan-core" />
           </set>
         </option>
       </GradleProjectSettings>
@@ -72,7 +69,6 @@
         </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/aan-processor-ksa" />
-        <option name="gradleHome" value="$USER_HOME$/gradle-7.6" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/aan-commons" />
@@ -94,7 +90,6 @@
         </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/aan-projector-ksa" />
-        <option name="gradleHome" value="$USER_HOME$/gradle-7.6" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/aan-commons" />
@@ -110,135 +105,14 @@
     </profile>
     <version value="1.0" />
   </component>
-  <component name="Palette2">
-    <group name="Swing">
-      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
-      </item>
-      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
-      </item>
-      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.svg" removable="false" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
-      </item>
-      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.svg" removable="false" auto-create-binding="false" can-attach-label="true">
-        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
-      </item>
-      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.svg" removable="false" auto-create-binding="true" can-attach-label="false">
-        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
-        <initial-values>
-          <property name="text" value="Button" />
-        </initial-values>
-      </item>
-      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.svg" removable="false" auto-create-binding="true" can-attach-label="false">
-        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
-        <initial-values>
-          <property name="text" value="RadioButton" />
-        </initial-values>
-      </item>
-      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.svg" removable="false" auto-create-binding="true" can-attach-label="false">
-        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
-        <initial-values>
-          <property name="text" value="CheckBox" />
-        </initial-values>
-      </item>
-      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.svg" removable="false" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
-        <initial-values>
-          <property name="text" value="Label" />
-        </initial-values>
-      </item>
-      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
-          <preferred-size width="150" height="-1" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
-          <preferred-size width="150" height="-1" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
-          <preferred-size width="150" height="-1" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.svg" removable="false" auto-create-binding="true" can-attach-label="true">
-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
-          <preferred-size width="150" height="50" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
-          <preferred-size width="150" height="50" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
-          <preferred-size width="150" height="50" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.svg" removable="false" auto-create-binding="true" can-attach-label="true">
-        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
-      </item>
-      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.svg" removable="false" auto-create-binding="true" can-attach-label="false">
-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
-          <preferred-size width="150" height="50" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.svg" removable="false" auto-create-binding="true" can-attach-label="false">
-        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
-          <preferred-size width="150" height="50" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.svg" removable="false" auto-create-binding="true" can-attach-label="false">
-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
-          <preferred-size width="150" height="50" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.svg" removable="false" auto-create-binding="true" can-attach-label="false">
-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
-          <preferred-size width="200" height="200" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.svg" removable="false" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
-          <preferred-size width="200" height="200" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.svg" removable="false" auto-create-binding="true" can-attach-label="true">
-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
-      </item>
-      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.svg" removable="false" auto-create-binding="true" can-attach-label="false">
-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
-      </item>
-      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
-      </item>
-      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
-      </item>
-      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.svg" removable="false" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
-          <preferred-size width="-1" height="20" />
-        </default-constraints>
-      </item>
-      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
-      </item>
-      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
-        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
-      </item>
-    </group>
-  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/aan-commons/aan-commons.iml" filepath="$PROJECT_DIR$/aan-commons/aan-commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-commons/aan-commons.main.iml" filepath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-commons/aan-commons.test.iml" filepath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aan-node/aan-node.iml" filepath="$PROJECT_DIR$/aan-node/aan-node.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aan-node/aan-node.main.iml" filepath="$PROJECT_DIR$/aan-node/aan-node.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aan-node/aan-node.test.iml" filepath="$PROJECT_DIR$/aan-node/aan-node.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-core/aan-core.iml" filepath="$PROJECT_DIR$/aan-core/aan-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-core/aan-core.main.iml" filepath="$PROJECT_DIR$/aan-core/aan-core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-core/aan-core.test.iml" filepath="$PROJECT_DIR$/aan-core/aan-core.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.test.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.test.iml" />
@@ -248,94 +122,7 @@
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build" />
-  </component>
-  <component name="ProjectRunConfigurationManager">
-    <configuration default="false" name="ANNNode" type="Application" factoryName="Application" editBeforeRun="true" singleton="false">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.ANNCore" />
-      <module name="aan-node.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="false" name="ProcessorKSA" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ong.aurora.processor.ProcessorKSA" />
-      <module name="aan-processor-ksa.main" />
-      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="false" name="ProjectorKSA" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ong.aurora.projector.ProjectorKSA" />
-      <module name="aan-projector-ksa.main" />
-      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="false" name="aan-commands producer" type="ShConfigurationType">
-      <option name="SCRIPT_TEXT" value="docker-compose exec aan-kafka bash -c &quot;kafka-console-producer --bootstrap-server kafka:9092 --topic aurora-aan-commands --property 'parse.key=true' --property 'key.separator=|'&quot;" />
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="" />
-      <option name="SCRIPT_OPTIONS" value="" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="false" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/aan-kafka" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="EXECUTE_IN_TERMINAL" value="true" />
-      <option name="EXECUTE_SCRIPT_FILE" value="false" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration default="false" name="aan-events consumer" type="ShConfigurationType">
-      <option name="SCRIPT_TEXT" value="docker-compose exec aan-kafka bash -c &quot;kafka-console-consumer --bootstrap-server kafka:9092 --topic aurora-aan-events --property print.timestamp=true --property print.key=true --property print.value=true --from-beginning&quot;" />
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="" />
-      <option name="SCRIPT_OPTIONS" value="" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="false" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/aan-kafka" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="EXECUTE_IN_TERMINAL" value="true" />
-      <option name="EXECUTE_SCRIPT_FILE" value="false" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration default="false" name="kafka cluster down" type="ShConfigurationType">
-      <option name="SCRIPT_TEXT" value="docker-compose down" />
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="" />
-      <option name="SCRIPT_OPTIONS" value="" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="false" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/aan-kafka" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="EXECUTE_IN_TERMINAL" value="true" />
-      <option name="EXECUTE_SCRIPT_FILE" value="false" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration default="false" name="kafka cluster up" type="ShConfigurationType">
-      <option name="SCRIPT_TEXT" value="docker-compose up" />
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="" />
-      <option name="SCRIPT_OPTIONS" value="" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="false" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/aan-kafka" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="EXECUTE_IN_TERMINAL" value="true" />
-      <option name="EXECUTE_SCRIPT_FILE" value="false" />
-      <envs />
-      <method v="2" />
-    </configuration>
+    <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>
@@ -359,14 +146,14 @@
       <option name="url" value="https://artifacts.consensys.net/public/maven/maven/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://dl.cloudsmith.io/public/libp2p/jvm-libp2p/maven/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="maven3" />
       <option name="name" value="maven3" />
       <option name="url" value="https://maven.scijava.org/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="https://dl.cloudsmith.io/public/libp2p/jvm-libp2p/maven/" />
     </remote-repository>
   </component>
   <component name="VcsDirectoryMappings">
@@ -1143,7 +930,7 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.5.32/15f47c41cca2ac10716e5085cb3b97a3a650f651/kotlin-stdlib-common-1.5.32-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10" type="kotlin.common">
+    <library name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.7.10/bac80c520d0a9e3f3673bc2658c6ed02ef45a76a/kotlin-stdlib-common-1.7.10.jar!/" />
       </CLASSES>
