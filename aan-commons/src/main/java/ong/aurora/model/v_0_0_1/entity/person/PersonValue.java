@@ -24,13 +24,6 @@ public record PersonValue(@JsonProperty("person_id") String personId, @JsonPrope
 
     @Override
     public PersonValue onUpdateValue(PersonValue newValue) {
-
-//        List<PersonValue> personValueList = new java.util.ArrayList<>(this.history == null ? List.of() : this.history);
-//
-//        personValueList.add(new PersonValue(null, this.personName(), this.personLastname(), this.personMail(), null, null, this.updatedAt()));
-//
-//        PersonValue updated = new PersonValue(this.ouId, newValue.personName(), newValue.personLastname(), newValue.personMail(), personValueList, this.createdAt, newValue.createdAt);
-
-        return new PersonValue(this.personId, "UPDATED !!", newValue.personLastname(), newValue.personMail());
+        return new PersonValue(this.personId, newValue.personName(), newValue.personLastname(), newValue.personMail());
     }
 }

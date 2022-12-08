@@ -2,14 +2,12 @@ package ong.aurora.processor;
 
 import com.google.common.hash.Hashing;
 import ong.aurora.commons.command.*;
-import ong.aurora.commons.database.AANDatabase;
 import ong.aurora.commons.event.Event;
 import ong.aurora.commons.event.EventData;
-import ong.aurora.commons.store.ANNEventStore;
 import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.projector.AANProjector;
+import ong.aurora.commons.store.ANNEventStore;
 import ong.aurora.model.v_0_0_1.AuroraOM;
-import ong.aurora.processor.database.FileDatabase;
 import ong.aurora.processor.projector.KSAProjector;
 import org.apache.kafka.streams.processor.api.Processor;
 import org.apache.kafka.streams.processor.api.ProcessorContext;
@@ -30,12 +28,8 @@ public class AANProcessor implements Processor<String, Command, Long, Event> {
 
     private ProcessorContext<Long, Event> context;
 
-    private KeyValueStore<Long, Event> kvStore;
-
     private Long currentOffset;
     private String currentHash;
-
-    private final AANDatabase aanDatabase = new FileDatabase();
 
     private AANProjector aanProjector;
 
@@ -52,7 +46,6 @@ public class AANProcessor implements Processor<String, Command, Long, Event> {
     public void init(ProcessorContext<Long, Event> context) {
         org.apache.kafka.streams.processor.api.Processor.super.init(context);
         this.context = context;
-        this.kvStore = (KeyValueStore) context.getStateStore("aan-events-store");
 
         this.currentOffset = 0L;
         this.currentHash = "dummy";
@@ -98,9 +91,8 @@ public class AANProcessor implements Processor<String, Command, Long, Event> {
 
                 Event event = new Event(this.currentOffset, eventData.eventName(), eventData.eventData(), validationTime, sha256hex, command);
 
-                this.aanDatabase.persistEvent(event).get();
+                updateEventStore(event).get();
                 Record<Long, Event> newRecord = new Record<>(event.eventId(), event, event.eventTimestamp().toEpochMilli()); // CREAR NUEVO EVENTO
-                updateStore(event).get();
 
                 context.forward(newRecord);
                 this.currentOffset = this.currentOffset + 1;
@@ -128,9 +120,9 @@ public class AANProcessor implements Processor<String, Command, Long, Event> {
         org.apache.kafka.streams.processor.api.Processor.super.close();
     }
 
-    CompletableFuture<Void> updateStore(Event event) throws IOException {
+    CompletableFuture<Void> updateEventStore(Event event) throws IOException {
         logger.info("Actualizando store {}", event);
-        kvStore.put(event.eventId(), event);
+//        kvStore.put(event.eventId(), event);
         return this.eventStore.saveEvent(event);
     }
 

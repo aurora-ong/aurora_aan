@@ -6,13 +6,14 @@ import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.peer.node.ANNNodeEntity;
 import ong.aurora.commons.serialization.JsonSerdes;
 import ong.aurora.model.v_0_0_1.AuroraOM;
-import ong.aurora.model.v_0_0_1.entity.person.PersonEntity;
 import org.apache.kafka.common.serialization.Serdes;
+import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.*;
 import org.apache.kafka.streams.state.HostInfo;
+import org.apache.kafka.streams.state.KeyValueStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,13 +47,19 @@ public class ProjectorKSA {
         props.put(StreamsConfig.STATE_DIR_CONFIG, "/tmp/kafka-streams");
 
         StreamsBuilder builder = new StreamsBuilder();
-//
+
+
+        // EVENT
         KStream<Long, Event> eventKStream =
                 builder.stream(
                         "aurora-aan-events",
                         Consumed.with(Serdes.Long(), JsonSerdes.getJSONSerde(Event.class)));
 
         eventKStream.print(Printed.<Long, Event>toSysOut().withLabel("aurora-aan-events"));
+
+        eventKStream.toTable(Materialized.<Long, Event, KeyValueStore<Bytes, byte[]>>as("aan-events-store").withKeySerde(Serdes.Long()).withValueSerde(JsonSerdes.getJSONSerde(Event.class)));
+
+
 
         BranchedKStream<Long, Event> branchedEvents2 =
                 eventKStream.split(Named.as("projector-"));
@@ -74,10 +81,9 @@ public class ProjectorKSA {
         streams.start();
 
         HostInfo hostInfo = new HostInfo("localhost", 15002);
-//        RestService service = new RestService(hostInfo, streams);
-        RestService service = new RestService(hostInfo, streams, proyectorEntities);
-        log.info("Starting Digital Twin REST Service");
-        service.start();
+        log.info("Iniciando servicio REST {}:{}", hostInfo.host(), hostInfo.port());
+        RestService restService = new RestService(hostInfo, streams, proyectorEntities);
+        restService.start();
 
     }
 }

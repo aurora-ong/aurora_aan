@@ -37,6 +37,8 @@ class RestService {
     void start() {
         Javalin app = Javalin.create().start(hostInfo.port());
 
+
+
         for (AANEntity entity2 : this.entity2List) {
             String allPath = "/".concat(entity2.entityName).concat("/all");
             String onePath = "/".concat(entity2.entityName).concat("/one");
@@ -44,10 +46,12 @@ class RestService {
             log.info("Registrando ruta {}", allPath);
             app.get(allPath, ctx -> this.entityAll(ctx, entity2));
             log.info("Registrando ruta {}", onePath);
-            app.post(onePath, ctx -> this.entityOne(ctx, entity2)); // TODO CAMBIAR A GET
+            app.get(onePath, ctx -> this.entityOne(ctx, entity2));
             log.info("Registrando ruta {}", tracePath);
-            app.post(tracePath, ctx -> this.entityTrace(ctx, entity2));
+            app.get(tracePath, ctx -> this.entityTrace(ctx, entity2));
         }
+
+        app.get("/event/all", this::eventAll);
 
     }
 
@@ -126,6 +130,27 @@ class RestService {
             context.status(HttpCode.BAD_REQUEST);
             throw e;
         }
+
+    }
+
+
+    ReadOnlyKeyValueStore<Long, Event> getEventStore() {
+        return streams.store(
+                StoreQueryParameters.fromNameAndType(
+                        "aan-events-store", QueryableStoreTypes.keyValueStore()));
+    }
+    void eventAll(Context context) {
+
+        List<Event> eventList = new ArrayList<>();
+
+        try (KeyValueIterator<Long, Event> iterator = this.getEventStore().all()) {
+            while (iterator.hasNext()) {
+                KeyValue<Long, Event> keyValue = iterator.next();
+                eventList.add(keyValue.value);
+            }
+        }
+
+        context.json(eventList);
 
     }
 

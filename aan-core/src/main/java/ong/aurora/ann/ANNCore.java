@@ -36,7 +36,7 @@ public class ANNCore {
             log.info("!! Blockchain no inicializada");
 
         } else{
-            log.info("!! Blockchain inicializada ({} bloques)", blockchain.blockCount());
+            log.info("!! Blockchain encontrada ({} bloques)", blockchain.blockCount());
             log.info("Verificando integridad");
             blockchain.verifyIntegrity().get();
 

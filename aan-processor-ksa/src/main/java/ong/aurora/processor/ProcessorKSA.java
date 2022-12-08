@@ -28,8 +28,6 @@ class ProcessorKSA {
 
         // ANN NODE
         FileEventStore eventStore = new FileEventStore("events.ann");
-//        AANProcessor aanProcessor = ;
-
 
         log.info("Cargando processor-ksa");
         Topology builder = new Topology();
@@ -55,17 +53,6 @@ class ProcessorKSA {
                 () -> new AANProcessor(eventStore), // clase que procesa
                 "Aurora AAN Commands"); // parent
 
-        StoreBuilder<KeyValueStore<Long, Event>> storeBuilder =
-                Stores.keyValueStoreBuilder(
-                        Stores.persistentKeyValueStore("aan-events-store"),
-                        Serdes.Long(),
-                        JsonSerdes.getJSONSerde(Event.class));
-
-        builder.addStateStore(
-                storeBuilder,
-                "Aurora AAN Command Validator"
-        );
-
         // TOPIC EVENTOS
         builder.addSink(
                 "Aurora AAN Events", // name
@@ -81,12 +68,6 @@ class ProcessorKSA {
         streams.cleanUp();
         log.info("Iniciando processor-ksa");
         streams.start();
-
-//        String[] endpointParts = config.getString(StreamsConfig.APPLICATION_SERVER_CONFIG).split(":");
-        HostInfo hostInfo = new HostInfo("localhost", 15001);
-        RestService service = new RestService(hostInfo, streams);
-        log.info("Starting Digital Twin REST Service");
-        service.start();
 
     }
 }
