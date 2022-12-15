@@ -78,7 +78,14 @@ public class ProjectorKSA {
         Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
         streams.cleanUp();
         log.info("Iniciando projector-ksa");
+
+        streams.setStateListener((newState, oldState) -> {
+            log.info("State Listener: {} -> {}", oldState, newState);
+        });
+
         streams.start();
+
+
 
         HostInfo hostInfo = new HostInfo("localhost", 15002);
         log.info("Iniciando servicio REST {}:{}", hostInfo.host(), hostInfo.port());

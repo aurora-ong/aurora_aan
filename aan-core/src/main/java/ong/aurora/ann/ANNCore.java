@@ -3,6 +3,7 @@ package ong.aurora.ann;
 import ong.aurora.commons.blockchain.ANNBlockchain;
 import ong.aurora.commons.command.Command;
 import ong.aurora.commons.event.Event;
+import ong.aurora.commons.projector.ksaprojector.KSAProjector;
 import ong.aurora.commons.store.file.FileEventStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,10 @@ public class ANNCore {
             blockchain.verifyIntegrity().get();
 
         }
+
+        KSAProjector aanProjector = new KSAProjector("http://localhost:15002");
+
+
 
 
 //        try {

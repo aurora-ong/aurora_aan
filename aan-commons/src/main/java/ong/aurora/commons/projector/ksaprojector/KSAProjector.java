@@ -1,4 +1,4 @@
-package ong.aurora.processor.projector;
+package ong.aurora.commons.projector.ksaprojector;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;

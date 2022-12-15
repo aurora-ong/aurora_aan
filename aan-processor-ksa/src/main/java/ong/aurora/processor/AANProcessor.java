@@ -8,11 +8,10 @@ import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.projector.AANProjector;
 import ong.aurora.commons.store.ANNEventStore;
 import ong.aurora.model.v_0_0_1.AuroraOM;
-import ong.aurora.processor.projector.KSAProjector;
+import ong.aurora.commons.projector.ksaprojector.KSAProjector;
 import org.apache.kafka.streams.processor.api.Processor;
 import org.apache.kafka.streams.processor.api.ProcessorContext;
 import org.apache.kafka.streams.processor.api.Record;
-import org.apache.kafka.streams.state.KeyValueStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
