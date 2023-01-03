@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ChatProtocol extends ProtocolHandler<ChatController> {
+public class ChatProtocol extends ProtocolHandler<Chatter> {
 
     private static final Logger log = LoggerFactory.getLogger(ChatProtocol.class);
 
@@ -23,7 +23,7 @@ public class ChatProtocol extends ProtocolHandler<ChatController> {
 
     @NotNull
     @Override
-    protected CompletableFuture<ChatController> onStartInitiator(@NotNull Stream stream) {
+    protected CompletableFuture<Chatter> onStartInitiator(@NotNull Stream stream) {
 //        return super.onStartInitiator(stream);
         log.info("onStartInitiator");
         return onStart(stream);
@@ -31,15 +31,21 @@ public class ChatProtocol extends ProtocolHandler<ChatController> {
 
     @NotNull
     @Override
-    protected CompletableFuture<ChatController> onStartResponder(@NotNull Stream stream) {
+    protected CompletableFuture<Chatter> onStartResponder(@NotNull Stream stream) {
 //        return super.onStartResponder(stream);
-        log.info("onStartResponder");
+        log.info("onStartResponder {}", stream.remotePeerId());
+
+
+
+//        stream.close();
+
+
         return onStart(stream);
     }
 
-    CompletableFuture<ChatController> onStart(Stream stream) {
+    CompletableFuture<Chatter> onStart(Stream stream) {
         log.info("onStart");
-        CompletableFuture<ChatController> ready = new CompletableFuture<>();
+        CompletableFuture<Chatter> ready = new CompletableFuture<>();
         Chatter chatController = new Chatter(ready);
         stream.pushHandler(chatController);
 
@@ -48,8 +54,9 @@ public class ChatProtocol extends ProtocolHandler<ChatController> {
 
     @NotNull
     @Override
-    public CompletableFuture<ChatController> initChannel(@NotNull P2PChannel ch) {
+    public CompletableFuture<Chatter> initChannel(@NotNull P2PChannel ch) {
         log.info("initChannel");
         return super.initChannel(ch);
     }
+
 }

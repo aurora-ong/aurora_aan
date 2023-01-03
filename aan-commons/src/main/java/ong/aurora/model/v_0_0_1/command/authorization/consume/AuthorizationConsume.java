@@ -57,7 +57,7 @@ public class AuthorizationConsume implements AANCommand {
 //             throw new CommandValidationException("command_not_authorizable");
 //         }
 
-        Command newCommand = new Command(command.commandTimestamp(), authorizationValue.commandName(), authorizationValue.commandData());
+        Command newCommand = new Command(command.commandId(), command.commandTimestamp(), authorizationValue.commandName(), authorizationValue.commandData());
 
         Queue<EventData> eventQueue = new LinkedList<>();
 

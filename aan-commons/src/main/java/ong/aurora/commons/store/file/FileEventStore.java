@@ -27,12 +27,8 @@ public class FileEventStore implements ANNEventStore {
     BufferedReader bufferedReader;
 
 
-    public FileEventStore(String fileName) throws IOException {
-        Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toAbsolutePath().toString();
-        String filePath = s.concat("/ann-node-identity/".concat(fileName));
-
-        this.file = new File(filePath);
+    public FileEventStore(String path) throws IOException {
+        this.file = new File(path);
         if (file.createNewFile()) {
             System.out.println("File created: " + file.getName());
         } else {
@@ -50,22 +46,19 @@ public class FileEventStore implements ANNEventStore {
     }
 
     @Override
-    public CompletableFuture<Void> saveEvent(Event event) throws IOException {
-        log.info("Escribiendo evento en {}", this.file.getCanonicalPath().toString());
-        ANNSerializer serializer = new ANNJacksonSerializer();
-        printWriter.println(serializer.toJSON(event));
+    public CompletableFuture<Void> saveEvent(String event) throws Exception {
+        log.info("Escribiendo evento en {}", this.file.getCanonicalPath());
+        printWriter.println(event);
         printWriter.flush();
         return CompletableFuture.completedFuture(null);
     }
 
     @Override
-    public Stream<Event> readEventStore() {
-        ANNSerializer serializer = new ANNJacksonSerializer();
+    public Stream<String> readEventStore() {
         try {
-            return Files.lines(this.file.toPath()).map(s -> serializer.fromJSON(s, Event.class));
+            return Files.lines(this.file.toPath());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-//        return this.bufferedReader.lines().map(s -> serializer.fromJSON(s, Event.class));
     }
 }

@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public interface ANNEventStore {
 
-    CompletableFuture<Void> saveEvent(Event event) throws IOException;
+    CompletableFuture<Void> saveEvent(String event) throws IOException, Exception;
 
-    Stream<Event> readEventStore();
+    Stream<String> readEventStore();
 }

@@ -5,6 +5,7 @@ import io.libp2p.core.Host;
 import io.libp2p.core.PeerId;
 import io.libp2p.core.multiformats.Multiaddr;
 import io.libp2p.crypto.keys.RsaPublicKey;
+import ong.aurora.ann.identity.ANNNodeIdentity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,9 +17,14 @@ public class MainChat1 {
     public static void main(String[] args) throws Exception {
         Chat chat1 = new Chat();
 
+
+
         String otherNodeAddr = "/ip4/127.0.0.1/tcp/4000";
 
-        ANNNodeIdentity annNodeIdentity = new ANNNodeIdentity("host_2");
+        String nodeInfoPath = "";
+        String nodeId = "";
+
+        ANNNodeIdentity annNodeIdentity = ANNNodeIdentity.fromFile(nodeInfoPath.concat(nodeId).concat("/identity_private.pem"), nodeInfoPath.concat(nodeId).concat("/identity_public.pem"));
 
         log.info("PK {} {}", annNodeIdentity.publicKey.getEncoded().length, annNodeIdentity.publicKey.getEncoded());
 

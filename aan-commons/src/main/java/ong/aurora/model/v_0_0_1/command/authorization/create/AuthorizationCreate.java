@@ -48,7 +48,7 @@ public class AuthorizationCreate implements AANCommand {
             throw new CommandValidationException("command_not_authorizable");
         }
 
-        Command subCommandData = new Command(command.commandTimestamp(), authorizationCommandData.commandName(), authorizationCommandData.commandData());
+        Command subCommandData = new Command(UUID.randomUUID().toString(), command.commandTimestamp(), authorizationCommandData.commandName(), authorizationCommandData.commandData());
         CommandData data = ((Authorizable) commandProcessor).fromAuthorization(subCommandData, authorizationCommandData);
 
         Queue<EventData> eventQueue = new LinkedList<>();

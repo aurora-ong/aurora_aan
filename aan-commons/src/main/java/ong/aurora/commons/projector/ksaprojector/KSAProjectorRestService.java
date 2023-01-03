@@ -1,4 +1,4 @@
-package ong.aurora.projector;
+package ong.aurora.commons.projector.ksaprojector;
 
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -21,15 +21,15 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-class RestService {
+class KSAProjectorRestService {
     private final HostInfo hostInfo;
     private final KafkaStreams streams;
 
     private final List<AANEntity> entity2List;
 
-    private static final Logger log = LoggerFactory.getLogger(RestService.class);
+    private static final Logger log = LoggerFactory.getLogger(KSAProjectorRestService.class);
 
-    RestService(HostInfo hostInfo, KafkaStreams streams, List<AANEntity> entity2List) {
+    KSAProjectorRestService(HostInfo hostInfo, KafkaStreams streams, List<AANEntity> entity2List) {
         this.entity2List = entity2List;
         this.hostInfo = hostInfo;
         this.streams = streams;

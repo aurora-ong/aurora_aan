@@ -32,19 +32,41 @@ dependencies {
 
     implementation 'io.libp2p:jvm-libp2p-minimal:0.10.0-RELEASE'
 
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    implementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
+
+    // https://mvnrepository.com/artifact/io.reactivex/rxjava
+    implementation group: 'io.reactivex', name: 'rxjava', version: '1.3.8'
+
+
+    implementation 'org.apache.kafka:kafka-clients:3.0.0'
+
     implementation 'ong.aurora.ann:aan-commons:1.0-SNAPSHOT'
 
     // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
     implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.70'
 
-// https://mvnrepository.com/artifact/com.github.multiformats/java-multihash
+    // https://mvnrepository.com/artifact/com.github.multiformats/java-multihash
     implementation group: 'com.github.multiformats', name: 'java-multihash', version: 'v1.3.2'
 
-
+    // required for interactive queries (server)
+    implementation 'io.javalin:javalin:4.6.1'
 
     // logging
     implementation 'org.slf4j:slf4j-api:1.7.36'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.13.3'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.3'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.13.3'
 
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'

@@ -14,7 +14,8 @@ public record ANNNodeValue(
         @JsonProperty("node_id") String nodeId,
         @JsonProperty("node_name") String nodeName,
         @JsonProperty("node_hostname") String nodeHostname,
-        @JsonProperty("node_signature") PublicKey nodeSignature,
+        @JsonProperty("node_port") String nodePort,
+        @JsonProperty("node_signature") String nodeSignature,
         @JsonProperty("node_status") ANNNodeStatus nodeStatus
 
 ) implements EntityValue<ANNNodeValue> {

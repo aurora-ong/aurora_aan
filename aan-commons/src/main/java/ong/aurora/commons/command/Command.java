@@ -8,9 +8,11 @@ import java.util.Map;
 
 // TODO ADD COMMAND ID
 // TODO ADD COMMAND CONTEXT
-public record Command(@JsonProperty("command_timestamp") Instant commandTimestamp,
-                      @JsonProperty("command_name") String commandName,
-                      @JsonProperty("command_data") Map<String, Object> commandData) {
+public record Command(
+        @JsonProperty("command_id") String commandId,
+        @JsonProperty("command_timestamp") Instant commandTimestamp,
+        @JsonProperty("command_name") String commandName,
+        @JsonProperty("command_data") Map<String, Object> commandData) {
 
     public <T> T commandData2(Class<T> commandDataClass) {
 

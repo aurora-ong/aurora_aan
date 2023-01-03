@@ -75,8 +75,14 @@ public class ProjectorKSA {
 
         KafkaStreams streams = new KafkaStreams(builder.build(), props);
 
-        Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
-        streams.cleanUp();
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            log.info("Cerrando KSA Proyector..");
+            streams.close();
+            log.info("Limpieza..");
+            streams.cleanUp();
+            log.info("Finalizado");
+        }));
+
         log.info("Iniciando projector-ksa");
 
         streams.setStateListener((newState, oldState) -> {

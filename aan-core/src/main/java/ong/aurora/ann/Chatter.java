@@ -20,9 +20,10 @@ public class Chatter implements ProtocolMessageHandler<ByteBuf>, ChatController 
 
     Stream stream;
 
-    CompletableFuture<ChatController> ready;
+    CompletableFuture<Chatter> ready;
 
-    public Chatter(CompletableFuture<ChatController> ready) {
+
+    public Chatter(CompletableFuture<Chatter> ready) {
         this.ready = ready;
     }
 
@@ -33,29 +34,29 @@ public class Chatter implements ProtocolMessageHandler<ByteBuf>, ChatController 
         ByteBuf byteBuf = Unpooled.wrappedBuffer(message.getBytes(StandardCharsets.UTF_8));
 
         stream.writeAndFlush(byteBuf);
+
+//        this.ready.whenComplete((chatter, throwable) -> {
+//
+//            ByteBuf byteBuf = Unpooled.wrappedBuffer(message.getBytes(StandardCharsets.UTF_8));
+//
+//            stream.writeAndFlush(byteBuf);
+//        });
+
     }
 
     @Override
     public void onActivated(@NotNull Stream stream) {
-
-//        ProtocolMessageHandler.super.onActivated(stream);
-        log.info("onActivated {}", stream.remotePeerId());
-        stream.getProtocol().thenAccept(s -> log.info("Get Protocol: {}", s));
+        log.info("Nueva conexión establecida con {} {}", stream.remotePeerId(), stream.getConnection().remoteAddress().toString());
+        stream.getProtocol().thenAccept(s -> log.info("Protocolo: {}", s));
         this.stream = stream;
-
-//        stream.writeAndFlush("LALA");
-
         this.ready.complete(this);
     }
 
 
-
     @Override
     public void onMessage(@NotNull Stream stream, ByteBuf msg) {
-        log.info("onMessage");
-
 //        ProtocolMessageHandler.super.onMessage(stream, msg);
-        log.info("Mensaje recibido de {} {}", this.stream.getConnection().secureSession().getLocalId(), msg.toString(StandardCharsets.UTF_8));
+        log.info("Mensaje recibido de {} {}", this.stream.getConnection().secureSession().getRemoteId(), msg.toString(StandardCharsets.UTF_8));
     }
 
     @Override
@@ -70,13 +71,5 @@ public class Chatter implements ProtocolMessageHandler<ByteBuf>, ChatController 
         log.info("onException", cause);
     }
 
-//    @Override
-//    public void fireMessage(@NotNull Stream stream, @NotNull Object msg) {
-//
-//
-//
-//        log.info("fireMessage {}", msg.toString()
-//
-//        );
-//    }
+
 }
