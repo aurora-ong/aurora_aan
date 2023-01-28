@@ -4,7 +4,7 @@ import com.google.common.net.HostAndPort;
 import ong.aurora.ann.command.CommandPool;
 import ong.aurora.ann.command.CommandRestService;
 import ong.aurora.ann.identity.ANNNodeIdentity;
-import ong.aurora.ann.p2p.AANP2pNodeHost;
+import ong.aurora.ann.p2p.p2pHostNode;
 import ong.aurora.commons.blockchain.ANNBlockchain;
 import ong.aurora.commons.command.CommandProjectorQueryException;
 import ong.aurora.commons.entity.MaterializedEntity;
@@ -12,6 +12,7 @@ import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.peer.node.ANNNodeEntity;
 import ong.aurora.commons.peer.node.ANNNodeValue;
 import ong.aurora.commons.projector.ksaprojector.KSAProjector;
+import ong.aurora.commons.serialization.ANNSerializer;
 import ong.aurora.commons.serialization.jackson.ANNJacksonSerializer;
 import ong.aurora.commons.store.file.FileEventStore;
 import ong.aurora.model.v_0_0_1.AuroraOM;
@@ -29,6 +30,9 @@ public class ANNCore {
 
     public static void main(String[] args) throws Exception, CommandProjectorQueryException {
 
+
+        ANNSerializer annSerializer = new ANNJacksonSerializer();
+
         AANModel aanModel = new AuroraOM();
 
         Map<String, String> env = System.getenv();
@@ -45,16 +49,16 @@ public class ANNCore {
 
         ANNNodeIdentity nodeIdentity = ANNNodeIdentity.fromFile(nodeInfoPath.concat(nodeId).concat("/identity_private.pem"), nodeInfoPath.concat(nodeId).concat("/identity_public.pem"));
 
-        ANNBlockchain blockchain = new ANNBlockchain(new FileEventStore(nodeInfoPath.concat(nodeId).concat("/event_store.log")), new ANNJacksonSerializer());
+        ANNBlockchain blockchain = new ANNBlockchain(new FileEventStore(nodeInfoPath.concat(nodeId).concat("/event_store.log")), annSerializer);
 
         if (blockchain.isEmpty()) {
             log.info("!! Blockchain no inicializada");
+
 
         } else {
             log.info("!! Blockchain encontrada ({} bloques)", blockchain.blockCount());
             log.info("Verificando integridad");
             blockchain.verifyIntegrity().get();
-
         }
 
         KSAProjector aanProjector = new KSAProjector("http://localhost:15002", "localhost:29092");
@@ -112,23 +116,14 @@ public class ANNCore {
         CommandRestService commandRestService = new CommandRestService(HostAndPort.fromParts("127.0.0.1", Integer.parseInt(commandApiPort)), aanProcessor, commandPool);
         commandRestService.start();
 
-        // TODO INICIAR CLIENTE P2P
-
         BehaviorSubject<List<ANNNodeValue>> projectorNodes = BehaviorSubject.create(List.of());
 
-
-
-        AANP2pNodeHost p2PNode = new AANP2pNodeHost(nodeIdentity, thisNode, projectorNodes);
+        p2pHostNode p2PNode = new p2pHostNode(nodeIdentity, thisNode, annSerializer, projectorNodes, blockchain);
 
         p2PNode.start().get();
 
-//        p2PNode.dialNodes(nodes.stream().filter(annNodeValueMaterializedEntity -> !annNodeValueMaterializedEntity.getEntityValue().nodeId().equals(thisNode.nodeId())).map(MaterializedEntity::getEntityValue).collect(Collectors.toList())).get();
-//        p2PNode.dialNodes(nodes.stream().map(MaterializedEntity::getEntityValue).collect(Collectors.toList())).get();
-
-
-        log.info("Actualizado");
-        projectorNodes.onNext(allNodeList.stream().map(annNodeValueMaterializedEntity -> annNodeValueMaterializedEntity.getEntityValue()).toList());
-
+        log.info("Actualizando nodos");
+        projectorNodes.onNext(allNodeList.stream().map(MaterializedEntity::getEntityValue).toList());
 
 
     }

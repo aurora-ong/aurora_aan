@@ -235,7 +235,6 @@
       <module fileurl="file://$PROJECT_DIR$/aan-core/aan-core.iml" filepath="$PROJECT_DIR$/aan-core/aan-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-core/aan-core.main.iml" filepath="$PROJECT_DIR$/aan-core/aan-core.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-core/aan-core.test.iml" filepath="$PROJECT_DIR$/aan-core/aan-core.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.test.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" />
@@ -243,7 +242,7 @@
       <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ProjectRunConfigurationManager">

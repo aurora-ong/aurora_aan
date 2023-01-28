@@ -9,6 +9,7 @@ import ong.aurora.commons.store.ANNEventStore;
 import ong.aurora.commons.store.file.FileEventStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rx.subjects.BehaviorSubject;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
@@ -27,7 +28,10 @@ public class ANNBlockchain {
 
     public ANNBlockchain(ANNEventStore eventStore, ANNSerializer annSerializer) {
         this.eventStore = eventStore;
+
         this.serializer = annSerializer;
+        log.info("ANN Blockchain Último evento: {}", this.lastEvent());
+        this.blockchainStream.onNext(this.lastEvent().orElse(null));
     }
 
     public CompletableFuture<Void> verifyIntegrity() {
@@ -64,12 +68,17 @@ public class ANNBlockchain {
         return this.eventStream().max(Comparator.comparingLong(Event::eventId));
     }
 
+    public BehaviorSubject<Event> blockchainStream = BehaviorSubject.create();
+
     public Optional<String> lastEventHash() {
         return this.lastEvent().map(this::eventHash);
     }
 
     public CompletableFuture<Void> persistEvent(Event event) throws Exception {
-        return this.eventStore.saveEvent(serializer.toJSON(event));
+        // TODO COMPROBAR HASH
+        this.eventStore.saveEvent(serializer.toJSON(event));
+        blockchainStream.onNext(event);
+        return CompletableFuture.completedFuture(null);
     }
 
     public String eventHash(Event event) {

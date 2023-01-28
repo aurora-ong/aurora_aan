@@ -1,63 +1,43 @@
-package ong.aurora.processor;
+package ong.aurora.ann;
 
+import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
+import ong.aurora.commons.blockchain.ANNBlockchain;
 import ong.aurora.commons.command.*;
 import ong.aurora.commons.event.Event;
 import ong.aurora.commons.event.EventData;
 import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.projector.AANProjector;
-import ong.aurora.commons.store.ANNEventStore;
 import ong.aurora.model.v_0_0_1.AuroraOM;
-import ong.aurora.commons.projector.ksaprojector.KSAProjector;
-import org.apache.kafka.streams.processor.api.Processor;
-import org.apache.kafka.streams.processor.api.ProcessorContext;
-import org.apache.kafka.streams.processor.api.Record;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 
-public class AANProcessor implements Processor<String, Command, Long, Event> {
+public class AANProcessor {
 
     private static final Logger logger = LoggerFactory.getLogger(AANProcessor.class);
 
-    private ProcessorContext<Long, Event> context;
-
-    private Long currentOffset;
     private String currentHash;
 
-    private AANProjector aanProjector;
+    private final AANProjector aanProjector;
 
     AANModel aanModel;
-    ANNEventStore eventStore;
+    ANNBlockchain annBlockchain;
 
-    public AANProcessor(ANNEventStore annEventStore) {
-        this.eventStore = annEventStore;
-    }
-
-
-
-    @Override
-    public void init(ProcessorContext<Long, Event> context) {
-        org.apache.kafka.streams.processor.api.Processor.super.init(context);
-        this.context = context;
-
-        this.currentOffset = 0L;
+    public AANProcessor(ANNBlockchain annBlockchain, AANProjector aanProjector, AANModel aanModel) {
+        this.annBlockchain = annBlockchain;
         this.currentHash = "dummy";
-        this.aanModel = new AuroraOM();
-        this.aanProjector = new KSAProjector("http://localhost:15002");
+        this.aanModel = aanModel;
+        this.aanProjector = aanProjector;
     }
 
-    @Override
-    public void process(Record<String, Command> commandRecord) {
+    public CompletableFuture<Void> process(Command command) {
 
-        logger.info("### Procesando un nuevo comando {} {}", commandRecord.key(), commandRecord.toString());
-
-        Command command = commandRecord.value();
+        logger.info("### Procesando un nuevo comando {}", command.toString());
 
         try {
 
@@ -72,9 +52,6 @@ public class AANProcessor implements Processor<String, Command, Long, Event> {
 
             logger.info("Comando validado");
 
-
-//            Queue<EventData> resultEvent = commandProcessor.applyCommand(command);
-
             // ESTE VALOR DEBE VENIR DE LA VALIDACIÓN, YA QUE DEBE ESTAR CONSENSUADO PARA QUE PRODUZCA UN HASH DETERMINISTICO
             Instant validationTime = Instant.now();
 
@@ -82,20 +59,13 @@ public class AANProcessor implements Processor<String, Command, Long, Event> {
             for (EventData eventData : resultEvent) {
                 logger.info("Procesando evento {}/{}", eventNumber, resultEvent.size());
 
-                String body = command.toString();
+                logger.info("Último evento: {}", annBlockchain.lastEventHash().orElse(null));
 
-                String sha256hex = Hashing.sha256()
-                        .hashString(body, StandardCharsets.UTF_8)
-                        .toString();
-
-                Event event = new Event(this.currentOffset, eventData.eventName(), eventData.eventData(), validationTime, sha256hex, command);
+                Event event = new Event(this.annBlockchain.blockCount(), eventData.eventName(), eventData.eventData(), validationTime, annBlockchain.lastEventHash().orElse(null), command);
 
                 updateEventStore(event).get();
-                Record<Long, Event> newRecord = new Record<>(event.eventId(), event, event.eventTimestamp().toEpochMilli()); // CREAR NUEVO EVENTO
+                aanProjector.projectEvent(event).get();
 
-                context.forward(newRecord);
-                this.currentOffset = this.currentOffset + 1;
-                this.currentHash = sha256hex;
                 eventNumber++;
             }
 
@@ -112,17 +82,13 @@ public class AANProcessor implements Processor<String, Command, Long, Event> {
             logger.error("### Validación falló (otro) {}", e);
         }
 
+        return CompletableFuture.completedFuture(null);
+
     }
 
-    @Override
-    public void close() {
-        org.apache.kafka.streams.processor.api.Processor.super.close();
-    }
-
-    CompletableFuture<Void> updateEventStore(Event event) throws IOException {
+    CompletableFuture<Void> updateEventStore(Event event) throws Exception {
         logger.info("Actualizando store {}", event);
-//        kvStore.put(event.eventId(), event);
-        return this.eventStore.saveEvent(event);
+        return this.annBlockchain.persistEvent(event);
     }
 
 

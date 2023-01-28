@@ -39,6 +39,7 @@ public class CreatePerson implements AANCommand {
 //        command.checkRequiredFields(List.of("person_id", "person_name", "person_lastname"));
 
 
+        // TODO REVISAR
         Optional<MaterializedEntity<PersonValue>> value = projector.queryOne(new PersonEntity(), new PersonKey(commandData.personId()));
 
         logger.info("getOne optional: {}", value);

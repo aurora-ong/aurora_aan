@@ -184,6 +184,7 @@ public class KSAProjector implements AANProjector {
             HttpRequest request = builder.build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+            logger.info("HttpResponse {} {}", response.statusCode(), response.body());
 
             if (response.statusCode() == 404) {
                 logger.info("No encontrado");

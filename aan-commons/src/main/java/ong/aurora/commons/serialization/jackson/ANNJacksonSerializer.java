@@ -27,6 +27,7 @@ public class ANNJacksonSerializer implements ANNSerializer {
     public <T> T fromJSON(String json, Class<T> tClass) {
         try {
             return objectMapper.readValue(json, tClass);
+
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
