@@ -69,27 +69,6 @@
           </compositeBuild>
         </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/aan-processor-ksa" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/aan-commons" />
-            <option value="$PROJECT_DIR$/aan-processor-ksa" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT">
-            <builds>
-              <build path="$PROJECT_DIR$/aan-commons" name="aan-commons">
-                <projects>
-                  <project path="$PROJECT_DIR$/aan-commons" />
-                </projects>
-              </build>
-            </builds>
-          </compositeBuild>
-        </compositeConfiguration>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/aan-projector-ksa" />
         <option name="modules">
           <set>

@@ -6,6 +6,7 @@ import io.libp2p.crypto.keys.RsaPublicKey;
 import ong.aurora.ann.PeerController;
 import ong.aurora.ann.identity.ANNNodeIdentity;
 import ong.aurora.ann.p2p.msg.BlockchainStatus;
+import ong.aurora.commons.event.Event;
 import ong.aurora.commons.peer.node.ANNNodeValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,7 +80,6 @@ public class p2pPeerNode {
             log.info("Actualizando estado peer {} {}", this.peerNodeValue.nodeId(), p2PPeerConnectionStatusType);
             this.peerStatus.onNext(new p2pPeerStatus(this.peerNodeValue.nodeId(), p2PPeerConnectionStatusType, null));
 
-//            // TODO CORREGIR CONDICIÓN DE CARRERA
 //            if (p2PPeerConnectionStatusType == P2PPeerConnectionStatusType.CONNECTED) {
 //
 //            }
@@ -106,10 +106,23 @@ public class p2pPeerNode {
         }
         log.info("Procesando mensaje {} ({}@{})", this.peerNodeValue.nodeName(), this.peerNodeValue.nodeId(), this.peerNodeValue.nodeHostname());
 
-        if (message instanceof BlockchainStatus s) {
+        if (message instanceof BlockchainStatus blockchainStatusUpdate) {
 //            log.info("Actualizando Blockchain {}", s);
-            this.peerStatus.onNext(new p2pPeerStatus(this.peerStatus.getValue().nodeId(), this.peerStatus.getValue().currentStatus(), s.blockchainIndex()));
+
+            Long localBlockchainIndex = this.p2pHostNode.hostBlockchain.lastEvent().map(Event::eventId).orElse(-1L);
+
+            if (localBlockchainIndex.compareTo(blockchainStatusUpdate.blockchainIndex()) == 0) {
+                log.info("++ Nodo {} sincronizado remoteIndex: {} localIndex: {}", this.peerNodeValue.nodeId(), blockchainStatusUpdate.blockchainIndex(), localBlockchainIndex);
+                this.peerStatus.onNext(new p2pPeerStatus(this.peerStatus.getValue().nodeId(), P2PPeerConnectionStatusType.READY, blockchainStatusUpdate.blockchainIndex()));
+            } else {
+                log.info("++ Nodo {} des-sincronizado remoteIndex: {} localIndex: {}", this.peerNodeValue.nodeId(), blockchainStatusUpdate.blockchainIndex(), localBlockchainIndex);
+                this.peerStatus.onNext(new p2pPeerStatus(this.peerStatus.getValue().nodeId(), P2PPeerConnectionStatusType.BALANCING, blockchainStatusUpdate.blockchainIndex()));
+            }
+
+
 //            log.info("Blockchain actualizado");
         }
     }
+
+
 }

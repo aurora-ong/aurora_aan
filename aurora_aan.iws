@@ -4,57 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ p2p peer protocol&#10;++ p2p peer network&#10;++ command api&#10;++ processor &amp; projector moved inside aan core">
-      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/util/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/PeerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/msg/BlockchainStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/msg/MessageType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/msg/P2PMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/msg/P2PMessage2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pHostNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pPeerNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/ANNBlockchain.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/ANNBlockchain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/entity/MaterializedEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/entity/MaterializedEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/ksaprojector/KSAProjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/ksaprojector/KSAProjector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/jackson/ANNJacksonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/jackson/ANNJacksonSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/model/v_0_0_1/command/person/create/CreatePerson.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/model/v_0_0_1/command/person/create/CreatePerson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/Chat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ChatBinding.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ChatController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ChatProtocol.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/Chatter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/MainChat1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/MainChat2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/P2PNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/AANBinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/AANBinding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/AANP2PNodePeer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/AANP2pNodeHost.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/AANProtocol.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/AANProtocol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/P2PPeerStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pPeerStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/P2PPeerStatusType.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/P2PPeerConnectionStatusType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/src/main/java/ong/aurora/processor/AANProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/src/main/java/ong/aurora/processor/ProcessorKSA.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-processor-ksa/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" afterDir="false" />
+    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ p2p peer connection status&#10;+- p2p peer blockchain status">
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/P2PPeerConnectionStatusType.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/P2PPeerConnectionStatusType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pHostNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pHostNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pPeerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pPeerNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
     </list>
@@ -96,10 +49,6 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="aan-core" type="f1a62948:ProjectNode" />
               </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="aan-processor-ksa" type="f1a62948:ProjectNode" />
-              </path>
             </expand>
             <select />
           </tree_state>
@@ -112,11 +61,17 @@
       <list>
         <option value="Record" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="distributed_consensus_p2p" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GithubProjectSettings">
@@ -154,11 +109,11 @@
       <recent name="Z:\AURORA\aurora\aurora_aan\aan-core\src\main" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="ong.aurora.ann.p2p.msg" />
+      <recent name="ong.aurora.ann.p2p.fsm" />
       <recent name="ong.aurora.ann.p2p" />
+      <recent name="ong.aurora.ann.p2p.msg" />
       <recent name="ong.aurora.ann" />
       <recent name="ong.aurora" />
-      <recent name="ong.aurora.commons.projector.ksaprojector" />
     </key>
   </component>
   <component name="RunManager" selected="Application.ANNCore (H4)">
@@ -317,7 +272,8 @@
       <workItem from="1674600806744" duration="4328000" />
       <workItem from="1674663332442" duration="34000" />
       <workItem from="1674738362216" duration="3617000" />
-      <workItem from="1674908033362" duration="4233000" />
+      <workItem from="1674908033362" duration="13406000" />
+      <workItem from="1675006778454" duration="2637000" />
     </task>
     <task id="LOCAL-00001" summary="++ gradle fix">
       <created>1670288482182</created>
@@ -347,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672750000218</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="++ p2p peer connection status&#10;+- p2p peer blockchain status">
+      <created>1674912547745</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1674912547745</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,6 +332,7 @@
     <MESSAGE value="++ gradle fix&#10;++ update event record to long" />
     <MESSAGE value="++ blockchain verify block index&#10;++ moved rest event store to projector" />
     <MESSAGE value="++ p2p peer protocol&#10;++ p2p peer network&#10;++ command api&#10;++ processor &amp; projector moved inside aan core" />
-    <option name="LAST_COMMIT_MESSAGE" value="++ p2p peer protocol&#10;++ p2p peer network&#10;++ command api&#10;++ processor &amp; projector moved inside aan core" />
+    <MESSAGE value="++ p2p peer connection status&#10;+- p2p peer blockchain status" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ p2p peer connection status&#10;+- p2p peer blockchain status" />
   </component>
 </project>

@@ -83,7 +83,7 @@ public class p2pHostNode {
                 return peerStatusList;
             }).subscribe(peerStatusList -> {
 
-                boolean networkReady = peerStatusList.stream().allMatch(p2PPeerStatus -> p2PPeerStatus.currentStatus() == P2PPeerConnectionStatusType.CONNECTED);
+                boolean networkReady = peerStatusList.stream().allMatch(p2PPeerStatus -> p2PPeerStatus.currentStatus() != P2PPeerConnectionStatusType.DISCONNECTED);
 
                 if (networkReady) {
                     log.info("++ Conexión con la red establecida");
@@ -94,22 +94,22 @@ public class p2pHostNode {
                             this.broadcastMessage(new BlockchainStatus(Optional.ofNullable(this.hostBlockchain.blockchainStream.getValue()).map(Event::eventId).orElse(-1L)));
                         });
                     }
-
-                    if (peerStatusList.stream().allMatch(p2pPeerStatus -> p2pPeerStatus.blockchainIndex() != null)) {
-                        log.info("Network blockchain status ready");
-                        Long maxBlockchainIndex = peerStatusList.stream().max(Comparator.comparingLong(p2pPeerStatus::blockchainIndex)).orElseThrow(() -> new RuntimeException("No blockchain index")).blockchainIndex();
-
-                        log.info("maxBlockchainIndex: {}", maxBlockchainIndex);
-
-                        Long localBlockchainIndex = this.hostBlockchain.lastEvent().map(Event::eventId).orElse(-1L);
-
-                        if (localBlockchainIndex.compareTo(maxBlockchainIndex) >= 0) {
-                            log.info("++ Nodo sincronizado maxBlockchainIndex: {} localIndex: {}", maxBlockchainIndex, localBlockchainIndex);
-                        } else {
-                            log.info("!! Nodo dessincronizado maxBlockchainIndex: {} localIndex: {}", maxBlockchainIndex, localBlockchainIndex);
-                        }
-
-                    }
+//
+//                    if (peerStatusList.stream().allMatch(p2pPeerStatus -> p2pPeerStatus.blockchainIndex() != null)) {
+//                        log.info("Network blockchain status ready");
+//                        Long maxBlockchainIndex = peerStatusList.stream().max(Comparator.comparingLong(p2pPeerStatus::blockchainIndex)).orElseThrow(() -> new RuntimeException("No blockchain index")).blockchainIndex();
+//
+//                        log.info("maxBlockchainIndex: {}", maxBlockchainIndex);
+//
+//                        Long localBlockchainIndex = this.hostBlockchain.lastEvent().map(Event::eventId).orElse(-1L);
+//
+//                        if (localBlockchainIndex.compareTo(maxBlockchainIndex) >= 0) {
+//                            log.info("++ Nodo sincronizado maxBlockchainIndex: {} localIndex: {}", maxBlockchainIndex, localBlockchainIndex);
+//                        } else {
+//                            log.info("!! Nodo dessincronizado maxBlockchainIndex: {} localIndex: {}", maxBlockchainIndex, localBlockchainIndex);
+//                        }
+//
+//                    }
 
                 } else {
                     log.info("!! Conexión con la red perdida");
