@@ -8,7 +8,6 @@
       <module name="aan-core" target="17" />
       <module name="aan-core.main" target="17" />
       <module name="aan-core.test" target="17" />
-      <module name="aan-processor-ksa" target="17" />
       <module name="aan-processor-ksa.main" target="17" />
       <module name="aan-processor-ksa.test" target="17" />
       <module name="aan-projector-ksa" target="17" />
@@ -214,6 +213,7 @@
       <module fileurl="file://$PROJECT_DIR$/aan-core/aan-core.iml" filepath="$PROJECT_DIR$/aan-core/aan-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-core/aan-core.main.iml" filepath="$PROJECT_DIR$/aan-core/aan-core.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-core/aan-core.test.iml" filepath="$PROJECT_DIR$/aan-core/aan-core.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.test.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" />
