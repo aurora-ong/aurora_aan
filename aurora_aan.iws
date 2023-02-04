@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ refactored project to mono repo">
-      <change beforePath="$PROJECT_DIR$/aurora_aan.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.ipr" afterDir="false" />
+    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ p2p framework done">
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,14 +104,14 @@
       <recent name="ong.aurora" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ANNCore (H4)">
+  <component name="RunManager" selected="Application.ANNCore (H1)">
     <configuration name="ANNCore (H1)" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <envs>
         <env name="ANN_NODE_COMMAND_API_PORT" value="6000" />
         <env name="ANN_NODE_ID" value="node1" />
-        <env name="ANN_NODE_INFO_PATH" value="Z:\AURORA\aurora\aurora_aan\node_info\" />
+        <env name="ANN_NODE_INFO_PATH" value="./node_info/" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.ANNCore" />
       <module name="aan-core.main" />
@@ -127,7 +126,7 @@
       <envs>
         <env name="ANN_NODE_COMMAND_API_PORT" value="6001" />
         <env name="ANN_NODE_ID" value="node2" />
-        <env name="ANN_NODE_INFO_PATH" value="Z:\AURORA\aurora\aurora_aan\node_info\" />
+        <env name="ANN_NODE_INFO_PATH" value="./node_info/" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.ANNCore" />
       <module name="aan-core.main" />
@@ -141,7 +140,7 @@
       <envs>
         <env name="ANN_NODE_COMMAND_API_PORT" value="6003" />
         <env name="ANN_NODE_ID" value="node3" />
-        <env name="ANN_NODE_INFO_PATH" value="Z:\AURORA\aurora\aurora_aan\node_info\" />
+        <env name="ANN_NODE_INFO_PATH" value="./node_info/" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.ANNCore" />
       <module name="aan-core.main" />
@@ -155,36 +154,10 @@
       <envs>
         <env name="ANN_NODE_COMMAND_API_PORT" value="6004" />
         <env name="ANN_NODE_ID" value="node4" />
-        <env name="ANN_NODE_INFO_PATH" value="Z:\AURORA\aurora\aurora_aan\node_info\" />
+        <env name="ANN_NODE_INFO_PATH" value="./node_info/" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.ANNCore" />
       <module name="aan-core.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainChat1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.MainChat1" />
-      <module name="aan-core.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ong.aurora.ann.command.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainChat2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.MainChat2" />
-      <module name="aan-core.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ong.aurora.ann.command.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -208,8 +181,6 @@
       <item itemvalue="Application.ANNCore (H3)" />
       <item itemvalue="Application.ANNCore (H4)" />
       <item itemvalue="Application.ProjectorKSA" />
-      <item itemvalue="Application.MainChat1" />
-      <item itemvalue="Application.MainChat2" />
       <item itemvalue="Docker.docker-compose.yaml.aan-projector: Compose Deployment" />
       <item itemvalue="Shell Script.aan-commands producer" />
       <item itemvalue="Shell Script.aan-events consumer" />
@@ -219,8 +190,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Docker.docker-compose.yaml.aan-projector: Compose Deployment" />
-        <item itemvalue="Application.MainChat2" />
-        <item itemvalue="Application.MainChat1" />
       </list>
     </recent_temporary>
   </component>
@@ -263,7 +232,9 @@
       <workItem from="1674738362216" duration="3617000" />
       <workItem from="1674908033362" duration="13406000" />
       <workItem from="1675006778454" duration="2637000" />
-      <workItem from="1675023115184" duration="22000" />
+      <workItem from="1675023115184" duration="374000" />
+      <workItem from="1675082824551" duration="1017000" />
+      <workItem from="1675513685625" duration="708000" />
     </task>
     <task id="LOCAL-00001" summary="++ gradle fix">
       <created>1670288482182</created>
@@ -300,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674912547745</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="++ p2p framework done">
+      <created>1675023391571</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1675023391571</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -323,6 +301,7 @@
     <MESSAGE value="++ blockchain verify block index&#10;++ moved rest event store to projector" />
     <MESSAGE value="++ p2p peer protocol&#10;++ p2p peer network&#10;++ command api&#10;++ processor &amp; projector moved inside aan core" />
     <MESSAGE value="++ p2p peer connection status&#10;+- p2p peer blockchain status" />
-    <option name="LAST_COMMIT_MESSAGE" value="++ p2p peer connection status&#10;+- p2p peer blockchain status" />
+    <MESSAGE value="++ p2p framework done" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ p2p framework done" />
   </component>
 </project>
