@@ -3,6 +3,8 @@ package ong.aurora.ann;
 import com.google.common.net.HostAndPort;
 import ong.aurora.ann.command.CommandPool;
 import ong.aurora.ann.command.CommandRestService;
+import ong.aurora.ann.fsm.AANEvent;
+import ong.aurora.ann.fsm.AANState;
 import ong.aurora.ann.identity.ANNNodeIdentity;
 import ong.aurora.ann.p2p.p2pHostNode;
 import ong.aurora.commons.blockchain.ANNBlockchain;
@@ -18,6 +20,9 @@ import ong.aurora.commons.store.file.FileEventStore;
 import ong.aurora.model.v_0_0_1.AuroraOM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.statemachine.StateContext;
+import org.springframework.statemachine.action.Action;
 import rx.subjects.BehaviorSubject;
 
 import java.util.List;
@@ -127,4 +132,7 @@ public class ANNCore {
 
 
     }
+
+
+
 }

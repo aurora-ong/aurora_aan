@@ -1,3 +1,17 @@
+buildscript {
+    ext {
+        springBootVersion = '2.6.7'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
 plugins {
     id 'java'
 }
@@ -5,7 +19,12 @@ plugins {
 ext {
     kotlin_version = '1.7.10'
     kafkaVersion = '3.1.0'
+    springStatemachineVersion = '3.2.0'
+
 }
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 group 'ong.aurora.ann'
 version '1.0-SNAPSHOT'
@@ -21,7 +40,6 @@ repositories {
     maven {
         url "https://maven.scijava.org/content/repositories/public/"
     }
-
 
 }
 
@@ -68,9 +86,17 @@ dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.13.3'
 
+    implementation 'org.springframework.statemachine:spring-statemachine-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.statemachine:spring-statemachine-bom:${springStatemachineVersion}"
+    }
 }
 
 
