@@ -2,11 +2,9 @@ package ong.aurora.ann.fsm;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
@@ -51,14 +49,14 @@ public class AANFSM
             throws Exception {
         transitions
                 .withExternal()
-                .source(AANState.INICIAL).target(AANState.PROJECTOR).event(AANEvent.CONFIG_LOADED)
-                .action(actionnn())
+                .source(AANState.INICIAL).target(AANState.CONFIG_LOADING).event(AANEvent.APP_STARTED)
+//                .action(actionnn())
                 .and()
                 .withExternal()
-                .source(AANState.PROJECTOR).target(AANState.PROCESSOR).event(AANEvent.COMPLETED_2)
+                .source(AANState.CONFIG_LOADING).target(AANState.CONFIG_START).event(AANEvent.CONFIG_EMPTY)
                 .and()
                 .withExternal()
-                .source(AANState.PROCESSOR).target(AANState.BLOCKCHAIN).event(AANEvent.EMPTY_BLOCKCHAIN);
+                .source(AANState.CONFIG_LOADING).target(AANState.BLOCKCHAIN_LOADING).event(AANEvent.CONFIG_OK);
     }
 
     @Bean
@@ -70,12 +68,12 @@ public class AANFSM
             }
         };
     }
-
-    @Bean
-    public Action<AANState, AANEvent> actionnn() {
-        return context -> {
-            // do something
-            log.info("Ejecutando acción {} {}", context.getSource().getId(), context.getTarget().getId());
-        };
-    }
+//
+//    @Bean
+//    public Action<AANState, AANEvent> actionnn() {
+//        return context -> {
+//            // do something
+//            log.info("Ejecutando acción {} {}", context.getSource().getId(), context.getTarget().getId());
+//        };
+//    }
 }

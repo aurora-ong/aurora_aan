@@ -14,7 +14,7 @@ public class Test {
 
     @OnTransition
     public void anyTransition() {
-        log.info("TEST TEST");
+//        log.info("TEST TEST");
     }
 
     @OnTransition(source = "PROJECTOR", target = "PROCESSOR")

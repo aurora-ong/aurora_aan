@@ -39,7 +39,7 @@ public class p2pPeerNode {
 
         RsaPublicKey rsaPublicKey = null;
         try {
-            rsaPublicKey = new RsaPublicKey(ANNNodeIdentity.fromNodeSignature(peerNodeValue.nodeSignature()));
+            rsaPublicKey = new RsaPublicKey(ANNNodeIdentity.publicKeyFromString(peerNodeValue.nodeSignature()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -1,5 +1,5 @@
 package ong.aurora.ann.fsm;
 
 public enum AANEvent {
-        CONFIG_LOADED, COMPLETED_2, EMPTY_BLOCKCHAIN
+        APP_STARTED, CONFIG_EMPTY, CONFIG_OK, EMPTY_BLOCKCHAIN
 }

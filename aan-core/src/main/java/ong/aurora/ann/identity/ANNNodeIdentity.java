@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -58,12 +56,18 @@ public class ANNNodeIdentity {
         return encodedPK.equals(base64);
     }
 
-    public static PublicKey fromNodeSignature(String nodeSignature) throws Exception {
-        byte[] byteKey = Base64.getDecoder().decode(nodeSignature);
+    public static PublicKey publicKeyFromString(String publicKey) throws Exception {
+        byte[] byteKey = Base64.getDecoder().decode(publicKey);
         X509EncodedKeySpec X509publicKey = new X509EncodedKeySpec(byteKey);
         KeyFactory kf = KeyFactory.getInstance("RSA");
-
         return kf.generatePublic(X509publicKey);
+    }
+
+    public static PrivateKey privateKeyFromString(String privateKey) throws Exception {
+        byte[] byteKey = Base64.getDecoder().decode(privateKey);
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(byteKey);
+        KeyFactory kf = KeyFactory.getInstance("RSA");
+        return kf.generatePrivate(keySpec);
     }
 
 

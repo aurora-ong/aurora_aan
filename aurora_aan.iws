@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ update config">
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANFSM.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Starter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Test.java" afterDir="false" />
+    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ fsm spring initial">
+      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Initial.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/new_command.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_info/node1/identity_public_.pem" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aurora_aan.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANFSM.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANFSM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANState.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Starter.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Starter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/identity/ANNNodeIdentity.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/identity/ANNNodeIdentity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pPeerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pPeerNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,16 +104,18 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "Z:/AURORA/aurora/aurora_aan/aan-core/src/main",
+    "last_opened_file_path": "Z:/AURORA/aurora/aurora_aan/node_info/node1",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "spring.configuration.checksum": "b246a30b1e40a8a38bb8321e752970d7"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="Z:\AURORA\aurora\aurora_aan\node_info\node1" />
       <recent name="Z:\AURORA\aurora\aurora_aan\aan-core\src\main" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -185,6 +188,13 @@
       <method v="2" />
     </configuration>
     <configuration name="Starter" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="ACTIVE_PROFILES" />
+      <envs>
+        <env name="ANN_NODE_COMMAND_API_PORT" value="6000" />
+        <env name="ANN_NODE_ID" value="node1" />
+        <env name="ANN_NODE_KEY_PRIVATE" value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCuiAqv2JWaTLhLJrZVtXh5Cim11yBFkZAvcxVC4CQAErf8w9RENRsLN8bFpIqxj4fkljLyrc7wSv9Y+ZhMz6NTRkRzZZev26U7J6l0JELJwGoL131NrB88yNAlnWOqz9PNid/gNEBNDw/pLWgs4u33c/N1PPTsKmMqDJHA7eEDVZ9pADSmoczMc7dbWwLilp7Jd3cFxGt6o/xE0uaYHGApzi0580xrNLWBNMxe4hWAjDShgDPy8NjsSMJSP89FI6J4rLemhRLBtUYagr+YMm4FH8TcEFSFY3LJOJZESXcS4hv3QOg+a8dqKxwdHcxykEoJnet3cY4LslglAgBSSOhDAgMBAAECggEAAcU0EHPMPmTPrxT8rmQqvjEWe/v9r89YRewVTETuVYEYDjHUalIIuSTJmOSUSCQ5I+Q/FiWPeMFD5c1uhIanajgQb8doaPUyi0p+XemBxXKA3dJ0aWZsyrCq9PnEGi9zAlq328TQfA//PYJyr37THKIfUR5zpSn+PNe22BnzIQObqrqsVwoI6DA8LuKKY6TQs3kcMoKdw8HkuN5viPS5oB49y7tQYAxIJMELl8EGfREnWhVjeXLwCnvaOD8gIejiXlk0fQ5qobrvYE1yX6t/GzLK3viJci4NN57lJGj8+dgfvcFVX1ElTLV7+sK6qMhQOMxX7tD7Tx+ZOcn4+DyrQQKBgQDwrOrYkS6ysAW79E85q/b9O1yNdD+FjJJXWaueNoasq6KU/Sv06miYVEkReEdLH3SMiPR6YKD1MMfnN2vbYPBQwu/cJazFEorsIsrqdOf9qrk2hZc4ryxMzrn4gT+EEurIDwJMD5LGq8vOynhXBSSWC4+5egF+FTKWNaBSLd83/QKBgQC5pPTbNEvz2FveG2XP7W5HXgWe0mEknMeFMYeDJpUlq9jGt2/Ki57a5/OqTwpgUBDR+v43AwGP7hWQUg7INv2XZZS9zhENOWsP9IpZsh8LoR1cOBz22Qywe+sap7z7ceYjuXjSNptelKm1rq/882Qgtnc/cZG4MWGx/yrshWn1PwKBgGVVyUQKTQk7iA6NXVZBC6uv9NYyXhSTDYLt5I6nEqldUwU8W+exUvzgcCuE4y/EPMR3XcixKtRSB7lY4nbqKAU5LtkYm9gWaJvoQlvZgVyTJ4zHTta1Gwfz+uWhNeccN/KoLyVrYTd5WkTlhynMpozurUNBFaPKtRP93FT9r4DZAoGBAJEFZ7IFvH+UuM9dH7+6freJn2JefjyXrNVDx9SQQ1rWT9WMXuwe/c2L/TFB5Z0vbrRaGlTnKEVDe9zt/VYyfw/R7swHOhLWk+g25A0FtHLlPYZY32eGTv9fDl4YQu06IMovjU7KEb1k7N5cxGYZzFIxuB37nhYBnYvrBaEW55sJAoGAW+a3wm5WrRJbU9kB5IislN3gk1GiuYHGapxMTY+EieL78w7PkUg4ML3nYlt6eZ1QNjt1OdnEs7KdrnZm2VVK8ff1dZKIbYjPfBQye+CKHCgmhJkpsAU7JWDe0FD4Xdnz6g43IibuwBovXuAg1TtXB+ucSDkEhIcmsKf00N/fDSo=" />
+        <env name="ANN_NODE_KEY_PUBLIC" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArogKr9iVmky4Sya2VbV4eQoptdcgRZGQL3MVQuAkABK3/MPURDUbCzfGxaSKsY+H5JYy8q3O8Er/WPmYTM+jU0ZEc2WXr9ulOyepdCRCycBqC9d9TawfPMjQJZ1jqs/TzYnf4DRATQ8P6S1oLOLt93PzdTz07CpjKgyRwO3hA1WfaQA0pqHMzHO3W1sC4paeyXd3BcRreqP8RNLmmBxgKc4tOfNMazS1gTTMXuIVgIw0oYAz8vDY7EjCUj/PRSOieKy3poUSwbVGGoK/mDJuBR/E3BBUhWNyyTiWREl3EuIb90DoPmvHaiscHR3McpBKCZ3rd3GOC7JYJQIAUkjoQwIDAQAB" />
+      </envs>
       <module name="aan-core.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="ong.aurora.ann.fsm.Starter" />
       <extension name="coverage">
@@ -273,7 +283,10 @@
       <workItem from="1675006778454" duration="2637000" />
       <workItem from="1675023115184" duration="374000" />
       <workItem from="1675082824551" duration="1017000" />
-      <workItem from="1675513685625" duration="10456000" />
+      <workItem from="1675513685625" duration="11104000" />
+      <workItem from="1675691287590" duration="20000" />
+      <workItem from="1675947868232" duration="5177000" />
+      <workItem from="1676072964221" duration="4557000" />
     </task>
     <task id="LOCAL-00001" summary="++ gradle fix">
       <created>1670288482182</created>
@@ -324,7 +337,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675515032819</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="++ fsm spring initial">
+      <created>1675645012202</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1675645012202</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,6 +369,7 @@
     <MESSAGE value="++ p2p peer connection status&#10;+- p2p peer blockchain status" />
     <MESSAGE value="++ p2p framework done" />
     <MESSAGE value="++ update config" />
-    <option name="LAST_COMMIT_MESSAGE" value="++ update config" />
+    <MESSAGE value="++ fsm spring initial" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ fsm spring initial" />
   </component>
 </project>
