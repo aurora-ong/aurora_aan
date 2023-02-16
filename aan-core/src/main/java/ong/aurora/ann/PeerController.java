@@ -8,7 +8,7 @@ import ong.aurora.ann.p2p.P2PPeerConnectionStatusType;
 import ong.aurora.ann.p2p.msg.MessageType;
 import ong.aurora.ann.p2p.msg.P2PMessage;
 import ong.aurora.ann.p2p.msg.P2PMessage2;
-import ong.aurora.commons.serialization.ANNSerializer;
+import ong.aurora.commons.serialization.AANSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -27,14 +27,14 @@ public class PeerController implements ProtocolMessageHandler<ByteBuf> {
 
     CompletableFuture<PeerController> ready;
 
-    ANNSerializer annSerializer;
+    AANSerializer annSerializer;
 
     public BehaviorSubject<P2PPeerConnectionStatusType> connectionStatus =  BehaviorSubject.create(P2PPeerConnectionStatusType.DISCONNECTED);
 
     public PublishSubject<Object> peerMessageSubject = PublishSubject.create();
 
 
-    public PeerController(CompletableFuture<PeerController> ready, ANNSerializer annSerializer) {
+    public PeerController(CompletableFuture<PeerController> ready, AANSerializer annSerializer) {
         this.ready = ready;
         this.annSerializer = annSerializer;
     }

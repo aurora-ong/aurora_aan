@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
@@ -40,7 +39,7 @@ public class AANFSM
             throws Exception {
         states
                 .withStates()
-                .initial(AANState.INICIAL)
+                .initial(AANState.INITIAL)
                 .states(EnumSet.allOf(AANState.class));
     }
 
@@ -49,14 +48,19 @@ public class AANFSM
             throws Exception {
         transitions
                 .withExternal()
-                .source(AANState.INICIAL).target(AANState.CONFIG_LOADING).event(AANEvent.APP_STARTED)
+                .source(AANState.INITIAL).target(AANState.CONFIG_LOADING).event(AANEvent.APP_STARTED)
 //                .action(actionnn())
                 .and()
                 .withExternal()
                 .source(AANState.CONFIG_LOADING).target(AANState.CONFIG_START).event(AANEvent.CONFIG_EMPTY)
                 .and()
                 .withExternal()
-                .source(AANState.CONFIG_LOADING).target(AANState.BLOCKCHAIN_LOADING).event(AANEvent.CONFIG_OK);
+                .source(AANState.CONFIG_LOADING).target(AANState.BLOCKCHAIN_LOADING).event(AANEvent.CONFIG_OK)
+                .and()
+                .withExternal()
+                .source(AANState.BLOCKCHAIN_LOADING).target(AANState.PROJECTOR_LOADING).event(AANEvent.BLOCKCHAIN_OK)
+
+        ;
     }
 
     @Bean

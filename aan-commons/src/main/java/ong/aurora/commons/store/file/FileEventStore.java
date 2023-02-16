@@ -1,8 +1,5 @@
 package ong.aurora.commons.store.file;
 
-import ong.aurora.commons.event.Event;
-import ong.aurora.commons.serialization.ANNSerializer;
-import ong.aurora.commons.serialization.jackson.ANNJacksonSerializer;
 import ong.aurora.commons.store.ANNEventStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +7,6 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
@@ -28,14 +23,14 @@ public class FileEventStore implements ANNEventStore {
 
 
     public FileEventStore(String path) throws IOException {
+        log.info("Cargando blockchain desde archivo {}", path);
         this.file = new File(path);
         if (file.createNewFile()) {
-            System.out.println("File created: " + file.getName());
-        } else {
-            System.out.println("File already exists.");
+            log.info("Nueva blockchain inicializada en {}", path);
+
         }
+
         boolean setWrittable = file.setWritable(true, false);
-        log.info("setWrittable {}", setWrittable);
         fileWriter = new FileWriter(file, StandardCharsets.UTF_8, true);
         BufferedWriter bw = new BufferedWriter(fileWriter);
         FileReader fileReader = new FileReader(file, StandardCharsets.UTF_8);
@@ -43,6 +38,8 @@ public class FileEventStore implements ANNEventStore {
 
 
         this.printWriter = new PrintWriter(bw);
+        log.info("Archivo cargado correctamente");
+
     }
 
     @Override

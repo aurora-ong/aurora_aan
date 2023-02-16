@@ -1,18 +1,14 @@
 package ong.aurora.ann;
 
-import com.google.common.hash.HashCode;
-import com.google.common.hash.Hashing;
-import ong.aurora.commons.blockchain.ANNBlockchain;
+import ong.aurora.commons.blockchain.AANBlockchain;
 import ong.aurora.commons.command.*;
 import ong.aurora.commons.event.Event;
 import ong.aurora.commons.event.EventData;
 import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.projector.AANProjector;
-import ong.aurora.model.v_0_0_1.AuroraOM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
@@ -21,16 +17,12 @@ public class AANProcessor {
 
     private static final Logger logger = LoggerFactory.getLogger(AANProcessor.class);
 
-    private String currentHash;
-
-    private final AANProjector aanProjector;
-
     AANModel aanModel;
-    ANNBlockchain annBlockchain;
+    AANBlockchain aanBlockchain;
+    AANProjector aanProjector;
 
-    public AANProcessor(ANNBlockchain annBlockchain, AANProjector aanProjector, AANModel aanModel) {
-        this.annBlockchain = annBlockchain;
-        this.currentHash = "dummy";
+    public AANProcessor(AANBlockchain aanBlockchain, AANModel aanModel, AANProjector aanProjector) {
+        this.aanBlockchain = aanBlockchain;
         this.aanModel = aanModel;
         this.aanProjector = aanProjector;
     }
@@ -59,12 +51,13 @@ public class AANProcessor {
             for (EventData eventData : resultEvent) {
                 logger.info("Procesando evento {}/{}", eventNumber, resultEvent.size());
 
-                logger.info("Último evento: {}", annBlockchain.lastEventHash().orElse(null));
+                logger.info("Último evento: {}", aanBlockchain.lastEventHash().orElse(null));
 
-                Event event = new Event(this.annBlockchain.blockCount(), eventData.eventName(), eventData.eventData(), validationTime, annBlockchain.lastEventHash().orElse(null), command);
+                Event event = new Event(this.aanBlockchain.blockCount(), eventData.eventName(), eventData.eventData(), validationTime, aanBlockchain.lastEventHash().orElse(null), command);
 
                 updateEventStore(event).get();
-                aanProjector.projectEvent(event).get();
+                // TODO MOVER
+//                aanProjector.projectEvent(event).get();
 
                 eventNumber++;
             }
@@ -88,7 +81,7 @@ public class AANProcessor {
 
     CompletableFuture<Void> updateEventStore(Event event) throws Exception {
         logger.info("Actualizando store {}", event);
-        return this.annBlockchain.persistEvent(event);
+        return this.aanBlockchain.persistEvent(event);
     }
 
 

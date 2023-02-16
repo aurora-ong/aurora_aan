@@ -2,13 +2,13 @@ package ong.aurora.commons.serialization.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ong.aurora.commons.serialization.ANNSerializer;
+import ong.aurora.commons.serialization.AANSerializer;
 
-public class ANNJacksonSerializer implements ANNSerializer {
+public class AANJacksonSerializer implements AANSerializer {
 
     private ObjectMapper objectMapper;
 
-    public ANNJacksonSerializer() {
+    public AANJacksonSerializer() {
         this.objectMapper =
                 new ObjectMapper();
         this.objectMapper.findAndRegisterModules();

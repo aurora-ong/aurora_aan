@@ -13,12 +13,32 @@ public class AANConfig {
 
     private static final Logger log = LoggerFactory.getLogger(AANConfig.class);
 
-    public String nodeId;
+    String nodeId;
 
-    public PrivateKey privateKey;
+     PrivateKey privateKey;
 
-    public PublicKey publicKey;
+    PublicKey publicKey;
 
+    String blockchainFilePath;
+
+    public String getNodeId() {
+        return nodeId;
+    }
+
+    public PrivateKey getPrivateKey() {
+        return privateKey;
+    }
+
+    public PublicKey getPublicKey() {
+        return publicKey;
+    }
+
+    public String getBlockchainFilePath() {
+        if (blockchainFilePath == null || blockchainFilePath.isEmpty()) {
+            return "defaultpath";
+        }
+        return blockchainFilePath;
+    }
 
     @Override
     public String toString() {
@@ -37,7 +57,7 @@ public class AANConfig {
         log.info("Configuración cargada {}", this);
     }
 
-    public static AANConfig fromEnviroment() throws Exception {
+    public static AANConfig fromEnviroment() {
 
         log.info("Cargando configuración desde env");
 
@@ -50,15 +70,15 @@ public class AANConfig {
         String nodeKeyPrivateString = env.get("ANN_NODE_KEY_PRIVATE");
 
         if (nodeId == null || nodeId.isEmpty()) {
-            throw new Exception("Debe proporcionarse un identificador de nodo");
+            throw new RuntimeException("Debe proporcionarse un identificador de nodo");
         }
 
         if (nodeKeyPublicString == null || nodeKeyPublicString.isEmpty()) {
-            throw new Exception("Debe proporcionarse una llave pública para este nodo");
+            throw new RuntimeException("Debe proporcionarse una llave pública para este nodo");
         }
 
         if (nodeKeyPrivateString == null || nodeKeyPrivateString.isEmpty()) {
-            throw new Exception("Debe proporcionarse una llave privada para este nodo");
+            throw new RuntimeException("Debe proporcionarse una llave privada para este nodo");
         }
 
         PublicKey nodeKeyPublic = ANNNodeIdentity.publicKeyFromString(nodeKeyPublicString);
@@ -67,4 +87,6 @@ public class AANConfig {
 
         return new AANConfig(nodeId, nodeKeyPublic, nodeKeyPrivate);
     }
+
+
 }

@@ -5,15 +5,15 @@ import ong.aurora.ann.command.CommandPool;
 import ong.aurora.ann.command.CommandRestService;
 import ong.aurora.ann.identity.ANNNodeIdentity;
 import ong.aurora.ann.p2p.p2pHostNode;
-import ong.aurora.commons.blockchain.ANNBlockchain;
+import ong.aurora.commons.blockchain.AANBlockchain;
 import ong.aurora.commons.command.CommandProjectorQueryException;
 import ong.aurora.commons.entity.MaterializedEntity;
 import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.peer.node.ANNNodeEntity;
 import ong.aurora.commons.peer.node.ANNNodeValue;
 import ong.aurora.commons.projector.ksaprojector.KSAProjector;
-import ong.aurora.commons.serialization.ANNSerializer;
-import ong.aurora.commons.serialization.jackson.ANNJacksonSerializer;
+import ong.aurora.commons.serialization.AANSerializer;
+import ong.aurora.commons.serialization.jackson.AANJacksonSerializer;
 import ong.aurora.commons.store.file.FileEventStore;
 import ong.aurora.model.v_0_0_1.AuroraOM;
 import org.slf4j.Logger;
@@ -31,7 +31,7 @@ public class ANNCore {
     public static void main(String[] args) throws Exception, CommandProjectorQueryException {
 
 
-        ANNSerializer annSerializer = new ANNJacksonSerializer();
+        AANSerializer annSerializer = new AANJacksonSerializer();
 
         AANModel aanModel = new AuroraOM();
 
@@ -49,7 +49,7 @@ public class ANNCore {
 
         ANNNodeIdentity nodeIdentity = ANNNodeIdentity.fromFile(nodeInfoPath.concat(nodeId).concat("/identity_private.pem"), nodeInfoPath.concat(nodeId).concat("/identity_public.pem"));
 
-        ANNBlockchain blockchain = new ANNBlockchain(new FileEventStore(nodeInfoPath.concat(nodeId).concat("/event_store.log")), annSerializer);
+        AANBlockchain blockchain = new AANBlockchain(new FileEventStore(nodeInfoPath.concat(nodeId).concat("/event_store.log")), annSerializer);
 
         if (blockchain.isEmpty()) {
             log.info("!! Blockchain no inicializada");
@@ -67,7 +67,7 @@ public class ANNCore {
 
         log.info("Projector iniciado {}", aanProjector.toString());
 
-        AANProcessor aanProcessor = new AANProcessor(blockchain, aanProjector, aanModel);
+        AANProcessor aanProcessor = new AANProcessor(blockchain, aanModel, aanProjector);
 
         long eventCount2 = blockchain.blockCount();
         log.info("Cargando {} eventos", eventCount2);
@@ -120,14 +120,13 @@ public class ANNCore {
 
         p2pHostNode p2PNode = new p2pHostNode(nodeIdentity, thisNode, annSerializer, projectorNodes, blockchain);
 
-        p2PNode.start().get();
+//        p2PNode.start().get();
 
         log.info("Actualizando nodos");
         projectorNodes.onNext(allNodeList.stream().map(MaterializedEntity::getEntityValue).toList());
 
 
     }
-
 
 
 }

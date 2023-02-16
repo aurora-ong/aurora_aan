@@ -1,6 +1,6 @@
 package ong.aurora.commons.serialization;
 
-public interface ANNSerializer {
+public interface AANSerializer {
 
     String toJSON(Object object );
 

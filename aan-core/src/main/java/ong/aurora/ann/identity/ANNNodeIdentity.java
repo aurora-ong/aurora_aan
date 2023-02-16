@@ -56,18 +56,29 @@ public class ANNNodeIdentity {
         return encodedPK.equals(base64);
     }
 
-    public static PublicKey publicKeyFromString(String publicKey) throws Exception {
-        byte[] byteKey = Base64.getDecoder().decode(publicKey);
-        X509EncodedKeySpec X509publicKey = new X509EncodedKeySpec(byteKey);
-        KeyFactory kf = KeyFactory.getInstance("RSA");
-        return kf.generatePublic(X509publicKey);
+    public static PublicKey publicKeyFromString(String publicKey) {
+        try {
+            byte[] byteKey = Base64.getDecoder().decode(publicKey);
+            X509EncodedKeySpec X509publicKey = new X509EncodedKeySpec(byteKey);
+            KeyFactory kf = KeyFactory.getInstance("RSA");
+            return kf.generatePublic(X509publicKey);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Clave pública inválida {}", e);
+        }
     }
 
-    public static PrivateKey privateKeyFromString(String privateKey) throws Exception {
-        byte[] byteKey = Base64.getDecoder().decode(privateKey);
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(byteKey);
-        KeyFactory kf = KeyFactory.getInstance("RSA");
-        return kf.generatePrivate(keySpec);
+    public static PrivateKey privateKeyFromString(String privateKey) {
+        try {
+            byte[] byteKey = Base64.getDecoder().decode(privateKey);
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(byteKey);
+            KeyFactory kf = KeyFactory.getInstance("RSA");
+            return kf.generatePrivate(keySpec);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Clave privada inválida {}", e);
+        }
+
     }
 
 

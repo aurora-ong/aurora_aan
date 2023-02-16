@@ -1,5 +1,9 @@
 package ong.aurora.ann.fsm;
 
+import ong.aurora.commons.model.AANModel;
+import ong.aurora.commons.serialization.AANSerializer;
+import ong.aurora.commons.serialization.jackson.AANJacksonSerializer;
+import ong.aurora.model.v_0_0_1.AuroraOM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +32,17 @@ public class Starter implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        AANSerializer aanSerializer = new AANJacksonSerializer();
+
+        AANModel aanModel = new AuroraOM();
+
 //        log.info("ola mundo");
 //        stateMachine.sendEvent(AANEvent.CONFIG_LOADED);
-        Message<AANEvent> message = MessageBuilder.withPayload(AANEvent.APP_STARTED).setHeader("configFilePath", "asdasdsda").build();
+        Message<AANEvent> message = MessageBuilder
+                .withPayload(AANEvent.APP_STARTED)
+                .setHeader("aanSerializer", aanSerializer)
+                .setHeader("aanModel", aanModel)
+                .build();
 
         stateMachine.sendEvents(Flux.just(message)).subscribe();
 //

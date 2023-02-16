@@ -1,12 +1,9 @@
 package ong.aurora.commons.blockchain;
 
-import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import ong.aurora.commons.event.Event;
-import ong.aurora.commons.serialization.ANNSerializer;
-import ong.aurora.commons.serialization.jackson.ANNJacksonSerializer;
+import ong.aurora.commons.serialization.AANSerializer;
 import ong.aurora.commons.store.ANNEventStore;
-import ong.aurora.commons.store.file.FileEventStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rx.subjects.BehaviorSubject;
@@ -17,25 +14,23 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
-public class ANNBlockchain {
+public class AANBlockchain {
 
     ANNEventStore eventStore;
 
-    ANNSerializer serializer;
+    AANSerializer serializer;
 
 
-    private static final Logger log = LoggerFactory.getLogger(ANNBlockchain.class);
+    private static final Logger log = LoggerFactory.getLogger(AANBlockchain.class);
 
-    public ANNBlockchain(ANNEventStore eventStore, ANNSerializer annSerializer) {
+    public AANBlockchain(ANNEventStore eventStore, AANSerializer annSerializer) {
         this.eventStore = eventStore;
-
         this.serializer = annSerializer;
-        log.info("ANN Blockchain Último evento: {}", this.lastEvent());
         this.blockchainStream.onNext(this.lastEvent().orElse(null));
     }
 
     public CompletableFuture<Void> verifyIntegrity() {
-
+        log.info("Verificando integridad de blockchain");
 
         eventStream().reduce((event, event2) -> {
 
@@ -48,6 +43,7 @@ public class ANNBlockchain {
             return event2;
         });
 
+        log.info("Verificación completada correctamente");
 
         return CompletableFuture.completedFuture(null);
     }

@@ -4,7 +4,7 @@ import io.libp2p.core.P2PChannel;
 import io.libp2p.core.Stream;
 import io.libp2p.protocol.ProtocolHandler;
 import ong.aurora.ann.PeerController;
-import ong.aurora.commons.serialization.ANNSerializer;
+import ong.aurora.commons.serialization.AANSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +23,9 @@ public class AANProtocol extends ProtocolHandler<PeerController> {
 
     BehaviorSubject<List<p2pPeerNode>> networkPeers;
 
-    ANNSerializer annSerializer;
+    AANSerializer annSerializer;
 
-    public AANProtocol(BehaviorSubject<List<p2pPeerNode>> networkPeers, ANNSerializer annSerializer) {
+    public AANProtocol(BehaviorSubject<List<p2pPeerNode>> networkPeers, AANSerializer annSerializer) {
         super(Long.MAX_VALUE, Long.MAX_VALUE);
         this.networkPeers = networkPeers;
         this.annSerializer = annSerializer;

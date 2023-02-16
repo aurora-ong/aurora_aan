@@ -6,10 +6,10 @@ import io.libp2p.core.dsl.Builder;
 import io.libp2p.crypto.keys.RsaPrivateKey;
 import ong.aurora.ann.identity.ANNNodeIdentity;
 import ong.aurora.ann.p2p.msg.BlockchainStatus;
-import ong.aurora.commons.blockchain.ANNBlockchain;
+import ong.aurora.commons.blockchain.AANBlockchain;
 import ong.aurora.commons.event.Event;
 import ong.aurora.commons.peer.node.ANNNodeValue;
-import ong.aurora.commons.serialization.ANNSerializer;
+import ong.aurora.commons.serialization.AANSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rx.Observable;
@@ -28,14 +28,14 @@ public class p2pHostNode {
 
     BehaviorSubject<List<p2pPeerNode>> networkPeers = BehaviorSubject.create(List.of());
 
-    ANNBlockchain hostBlockchain;
+    AANBlockchain hostBlockchain;
 
     Subscription networkStatusSubscription;
     Subscription blockchainUpdateSubscription;
 
     private static final Logger log = LoggerFactory.getLogger(p2pHostNode.class);
 
-    public p2pHostNode(ANNNodeIdentity thisNodeIdentity, ANNNodeValue thisNodeValue, ANNSerializer annSerializer, BehaviorSubject<List<ANNNodeValue>> projectorNodes, ANNBlockchain hostBlockchain) {
+    public p2pHostNode(ANNNodeIdentity thisNodeIdentity, ANNNodeValue thisNodeValue, AANSerializer annSerializer, BehaviorSubject<List<ANNNodeValue>> projectorNodes, AANBlockchain hostBlockchain) {
         this.hostBlockchain = hostBlockchain;
         AANProtocol protocol = new AANProtocol(networkPeers, annSerializer);
         AANBinding aanBinding = new AANBinding(protocol);

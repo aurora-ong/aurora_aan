@@ -4,19 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ fsm spring initial">
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Initial.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/new_command.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_info/node1/identity_public_.pem" afterDir="false" />
+    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ p2p framework done">
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/ANNBlockchain.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/AANBlockchain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/ANNSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/AANSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/jackson/ANNJacksonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/jackson/AANJacksonSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/store/file/FileEventStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/store/file/FileEventStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/PeerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/PeerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANFSM.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANFSM.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANState.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Initial.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Initial.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Starter.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Starter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/identity/ANNNodeIdentity.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/identity/ANNNodeIdentity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pPeerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pPeerNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/AANProtocol.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/AANProtocol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pHostNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pHostNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,25 +99,25 @@
     <option name="showLibraryContents" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "Z:/AURORA/aurora/aurora_aan/node_info/node1",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "spring.configuration.checksum": "b246a30b1e40a8a38bb8321e752970d7"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;Z:/AURORA/aurora/aurora_aan/node_info/node1&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;b246a30b1e40a8a38bb8321e752970d7&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="Z:\AURORA\aurora\aurora_aan\node_info\node1" />
@@ -126,7 +131,7 @@
       <recent name="ong.aurora.ann" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Starter">
+  <component name="RunManager" selected="Shell Script.kafka cluster up">
     <configuration name="ANNCore (H1)" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
