@@ -31,6 +31,8 @@ public class CommandRestService {
 
         app.post("/command/new", this::newCommandHandler);
 
+        log.info("CommandRestService iniciado en {}:{}", hostAndPort.getHost(), hostAndPort.getPort());
+
     }
 
     void newCommandHandler(Context context) {

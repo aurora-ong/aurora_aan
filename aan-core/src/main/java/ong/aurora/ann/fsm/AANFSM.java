@@ -48,17 +48,22 @@ public class AANFSM
             throws Exception {
         transitions
                 .withExternal()
-                .source(AANState.INITIAL).target(AANState.CONFIG_LOADING).event(AANEvent.APP_STARTED)
-//                .action(actionnn())
+                .source(AANState.INITIAL).event(AANEvent.APP_STARTED).target(AANState.CONFIG_LOADING)
                 .and()
                 .withExternal()
-                .source(AANState.CONFIG_LOADING).target(AANState.CONFIG_START).event(AANEvent.CONFIG_EMPTY)
+                .source(AANState.CONFIG_LOADING).event(AANEvent.CONFIG_EMPTY).target(AANState.CONFIG_INIT)
                 .and()
                 .withExternal()
-                .source(AANState.CONFIG_LOADING).target(AANState.BLOCKCHAIN_LOADING).event(AANEvent.CONFIG_OK)
+                .source(AANState.CONFIG_LOADING).event(AANEvent.CONFIG_OK).target(AANState.BLOCKCHAIN_LOADING)
                 .and()
                 .withExternal()
-                .source(AANState.BLOCKCHAIN_LOADING).target(AANState.PROJECTOR_LOADING).event(AANEvent.BLOCKCHAIN_OK)
+                .source(AANState.BLOCKCHAIN_LOADING).event(AANEvent.BLOCKCHAIN_OK).target(AANState.PROJECTOR_LOADING)
+                .and()
+                .withExternal()
+                .source(AANState.PROJECTOR_LOADING).event(AANEvent.PROJECTOR_OK).target(AANState.PROCESSOR_LOADING)
+                .and()
+                .withExternal()
+                .source(AANState.PROCESSOR_LOADING).event(AANEvent.PROCESSOR_OK).target(AANState.NODE_LOADING)
 
         ;
     }

@@ -56,7 +56,6 @@ public class KSAProjector implements AANProjector {
         props.put("bootstrap.servers", kafkaCluster);
         props.put("acks", "all");
         this.producer = new KafkaProducer<>(props, Serdes.Long().serializer(), JsonSerdes.getJSONSerde(Event.class).serializer());
-
     }
 
     @Override

@@ -1,7 +1,12 @@
 package ong.aurora.ann.fsm;
 
+import com.google.common.net.HostAndPort;
 import ong.aurora.ann.AANConfig;
 import ong.aurora.ann.AANProcessor;
+import ong.aurora.ann.command.CommandPool;
+import ong.aurora.ann.command.CommandRestService;
+import ong.aurora.ann.p2p_2.AANNetwork;
+import ong.aurora.ann.p2p_2.libp2pHostNode;
 import ong.aurora.commons.blockchain.AANBlockchain;
 import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.projector.AANProjector;
@@ -16,14 +21,12 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.annotation.EventHeader;
-import org.springframework.statemachine.annotation.EventHeaders;
 import org.springframework.statemachine.annotation.OnStateEntry;
 import org.springframework.statemachine.annotation.WithStateMachine;
 import reactor.core.publisher.Flux;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Map;
 
 @WithStateMachine
 public class Initial {
@@ -35,7 +38,10 @@ public class Initial {
 
     //    @OnTransition(source = "INICIAL", target = "CONFIG_LOADING")
     @OnStateEntry(target = "CONFIG_LOADING")
-    public void fromS1ToS22(@EventHeader("aanSerializer") AANSerializer aanSerializer) {
+    public void onConfigLoading(
+            @EventHeader("aanSerializer") AANSerializer aanSerializer,
+            @EventHeader("aanModel") AANModel aanModel
+    ) {
         log.info("Iniciando AAN Node");
 
         AANConfig aanConfig = AANConfig.fromEnviroment();
@@ -43,6 +49,7 @@ public class Initial {
         Message<AANEvent> message = MessageBuilder
                 .withPayload(AANEvent.CONFIG_OK)
                 .setHeader("aanConfig", aanConfig)
+                .setHeader("aanModel", aanModel)
                 .setHeader("aanSerializer", aanSerializer)
                 .build();
 
@@ -52,7 +59,7 @@ public class Initial {
     }
 
     @OnStateEntry(source = "CONFIG_LOADING", target = "CONFIG_START")
-    public void startBlockchain() throws Exception {
+    public void onConfigStart() throws Exception {
         log.info("Introduce el identificador del nodo: ");
         String name;
         do {
@@ -70,7 +77,11 @@ public class Initial {
     }
 
     @OnStateEntry(source = "CONFIG_LOADING", target = "BLOCKCHAIN_LOADING")
-    public void onBlockchainLoading(@EventHeader("aanSerializer") AANSerializer aanSerializer, @EventHeader("aanConfig") AANConfig aanConfig, @EventHeaders Map<String, Object> headers) throws Exception {
+    public void onBlockchainLoading(
+            @EventHeader("aanSerializer") AANSerializer aanSerializer,
+            @EventHeader("aanConfig") AANConfig aanConfig,
+            @EventHeader("aanModel") AANModel aanModel
+    ) throws Exception {
         ANNEventStore eventStore = new FileEventStore(aanConfig.getBlockchainFilePath());
         AANBlockchain aanBlockchain = new AANBlockchain(eventStore, aanSerializer);
 
@@ -81,6 +92,7 @@ public class Initial {
         Message<AANEvent> message = MessageBuilder
                 .withPayload(AANEvent.BLOCKCHAIN_OK)
                 .setHeader("aanConfig", aanConfig)
+                .setHeader("aanModel", aanModel)
                 .setHeader("aanSerializer", aanSerializer)
                 .setHeader("aanBlockchain", aanBlockchain)
                 .build();
@@ -90,6 +102,7 @@ public class Initial {
 
     @OnStateEntry(source = "BLOCKCHAIN_LOADING", target = "PROJECTOR_LOADING")
     public void onProjectorLoading(
+            @EventHeader("aanModel") AANModel aanModel,
             @EventHeader("aanBlockchain") AANBlockchain aanBlockchain,
             @EventHeader("aanSerializer") AANSerializer aanSerializer,
             @EventHeader("aanConfig") AANConfig aanConfig) {
@@ -109,10 +122,11 @@ public class Initial {
         });
 
         Message<AANEvent> message = MessageBuilder
-                .withPayload(AANEvent.BLOCKCHAIN_OK)
+                .withPayload(AANEvent.PROJECTOR_OK)
                 .setHeader("aanConfig", aanConfig)
                 .setHeader("aanSerializer", aanSerializer)
                 .setHeader("aanBlockchain", aanBlockchain)
+                .setHeader("aanModel", aanModel)
                 .setHeader("aanProjector", aanProjector)
                 .build();
 
@@ -122,21 +136,81 @@ public class Initial {
     @OnStateEntry(source = "PROJECTOR_LOADING", target = "PROCESSOR_LOADING")
     public void onProcessorLoading(
             @EventHeader("aanModel") AANModel aanModel,
+            @EventHeader("aanConfig") AANConfig aanConfig,
             @EventHeader("aanBlockchain") AANBlockchain aanBlockchain,
             @EventHeader("aanSerializer") AANSerializer aanSerializer,
             @EventHeader("aanProjector") AANProjector aanProjector) throws Exception {
+        log.info("Inicializando procesador");
+
         AANProcessor aanProcessor = new AANProcessor(aanBlockchain, aanModel, aanProjector);
+
+        Message<AANEvent> message = MessageBuilder
+                .withPayload(AANEvent.PROCESSOR_OK)
+                .setHeader("aanConfig", aanConfig)
+                .setHeader("aanSerializer", aanSerializer)
+                .setHeader("aanModel", aanModel)
+                .setHeader("aanBlockchain", aanBlockchain)
+                .setHeader("aanProjector", aanProjector)
+                .setHeader("aanProcessor", aanProcessor)
+                .build();
+
+        stateMachine.sendEvents(Flux.just(message)).subscribe();
 
     }
 
     @OnStateEntry(source = "PROCESSOR_LOADING", target = "NODE_LOADING")
     public void onNodeLoading(
             @EventHeader("aanModel") AANModel aanModel,
+            @EventHeader("aanConfig") AANConfig aanConfig,
             @EventHeader("aanBlockchain") AANBlockchain aanBlockchain,
             @EventHeader("aanSerializer") AANSerializer aanSerializer,
-            @EventHeader("aanProjector") AANProjector aanProjector) throws Exception {
-        AANProcessor aanProcessor = new AANProcessor(aanBlockchain, aanModel, aanProjector);
+            @EventHeader("aanProjector") AANProjector aanProjector,
+            @EventHeader("aanProcessor") AANProcessor aanProcessor
 
+    ) throws Exception {
+        log.info("Inicializando nodo {}", aanConfig.getNodeId());
+
+        // INICIAR REST COMMAND
+        CommandPool commandPool = new CommandPool();
+
+        Integer commandApiPort = aanConfig.getCommandRestPort();
+
+        CommandRestService commandRestService = new CommandRestService(HostAndPort.fromParts("127.0.0.1", commandApiPort), aanProcessor, commandPool);
+        commandRestService.start();
+
+
+        // P2P
+
+        AANNetwork hostNode = new libp2pHostNode(aanConfig, aanSerializer, aanBlockchain);
+        hostNode.startHost();
     }
+
+//    @OnStateEntry(source = "NODE_LOADING", target = "NODE_READY")
+//    public void onNodeReady(
+//            @EventHeader("aanModel") AANModel aanModel,
+//            @EventHeader("aanConfig") AANConfig aanConfig,
+//            @EventHeader("aanBlockchain") AANBlockchain aanBlockchain,
+//            @EventHeader("aanSerializer") AANSerializer aanSerializer,
+//            @EventHeader("aanProjector") AANProjector aanProjector,
+//            @EventHeader("aanProcessor") AANProcessor aanProcessor
+//
+//    ) throws Exception {
+//        log.info("Inicializando nodo {}", aanConfig.getNodeId());
+//
+//        // INICIAR REST COMMAND
+//        CommandPool commandPool = new CommandPool();
+//
+//        Integer commandApiPort = aanConfig.getCommandRestPort();
+//
+//        CommandRestService commandRestService = new CommandRestService(HostAndPort.fromParts("127.0.0.1", commandApiPort), aanProcessor, commandPool);
+//        commandRestService.start();
+//
+//
+//        // P2P
+//
+//        Ip2pHostNode hostNode = new libp2pHostNode(aanConfig, aanSerializer, aanBlockchain);
+//    }
+
+
 
 }

@@ -15,11 +15,15 @@ public class AANConfig {
 
     String nodeId;
 
-     PrivateKey privateKey;
+    PrivateKey privateKey;
 
     PublicKey publicKey;
 
     String blockchainFilePath;
+
+    Integer commandRestPort;
+
+    Integer networkNodePort;
 
     public String getNodeId() {
         return nodeId;
@@ -88,5 +92,18 @@ public class AANConfig {
         return new AANConfig(nodeId, nodeKeyPublic, nodeKeyPrivate);
     }
 
+    public Integer getCommandRestPort() {
+        if (commandRestPort == null) {
+            return 6000;
+        }
+        return commandRestPort;
+    }
+
+    public Integer getNetworkNodePort() {
+        if (commandRestPort == null) {
+            return 4000;
+        }
+        return commandRestPort;
+    }
 
 }
