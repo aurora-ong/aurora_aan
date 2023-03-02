@@ -10,4 +10,6 @@ public interface AANModel {
     List<AANEntity> getModelEntities();
 
     List<AANCommand> getModelCommands();
+
+    AANCommand getInitialCommand();
 }

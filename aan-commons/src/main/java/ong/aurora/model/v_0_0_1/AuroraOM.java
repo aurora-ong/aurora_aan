@@ -5,6 +5,7 @@ import ong.aurora.commons.entity.AANEntity;
 import ong.aurora.commons.model.AANModel;
 import ong.aurora.model.v_0_0_1.command.authorization.consume.AuthorizationConsume;
 import ong.aurora.model.v_0_0_1.command.authorization.create.AuthorizationCreate;
+import ong.aurora.model.v_0_0_1.command.init.InitCommand;
 import ong.aurora.model.v_0_0_1.command.member.add.AddMember;
 import ong.aurora.model.v_0_0_1.command.node.add.AddNode;
 import ong.aurora.model.v_0_0_1.command.ou.create.CreateOU;
@@ -26,5 +27,10 @@ public class AuroraOM implements AANModel {
     @Override
     public List<AANCommand> getModelCommands() {
         return List.of(new CreatePerson(), new CreateOU(), new AddMember(), new AuthorizationCreate(), new AuthorizationConsume(), new AddNode());
+    }
+
+    @Override
+    public AANCommand getInitialCommand() {
+        return new InitCommand();
     }
 }
