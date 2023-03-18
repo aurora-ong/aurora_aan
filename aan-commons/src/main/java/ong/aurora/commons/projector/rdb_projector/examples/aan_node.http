@@ -1,0 +1,21 @@
+### Obtener todos los nodos
+GET http://localhost:15002/aan_node/all
+Accept: application/json
+
+### Obtener un nodo
+GET http://localhost:15002/aan_node/one
+Accept: application/json
+Content-Type: application/json
+
+{
+  "node_id": "node1"
+}
+
+### Trace nodo
+GET http://localhost:15002/aan_node/trace
+Accept: application/json
+Content-Type: application/json
+
+{
+  "node_id": "node1"
+}
