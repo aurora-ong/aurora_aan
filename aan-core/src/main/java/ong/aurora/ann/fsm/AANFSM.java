@@ -51,7 +51,7 @@ public class AANFSM
                 .source(AANState.INITIAL).event(AANEvent.APP_STARTED).target(AANState.CONFIG_LOADING)
                 .and()
                 .withExternal()
-                .source(AANState.CONFIG_LOADING).event(AANEvent.CONFIG_EMPTY).target(AANState.CONFIG_INIT)
+                .source(AANState.CONFIG_LOADING).event(AANEvent.CONFIG_EMPTY).target(AANState.CONFIG_START)
                 .and()
                 .withExternal()
                 .source(AANState.CONFIG_LOADING).event(AANEvent.CONFIG_OK).target(AANState.BLOCKCHAIN_LOADING)

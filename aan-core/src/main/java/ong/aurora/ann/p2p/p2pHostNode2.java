@@ -16,29 +16,32 @@ import rx.Observable;
 import rx.Subscription;
 import rx.subjects.BehaviorSubject;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import static ong.aurora.commons.util.Utils.maybeUnsubscribe;
 
-public class p2pHostNode {
+public class p2pHostNode2 {
 
     Host libp2pHost;
 
-    BehaviorSubject<List<p2pPeerNode>> networkPeers = BehaviorSubject.create(List.of());
+    BehaviorSubject<List<p2pPeerNode2>> networkPeers = BehaviorSubject.create(List.of());
 
     AANBlockchain hostBlockchain;
 
     Subscription networkStatusSubscription;
     Subscription blockchainUpdateSubscription;
 
-    private static final Logger log = LoggerFactory.getLogger(p2pHostNode.class);
+    private static final Logger log = LoggerFactory.getLogger(p2pHostNode2.class);
 
-    public p2pHostNode(ANNNodeIdentity thisNodeIdentity, ANNNodeValue thisNodeValue, AANSerializer annSerializer, BehaviorSubject<List<ANNNodeValue>> projectorNodes, AANBlockchain hostBlockchain) {
+    public p2pHostNode2(ANNNodeIdentity thisNodeIdentity, ANNNodeValue thisNodeValue, AANSerializer annSerializer, BehaviorSubject<List<ANNNodeValue>> projectorNodes, AANBlockchain hostBlockchain) {
         this.hostBlockchain = hostBlockchain;
-        AANProtocol protocol = new AANProtocol(networkPeers, annSerializer);
-        AANBinding aanBinding = new AANBinding(protocol);
+        AANProtocol2 protocol = new AANProtocol2(networkPeers, annSerializer);
+        AANBinding2 aanBinding = new AANBinding2(protocol);
 
         this.libp2pHost = new Builder()
                 .protocols(protocolBindings -> {
@@ -69,7 +72,7 @@ public class p2pHostNode {
                 nodeValue.dispose();
             });
 
-            List<p2pPeerNode> updatedPeers = annNodeValues.stream().parallel().map(nodeValue -> new p2pPeerNode(this, nodeValue)).toList();
+            List<p2pPeerNode2> updatedPeers = annNodeValues.stream().parallel().map(nodeValue -> new p2pPeerNode2(this, nodeValue)).toList();
             networkPeers.onNext(updatedPeers);
 
             maybeUnsubscribe(networkStatusSubscription);

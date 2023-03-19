@@ -4,7 +4,7 @@ import com.google.common.net.HostAndPort;
 import ong.aurora.ann.command.CommandPool;
 import ong.aurora.ann.command.CommandRestService;
 import ong.aurora.ann.identity.ANNNodeIdentity;
-import ong.aurora.ann.p2p.p2pHostNode;
+import ong.aurora.ann.p2p.p2pHostNode2;
 import ong.aurora.commons.blockchain.AANBlockchain;
 import ong.aurora.commons.command.CommandProjectorQueryException;
 import ong.aurora.commons.entity.MaterializedEntity;
@@ -118,8 +118,10 @@ public class ANNCore {
 
         BehaviorSubject<List<ANNNodeValue>> projectorNodes = BehaviorSubject.create(List.of());
 
-        p2pHostNode p2PNode = new p2pHostNode(nodeIdentity, thisNode, annSerializer, projectorNodes, blockchain);
+        p2pHostNode2 p2PNode = new p2pHostNode2(nodeIdentity, thisNode, annSerializer, projectorNodes, blockchain);
 
+
+        
 //        p2PNode.start().get();
 
         log.info("Actualizando nodos");

@@ -6,9 +6,12 @@ import ong.aurora.ann.AANProcessor;
 import ong.aurora.ann.command.CommandPool;
 import ong.aurora.ann.command.CommandRestService;
 import ong.aurora.ann.p2p_2.AANNetwork;
-import ong.aurora.ann.p2p_2.libp2pHostNode;
+import ong.aurora.ann.p2p_2.AANNetworkNode;
+import ong.aurora.ann.p2p_2.libp2pNetwork;
 import ong.aurora.commons.blockchain.AANBlockchain;
 import ong.aurora.commons.model.AANModel;
+import ong.aurora.commons.peer.node.ANNNodeStatus;
+import ong.aurora.commons.peer.node.ANNNodeValue;
 import ong.aurora.commons.projector.AANProjector;
 import ong.aurora.commons.projector.ksaprojector.KSAProjector;
 import ong.aurora.commons.serialization.AANSerializer;
@@ -24,9 +27,11 @@ import org.springframework.statemachine.annotation.EventHeader;
 import org.springframework.statemachine.annotation.OnStateEntry;
 import org.springframework.statemachine.annotation.WithStateMachine;
 import reactor.core.publisher.Flux;
+import rx.subjects.BehaviorSubject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.List;
 
 @WithStateMachine
 public class Initial {
@@ -179,10 +184,83 @@ public class Initial {
         commandRestService.start();
 
 
+        BehaviorSubject<List<AANNetworkNode>> networkNodes = BehaviorSubject.create(List.of());
+
+
+
         // P2P
 
-        AANNetwork hostNode = new libp2pHostNode(aanConfig, aanSerializer, aanBlockchain);
+        AANNetwork hostNode = new libp2pNetwork(aanConfig, aanSerializer, aanBlockchain);
         hostNode.startHost();
+
+
+        BehaviorSubject<List<ANNNodeValue>> projectorNodes = BehaviorSubject.create(List.of());
+
+//        Observable.combineLatest(projectorNodes.asObservable(), hostNode.onNetworkConnection().asObservable(), (args, r) -> {
+//          log.info(r);
+//        });
+
+        projectorNodes.asObservable().subscribe(annNodeValues -> {
+
+            log.info("========= \nProjector nodes actualizado: ");
+            annNodeValues.forEach(annNodeValue -> log.info(annNodeValue.toString()));
+            log.info("========= \n");
+
+            // CERRAR CONEXIÓN
+            networkNodes.getValue().forEach(o -> {});
+
+            // CREAR NETWORK PEERS
+            networkNodes.onNext(List.of());
+        });
+
+
+
+        hostNode.onNetworkConnection().subscribe(networkPeer -> {
+
+            log.info("Nueva conexión {} ", networkPeer.toString());
+
+            if (networkNodes.getValue().isEmpty()) {
+                // CREAR NETWORK PEER Y PUSHEAR
+                networkNodes.onNext(List.of());
+            }
+
+
+            if (!networkNodes.getValue().isEmpty()) {
+                // CHECKEAR QUE EXISTA EN NETWORKNODES, SI ESTÁ ASIGNAR, ELSE THROW
+            }
+
+
+        });
+
+        log.info("Introduce yes si deseas inicializar este nodo");
+        String input;
+        do {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(System.in));
+
+            // Reading data using readLine
+            input = reader.readLine();
+            log.info("Echo: {}", input);
+
+            if (input.equals("yes")) {
+                log.info("Inicializando nodo {}..", aanConfig.getNodeId());
+                ANNNodeValue nodeValue = new ANNNodeValue(aanConfig.getNodeId(), "Nodo inicial", "localhost", aanConfig.getNetworkNodePort().toString(), aanConfig.getPublicKey().toString(), ANNNodeStatus.ACTIVE);
+                projectorNodes.onNext(List.of(nodeValue));
+            }
+
+
+        } while (!input.equals("exit"));
+
+
+        ;
+
+//        aanBlockchain.persistEvent(new Event(0L, new ANNNodeEntity().entityName, ), )
+
+
+
+
+
+
     }
 
 //    @OnStateEntry(source = "NODE_LOADING", target = "NODE_READY")

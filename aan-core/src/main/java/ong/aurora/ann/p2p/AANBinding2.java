@@ -2,16 +2,14 @@ package ong.aurora.ann.p2p;
 
 import io.libp2p.core.multistream.StrictProtocolBinding;
 import ong.aurora.ann.PeerController;
-import ong.aurora.ann.p2p_2.AANNetworkPeer;
-import ong.aurora.ann.p2p_2.libp2pNetworkPeer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AANBinding extends StrictProtocolBinding<libp2pNetworkPeer> {
+public class AANBinding2 extends StrictProtocolBinding<PeerController> {
 
-    private static final Logger log = LoggerFactory.getLogger(AANBinding.class);
+    private static final Logger log = LoggerFactory.getLogger(AANBinding2.class);
 
-    public AANBinding(AANProtocol chatProtocol) {
+    public AANBinding2(AANProtocol2 chatProtocol) {
         super(AANProtocol.announce, chatProtocol);
         log.info("Chat binding {} {}", AANProtocol.announce, chatProtocol.toString());
     }

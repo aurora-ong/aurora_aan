@@ -15,13 +15,13 @@ import rx.subjects.BehaviorSubject;
 
 import static ong.aurora.commons.util.Utils.maybeUnsubscribe;
 
-public class p2pPeerNode {
+public class p2pPeerNode2 {
 
-    private static final Logger log = LoggerFactory.getLogger(p2pPeerNode.class);
+    private static final Logger log = LoggerFactory.getLogger(p2pPeerNode2.class);
 
     public BehaviorSubject<p2pPeerStatus> peerStatus = BehaviorSubject.create(new p2pPeerStatus(null, P2PPeerConnectionStatusType.DISCONNECTED, null));
 
-    p2pHostNode p2pHostNode;
+    p2pHostNode2 p2pHostNode;
 
     ANNNodeValue peerNodeValue;
 
@@ -33,7 +33,7 @@ public class p2pPeerNode {
     Subscription peerMessageSubscription;
 
 
-    public p2pPeerNode(p2pHostNode p2pHostNode, ANNNodeValue nodeValue) {
+    public p2pPeerNode2(p2pHostNode2 p2pHostNode, ANNNodeValue nodeValue) {
         this.p2pHostNode = p2pHostNode;
         this.peerNodeValue = nodeValue;
 
@@ -51,7 +51,7 @@ public class p2pPeerNode {
 
     }
 
-    public void localConnect(AANBinding chatBinding) {
+    public void localConnect(AANBinding2 chatBinding) {
         Multiaddr add = Multiaddr.fromString("/dns4/".concat(peerNodeValue.nodeHostname()).concat("/tcp/".concat(peerNodeValue.nodePort()).concat("/p2p/".concat(peerId))));
 
         try {
