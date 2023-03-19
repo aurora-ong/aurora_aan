@@ -39,7 +39,7 @@ public class RDBEntity<K, V extends EntityValue<V>> {
 
         Files.createDirectories(baseDir.getParentFile().toPath());
         Files.createDirectories(baseDir.getAbsoluteFile().toPath());
-
+        RocksDB.destroyDB(baseDir.getAbsolutePath(), options);
         entityDB = RocksDB.open(options, baseDir.getAbsolutePath());
 
 

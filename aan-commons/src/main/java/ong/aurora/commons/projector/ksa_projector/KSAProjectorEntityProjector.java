@@ -1,4 +1,4 @@
-package ong.aurora.commons.projector.ksaprojector;
+package ong.aurora.commons.projector.ksa_projector;
 
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import ong.aurora.commons.entity.AANEntity;
