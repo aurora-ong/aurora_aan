@@ -3,19 +3,17 @@ package ong.aurora.ann;
 import com.google.common.net.HostAndPort;
 import ong.aurora.ann.command.CommandPool;
 import ong.aurora.ann.command.CommandRestService;
-import ong.aurora.ann.config.AANConfig;
-import ong.aurora.ann.network.AANNetwork;
-import ong.aurora.ann.network.libp2p.libp2pNetwork;
-import ong.aurora.ann.network.AANNetworkNode;
-import ong.aurora.commons.blockchain.AANBlockchain;
+import ong.aurora.ann.identity.ANNNodeIdentity;
+import ong.aurora.ann.p2p.p2pHostNode;
+import ong.aurora.commons.blockchain.ANNBlockchain;
 import ong.aurora.commons.command.CommandProjectorQueryException;
 import ong.aurora.commons.entity.MaterializedEntity;
 import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.peer.node.ANNNodeEntity;
 import ong.aurora.commons.peer.node.ANNNodeValue;
 import ong.aurora.commons.projector.ksaprojector.KSAProjector;
-import ong.aurora.commons.serialization.AANSerializer;
-import ong.aurora.commons.serialization.jackson.AANJacksonSerializer;
+import ong.aurora.commons.serialization.ANNSerializer;
+import ong.aurora.commons.serialization.jackson.ANNJacksonSerializer;
 import ong.aurora.commons.store.file.FileEventStore;
 import ong.aurora.model.v_0_0_1.AuroraOM;
 import org.slf4j.Logger;
@@ -23,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import rx.subjects.BehaviorSubject;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class ANNCore {
@@ -56,9 +55,9 @@ public class ANNCore {
             aanBlockchain.verifyIntegrity().get();
         }
 
-        KSAProjector aanProjector = new KSAProjector("http://localhost:15002", "localhost:29092");
+        AANProjector aanProjector = new RDBProjector(annSerializer);
 
-//        aanProjector.startProjector(aanModel).get();
+        aanProjector.startProjector(aanModel).get();
 
         log.info("Projector iniciado {}", aanProjector.toString());
 
@@ -156,6 +155,4 @@ public class ANNCore {
 
 
     }
-
-
 }

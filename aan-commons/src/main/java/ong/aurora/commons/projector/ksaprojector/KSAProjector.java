@@ -204,6 +204,11 @@ public class KSAProjector implements AANProjector {
         }
     }
 
+    @Override
+    public <K, V extends EntityValue<V>> List<Event> traceOne(AANEntity<K, V> entity, K id) throws CommandProjectorQueryException {
+        return List.of();
+    }
+
     static private <T> T fromJSON(String json, JavaType typeReference) {
         ObjectMapper objectMapper =
                 new ObjectMapper();

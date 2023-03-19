@@ -32,6 +32,14 @@ public class MaterializedEntity<V extends EntityValue<V>> {
         return entityValue;
     }
 
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
     @Override
     public String toString() {
         return "MaterializedEntity{" +
