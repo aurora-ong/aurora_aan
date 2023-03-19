@@ -1,8 +1,6 @@
 package ong.aurora.commons.serialization;
 
 import java.lang.reflect.Type;
-
-public interface ANNSerializer {
 public interface AANSerializer {
 
     String toJSON(Object object );

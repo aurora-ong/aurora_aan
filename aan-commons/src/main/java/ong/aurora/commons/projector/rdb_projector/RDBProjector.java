@@ -8,7 +8,7 @@ import ong.aurora.commons.event.Event;
 import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.peer.node.ANNNodeEntity;
 import ong.aurora.commons.projector.AANProjector;
-import ong.aurora.commons.serialization.ANNSerializer;
+import ong.aurora.commons.serialization.AANSerializer;
 import org.apache.kafka.streams.state.HostInfo;
 import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
@@ -30,9 +30,9 @@ public class RDBProjector implements AANProjector {
 
     Map<String, RDBEntity> rdbEntityMap;
 
-    ANNSerializer annSerializer;
+    AANSerializer annSerializer;
 
-    public RDBProjector(ANNSerializer annSerializer) {
+    public RDBProjector(AANSerializer annSerializer) {
         this.annSerializer = annSerializer;
     }
 

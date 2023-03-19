@@ -3,12 +3,10 @@ package ong.aurora.commons.serialization.jackson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ong.aurora.commons.serialization.AANSerializer;
-
-public class AANJacksonSerializer implements AANSerializer {
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 
-public class ANNJacksonSerializer implements ANNSerializer {
+public class AANJacksonSerializer implements AANSerializer {
 
     private ObjectMapper objectMapper;
 

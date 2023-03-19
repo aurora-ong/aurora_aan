@@ -5,8 +5,7 @@ import ong.aurora.commons.entity.AANEntity;
 import ong.aurora.commons.entity.EntityValue;
 import ong.aurora.commons.entity.MaterializedEntity;
 import ong.aurora.commons.event.Event;
-import ong.aurora.commons.serialization.ANNSerializer;
-import org.checkerframework.checker.units.qual.A;
+import ong.aurora.commons.serialization.AANSerializer;
 import org.rocksdb.Options;
 import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
@@ -25,9 +24,9 @@ public class RDBEntity<K, V extends EntityValue<V>> {
 
     AANEntity<K, V> entity;
 
-    ANNSerializer annSerializer;
+    AANSerializer annSerializer;
 
-    public RDBEntity(AANEntity<K, V> entity, RocksDB rocksDB, ANNSerializer annSerializer) throws IOException, RocksDBException {
+    public RDBEntity(AANEntity<K, V> entity, RocksDB rocksDB, AANSerializer annSerializer) throws IOException, RocksDBException {
         this.annSerializer = annSerializer;
         this.entity = entity;
 
