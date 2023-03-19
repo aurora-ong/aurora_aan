@@ -1,4 +1,4 @@
-package ong.aurora.commons.projector.ksaprojector;
+package ong.aurora.commons.projector.ksa_projector;
 
 import io.javalin.Javalin;
 import io.javalin.http.Context;

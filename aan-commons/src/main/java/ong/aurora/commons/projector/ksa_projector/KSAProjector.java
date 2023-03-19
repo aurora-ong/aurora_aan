@@ -1,4 +1,4 @@
-package ong.aurora.commons.projector.ksaprojector;
+package ong.aurora.commons.projector.ksa_projector;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
@@ -35,7 +35,6 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 public class KSAProjector implements AANProjector {
 
