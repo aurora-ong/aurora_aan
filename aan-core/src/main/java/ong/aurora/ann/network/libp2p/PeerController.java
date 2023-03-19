@@ -1,13 +1,10 @@
-package ong.aurora.ann.p2p_2;
+package ong.aurora.ann.network.libp2p;
 
 import io.libp2p.core.Stream;
 import io.libp2p.protocol.ProtocolMessageHandler;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import ong.aurora.ann.p2p.P2PPeerConnectionStatusType;
-import ong.aurora.ann.p2p.msg.MessageType;
-import ong.aurora.ann.p2p.msg.P2PMessage;
-import ong.aurora.ann.p2p.msg.P2PMessage2;
+import ong.aurora.ann.network.AANNetworkPeerStatusType;
 import ong.aurora.commons.serialization.AANSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,22 +16,22 @@ import rx.subjects.PublishSubject;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 
-public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNetworkPeer {
+public class PeerController implements ProtocolMessageHandler<ByteBuf> {
 
-    private static final Logger log = LoggerFactory.getLogger(libp2pNetworkPeer.class);
+    private static final Logger log = LoggerFactory.getLogger(PeerController.class);
 
     Stream stream;
 
-    CompletableFuture<libp2pNetworkPeer> ready;
+    CompletableFuture<PeerController> ready;
 
     AANSerializer annSerializer;
 
-    public BehaviorSubject<P2PPeerConnectionStatusType> connectionStatus =  BehaviorSubject.create(P2PPeerConnectionStatusType.DISCONNECTED);
+    public BehaviorSubject<AANNetworkPeerStatusType> connectionStatus =  BehaviorSubject.create(AANNetworkPeerStatusType.DISCONNECTED);
 
     public PublishSubject<Object> peerMessageSubject = PublishSubject.create();
 
 
-    public libp2pNetworkPeer(CompletableFuture<libp2pNetworkPeer> ready, AANSerializer annSerializer) {
+    public PeerController(CompletableFuture<PeerController> ready, AANSerializer annSerializer) {
         this.ready = ready;
         this.annSerializer = annSerializer;
     }
@@ -57,19 +54,19 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
 
     }
 
-    public void sendMessage(MessageType messageType, Object message) {
-        log.info("Enviar mensaje a {} {}", this.stream.remotePeerId(), message);
-        String messages = annSerializer.toJSON(message);
-        P2PMessage p2PMessage = new P2PMessage(messageType, messages);
-        String messages2 = annSerializer.toJSON(p2PMessage);
-        ByteBuf byteBuf = Unpooled.wrappedBuffer(messages2.getBytes(StandardCharsets.UTF_8));
-        stream.writeAndFlush(byteBuf);
-    }
+//    public void sendMessage(MessageType messageType, Object message) {
+//        log.info("Enviar mensaje a {} {}", this.stream.remotePeerId(), message);
+//        String messages = annSerializer.toJSON(message);
+//        P2PMessage p2PMessage = new P2PMessage(messageType, messages);
+//        String messages2 = annSerializer.toJSON(p2PMessage);
+//        ByteBuf byteBuf = Unpooled.wrappedBuffer(messages2.getBytes(StandardCharsets.UTF_8));
+//        stream.writeAndFlush(byteBuf);
+//    }
 
     public void sendMessage2(Object message) {
         log.info("Enviar mensaje a {} {}", this.stream.remotePeerId(), message);
         String messages = annSerializer.toJSON(message);
-        P2PMessage2 p2PMessage = new P2PMessage2(message.getClass(), messages);
+        libp2pMessage p2PMessage = new libp2pMessage(message.getClass(), messages);
         String messages2 = annSerializer.toJSON(p2PMessage);
         ByteBuf byteBuf = Unpooled.wrappedBuffer(messages2.getBytes(StandardCharsets.UTF_8));
         stream.writeAndFlush(byteBuf);
@@ -80,12 +77,9 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
         log.info("Nueva conexión establecida con {} {}", stream.remotePeerId(), stream.getConnection().remoteAddress());
         stream.getProtocol().thenAccept(s -> log.info("Protocolo: {}", s));
         this.stream = stream;
-        stream.getConnection().secureSession().getRemotePubKey().bytes();
-        connectionStatus.onNext(P2PPeerConnectionStatusType.CONNECTED);
+        connectionStatus.onNext(AANNetworkPeerStatusType.CONNECTED);
         this.ready.complete(this);
     }
-
-
 
 
     @Override
@@ -94,7 +88,7 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
 
 //        P2PMessage encodedMessage = annSerializer.fromJSON(msg.toString(StandardCharsets.UTF_8), P2PMessage.class);
         try {
-            P2PMessage2 aanMessage = annSerializer.fromJSON(rawData.toString(StandardCharsets.UTF_8), P2PMessage2.class);
+            libp2pMessage aanMessage = annSerializer.fromJSON(rawData.toString(StandardCharsets.UTF_8), libp2pMessage.class);
             log.info("Mensaje recibido desde {} {}", this.stream.getConnection().secureSession().getRemoteId(), aanMessage);
             Object a = annSerializer.fromJSON(aanMessage.encodedMessage(), aanMessage.messageType());
             peerMessageSubject.onNext(a);
@@ -106,38 +100,14 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
     @Override
     public void onClosed(@NotNull Stream stream) {
         log.info("onClosed");
-        connectionStatus.onNext(P2PPeerConnectionStatusType.DISCONNECTED);
+        connectionStatus.onNext(AANNetworkPeerStatusType.DISCONNECTED);
     }
 
     @Override
     public void onException(@Nullable Throwable cause) {
         log.info("onException", cause);
-        connectionStatus.onNext(P2PPeerConnectionStatusType.DISCONNECTED);
+        connectionStatus.onNext(AANNetworkPeerStatusType.DISCONNECTED);
     }
 
 
-    @Override
-    public String getPeerIdentity() {
-        return stream.getConnection().secureSession().getRemotePubKey().toString();
-    }
-
-    @Override
-    public void sendMessage(Object message) {
-        log.info("Enviar mensaje a {} {}", this.stream.remotePeerId(), message);
-        String messages = annSerializer.toJSON(message);
-        P2PMessage2 p2PMessage = new P2PMessage2(message.getClass(), messages);
-        String messages2 = annSerializer.toJSON(p2PMessage);
-        ByteBuf byteBuf = Unpooled.wrappedBuffer(messages2.getBytes(StandardCharsets.UTF_8));
-        stream.writeAndFlush(byteBuf);
-    }
-
-    @Override
-    public PublishSubject<Object> onPeerMessage() {
-        return null;
-    }
-
-    @Override
-    public PublishSubject<Void> onPeerDisconected() {
-        return null;
-    }
 }

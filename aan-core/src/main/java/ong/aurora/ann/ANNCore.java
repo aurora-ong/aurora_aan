@@ -3,8 +3,10 @@ package ong.aurora.ann;
 import com.google.common.net.HostAndPort;
 import ong.aurora.ann.command.CommandPool;
 import ong.aurora.ann.command.CommandRestService;
-import ong.aurora.ann.identity.ANNNodeIdentity;
-import ong.aurora.ann.p2p.p2pHostNode2;
+import ong.aurora.ann.config.AANConfig;
+import ong.aurora.ann.network.AANNetwork;
+import ong.aurora.ann.network.libp2p.libp2pNetwork;
+import ong.aurora.ann.network.AANNetworkNode;
 import ong.aurora.commons.blockchain.AANBlockchain;
 import ong.aurora.commons.command.CommandProjectorQueryException;
 import ong.aurora.commons.entity.MaterializedEntity;
@@ -21,7 +23,6 @@ import org.slf4j.LoggerFactory;
 import rx.subjects.BehaviorSubject;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public class ANNCore {
@@ -31,34 +32,28 @@ public class ANNCore {
     public static void main(String[] args) throws Exception, CommandProjectorQueryException {
 
 
-        AANSerializer annSerializer = new AANJacksonSerializer();
+        AANSerializer aanSerializer = new AANJacksonSerializer();
 
         AANModel aanModel = new AuroraOM();
 
-        Map<String, String> env = System.getenv();
+        AANConfig aanConfig = AANConfig.fromEnviroment();
 
-        String nodeId = env.get("ANN_NODE_ID");
+        log.info("Iniciando nodo {}", aanConfig.getNodeId());
 
-        if (nodeId == null || nodeId.isEmpty()) {
-            throw new Exception("Debe proporcionarse un identificador de nodo");
-        }
+//        String nodeInfoPath = env.get("ANN_NODE_INFO_PATH");
+//
+//        ANNNodeIdentity nodeIdentity = ANNNodeIdentity.fromFile(nodeInfoPath.concat(nodeId).concat("/identity_private.pem"), nodeInfoPath.concat(nodeId).concat("/identity_public.pem"));
 
-        log.info("Iniciando nodo {}", nodeId);
+        AANBlockchain aanBlockchain = new AANBlockchain(new FileEventStore(aanConfig.getBlockchainFilePath()), aanSerializer);
 
-        String nodeInfoPath = env.get("ANN_NODE_INFO_PATH");
-
-        ANNNodeIdentity nodeIdentity = ANNNodeIdentity.fromFile(nodeInfoPath.concat(nodeId).concat("/identity_private.pem"), nodeInfoPath.concat(nodeId).concat("/identity_public.pem"));
-
-        AANBlockchain blockchain = new AANBlockchain(new FileEventStore(nodeInfoPath.concat(nodeId).concat("/event_store.log")), annSerializer);
-
-        if (blockchain.isEmpty()) {
+        if (aanBlockchain.isEmpty()) {
             log.info("!! Blockchain no inicializada");
 
 
         } else {
-            log.info("!! Blockchain encontrada ({} bloques)", blockchain.blockCount());
+            log.info("!! Blockchain encontrada ({} bloques)", aanBlockchain.blockCount());
             log.info("Verificando integridad");
-            blockchain.verifyIntegrity().get();
+            aanBlockchain.verifyIntegrity().get();
         }
 
         KSAProjector aanProjector = new KSAProjector("http://localhost:15002", "localhost:29092");
@@ -67,12 +62,12 @@ public class ANNCore {
 
         log.info("Projector iniciado {}", aanProjector.toString());
 
-        AANProcessor aanProcessor = new AANProcessor(blockchain, aanModel, aanProjector);
+        AANProcessor aanProcessor = new AANProcessor(aanBlockchain, aanModel, aanProjector);
 
-        long eventCount2 = blockchain.blockCount();
+        long eventCount2 = aanBlockchain.blockCount();
         log.info("Cargando {} eventos", eventCount2);
 
-        blockchain.eventStream().forEachOrdered(event -> {
+        aanBlockchain.eventStream().forEachOrdered(event -> {
             log.info("Leyendo eventStore {}", event);
             try {
                 aanProjector.projectEvent(event).get();
@@ -90,7 +85,7 @@ public class ANNCore {
             log.info("Nodo {}", annNodeValueMaterializedEntity.getEntityValue());
         });
 
-        Optional<MaterializedEntity<ANNNodeValue>> thisNodeOptional = allNodeList.stream().filter(annNodeValueMaterializedEntity -> annNodeValueMaterializedEntity.getEntityValue().nodeId().equals(nodeId)).findFirst();
+        Optional<MaterializedEntity<ANNNodeValue>> thisNodeOptional = allNodeList.stream().filter(annNodeValueMaterializedEntity -> annNodeValueMaterializedEntity.getEntityValue().nodeId().equals(aanConfig.getNodeId())).findFirst();
 
         log.info("Nodos optional {}", thisNodeOptional);
 
@@ -102,30 +97,62 @@ public class ANNCore {
 
         log.info("This node {}", thisNode);
 
-        if (!nodeIdentity.compareWith(thisNode.nodeSignature())) {
-            throw new Exception("Las firmas no coinciden");
-        }
+//        if (!nodeIdentity.compareWith(thisNode.nodeSignature())) {
+//            throw new Exception("Las firmas no coinciden");
+//        }
+//
 
         // INICIAR REST COMMAND
-
         CommandPool commandPool = new CommandPool();
 
-        String commandApiPort = env.get("ANN_NODE_COMMAND_API_PORT");
+        Integer commandApiPort = aanConfig.getCommandRestPort();
 
-
-        CommandRestService commandRestService = new CommandRestService(HostAndPort.fromParts("127.0.0.1", Integer.parseInt(commandApiPort)), aanProcessor, commandPool);
+        CommandRestService commandRestService = new CommandRestService(HostAndPort.fromParts("127.0.0.1", commandApiPort), aanProcessor, commandPool);
         commandRestService.start();
 
+
+        AANNetwork hostNode = new libp2pNetwork(aanConfig, aanSerializer, aanBlockchain);
+        hostNode.startHost();
+
+        BehaviorSubject<List<AANNetworkNode>> networkNodes = BehaviorSubject.create(List.of());
         BehaviorSubject<List<ANNNodeValue>> projectorNodes = BehaviorSubject.create(List.of());
 
-        p2pHostNode2 p2PNode = new p2pHostNode2(nodeIdentity, thisNode, annSerializer, projectorNodes, blockchain);
+
+        projectorNodes.asObservable().subscribe(annNodeValues -> {
+
+            log.info("========= \nProjector nodes actualizado: ");
+            annNodeValues.forEach(annNodeValue -> log.info(annNodeValue.toString()));
+            log.info("========= \n");
+
+            // CERRAR CONEXIÓN
+            networkNodes.getValue().forEach(o -> {});
+
+            // CREAR NETWORK PEERS
+            networkNodes.onNext(List.of());
+        });
 
 
-        
-//        p2PNode.start().get();
 
-        log.info("Actualizando nodos");
-        projectorNodes.onNext(allNodeList.stream().map(MaterializedEntity::getEntityValue).toList());
+        hostNode.onNetworkConnection().subscribe(networkPeer -> {
+
+            log.info("Nueva conexión {} ", networkPeer.toString());
+
+            if (networkNodes.getValue().isEmpty()) {
+                // CREAR NETWORK PEER Y PUSHEAR
+                networkNodes.onNext(List.of());
+            }
+
+
+            if (!networkNodes.getValue().isEmpty()) {
+                // CHECKEAR QUE EXISTA EN NETWORKNODES, SI ESTÁ ASIGNAR, ELSE THROW
+            }
+
+
+        });
+
+
+//        log.info("Actualizando nodos");
+//        projectorNodes.onNext(allNodeList.stream().map(MaterializedEntity::getEntityValue).toList());
 
 
     }

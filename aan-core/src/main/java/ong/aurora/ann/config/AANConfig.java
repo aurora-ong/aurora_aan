@@ -1,9 +1,7 @@
-package ong.aurora.ann;
+package ong.aurora.ann.config;
 
-import ong.aurora.ann.identity.ANNNodeIdentity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;

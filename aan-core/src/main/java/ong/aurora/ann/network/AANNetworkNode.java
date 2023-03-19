@@ -1,4 +1,6 @@
-package ong.aurora.ann.p2p_2;
+package ong.aurora.ann.network;
+
+import ong.aurora.ann.network.AANNetworkPeer;
 
 public class AANNetworkNode {
 

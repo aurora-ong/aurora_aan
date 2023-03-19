@@ -1,12 +1,12 @@
-package ong.aurora.ann.p2p_2;
+package ong.aurora.ann.network.libp2p;
 
 import io.libp2p.core.Host;
 import io.libp2p.core.crypto.PrivKey;
 import io.libp2p.core.dsl.Builder;
 import io.libp2p.crypto.keys.RsaPrivateKey;
-import ong.aurora.ann.AANConfig;
-import ong.aurora.ann.PeerController;
-import ong.aurora.ann.p2p.*;
+import ong.aurora.ann.config.AANConfig;
+import ong.aurora.ann.network.AANNetwork;
+import ong.aurora.ann.network.AANNetworkPeer;
 import ong.aurora.commons.blockchain.AANBlockchain;
 import ong.aurora.commons.serialization.AANSerializer;
 import org.slf4j.Logger;
@@ -30,12 +30,12 @@ public class libp2pNetwork implements AANNetwork {
 
     public libp2pNetwork(AANConfig aanConfig, AANSerializer annSerializer, AANBlockchain hostBlockchain) {
         this.hostBlockchain = hostBlockchain;
-        AANProtocol protocol = new AANProtocol(onNetworkConnection, annSerializer);
-        AANBinding aanBinding = new AANBinding(protocol);
+        libp2pProtocol protocol = new libp2pProtocol(onNetworkConnection, annSerializer);
+        libp2pBinding libp2pBinding = new libp2pBinding(protocol);
 
         this.libp2pHost = new Builder()
                 .protocols(protocolBindings -> {
-                    protocolBindings.add(aanBinding);
+                    protocolBindings.add(libp2pBinding);
                     return null;
                 })
                 .network(networkConfigBuilder -> {

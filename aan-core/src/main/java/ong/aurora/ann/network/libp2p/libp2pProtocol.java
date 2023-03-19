@@ -1,26 +1,20 @@
-package ong.aurora.ann.p2p;
+package ong.aurora.ann.network.libp2p;
 
 import io.libp2p.core.P2PChannel;
 import io.libp2p.core.Stream;
 import io.libp2p.protocol.ProtocolHandler;
-import ong.aurora.ann.PeerController;
-import ong.aurora.ann.p2p_2.AANNetworkPeer;
-import ong.aurora.ann.p2p_2.libp2pNetworkPeer;
+import ong.aurora.ann.network.AANNetworkPeer;
 import ong.aurora.commons.serialization.AANSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-public class AANProtocol extends ProtocolHandler<libp2pNetworkPeer> {
+public class libp2pProtocol extends ProtocolHandler<libp2pNetworkPeer> {
 
-    private static final Logger log = LoggerFactory.getLogger(AANProtocol.class);
+    private static final Logger log = LoggerFactory.getLogger(libp2pProtocol.class);
 
     public static final String announce = "/aurora/aan/0.1.0";
 
@@ -28,7 +22,7 @@ public class AANProtocol extends ProtocolHandler<libp2pNetworkPeer> {
 
     AANSerializer annSerializer;
 
-    public AANProtocol(PublishSubject<AANNetworkPeer> onNetworkConnection, AANSerializer annSerializer) {
+    public libp2pProtocol(PublishSubject<AANNetworkPeer> onNetworkConnection, AANSerializer annSerializer) {
         super(Long.MAX_VALUE, Long.MAX_VALUE);
         this.onNetworkConnection = onNetworkConnection;
         this.annSerializer = annSerializer;

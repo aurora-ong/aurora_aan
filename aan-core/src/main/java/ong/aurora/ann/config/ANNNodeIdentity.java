@@ -1,4 +1,4 @@
-package ong.aurora.ann.identity;
+package ong.aurora.ann.config;
 
 import ong.aurora.ann.PemFile;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;

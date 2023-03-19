@@ -1,6 +1,6 @@
-package ong.aurora.ann.p2p.msg;
+package ong.aurora.ann.network.libp2p;
 
-public record P2PMessage2(Class messageType, String encodedMessage) {
+public record libp2pMessage(Class messageType, String encodedMessage) {
 
     @Override
     public String toString() {
