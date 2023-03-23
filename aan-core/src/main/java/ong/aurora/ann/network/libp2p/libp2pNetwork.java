@@ -4,7 +4,7 @@ import io.libp2p.core.Host;
 import io.libp2p.core.crypto.PrivKey;
 import io.libp2p.core.dsl.Builder;
 import io.libp2p.crypto.keys.RsaPrivateKey;
-import ong.aurora.ann.config.AANConfig;
+import ong.aurora.commons.config.AANConfig;
 import ong.aurora.ann.network.AANNetwork;
 import ong.aurora.ann.network.AANNetworkPeer;
 import ong.aurora.commons.blockchain.AANBlockchain;
@@ -39,14 +39,14 @@ public class libp2pNetwork implements AANNetwork {
                     return null;
                 })
                 .network(networkConfigBuilder -> {
-                    String add = "/dns4/".concat("localhost").concat("/tcp/".concat(aanConfig.getNetworkNodePort().toString()));
+                    String add = "/dns4/".concat("localhost").concat("/tcp/".concat(aanConfig.networkNodePort.toString()));
                     networkConfigBuilder.listen(add);
                     return null;
                 })
                 .identity(identityBuilder -> {
                     identityBuilder.setFactory(() -> {
 
-                        PrivKey privKey = new RsaPrivateKey(aanConfig.getPrivateKey(), aanConfig.getPublicKey());
+                        PrivKey privKey = new RsaPrivateKey(aanConfig.privateKey, aanConfig.publicKey);
 
                         return privKey;
                     });

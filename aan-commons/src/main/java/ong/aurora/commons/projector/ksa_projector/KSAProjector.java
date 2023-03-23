@@ -46,11 +46,13 @@ public class KSAProjector implements AANProjector {
 
     private Producer<Long, Event> producer;
 
+    AANModel aanModel;
 
-    public KSAProjector(String host, String kafkaCluster) {
+
+    public KSAProjector(String host, String kafkaCluster, AANModel aanModel) {
         this.host = host;
         this.httpClient = HttpClient.newBuilder().build();
-
+        this.aanModel = aanModel;
         Properties props = new Properties();
         props.put("bootstrap.servers", kafkaCluster);
         props.put("acks", "all");
@@ -58,14 +60,14 @@ public class KSAProjector implements AANProjector {
     }
 
     @Override
-    public CompletableFuture<Void> startProjector(AANModel model) throws Exception {
+    public CompletableFuture<Void> startProjector() throws Exception {
         logger.info("Cargando projector-ksa");
 
         List<AANEntity> aanEntities = List.of(new ANNNodeEntity());
 
         List<AANEntity> proyectorEntities = new ArrayList<>();
         proyectorEntities.addAll(aanEntities);
-        proyectorEntities.addAll(model.getModelEntities());
+        proyectorEntities.addAll(aanModel.getModelEntities());
 
 
         Properties props = new Properties();

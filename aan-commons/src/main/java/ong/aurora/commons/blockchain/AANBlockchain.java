@@ -6,7 +6,7 @@ import ong.aurora.commons.serialization.AANSerializer;
 import ong.aurora.commons.store.ANNEventStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rx.subjects.BehaviorSubject;
+import rx.subjects.PublishSubject;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
@@ -26,7 +26,6 @@ public class AANBlockchain {
     public AANBlockchain(ANNEventStore eventStore, AANSerializer annSerializer) {
         this.eventStore = eventStore;
         this.serializer = annSerializer;
-        this.blockchainStream.onNext(this.lastEvent().orElse(null));
     }
 
     public CompletableFuture<Void> verifyIntegrity() {
@@ -64,7 +63,7 @@ public class AANBlockchain {
         return this.eventStream().max(Comparator.comparingLong(Event::eventId));
     }
 
-    public BehaviorSubject<Event> blockchainStream = BehaviorSubject.create();
+    public PublishSubject<Event> onEventPersisted = PublishSubject.create();
 
     public Optional<String> lastEventHash() {
         return this.lastEvent().map(this::eventHash);
@@ -73,7 +72,7 @@ public class AANBlockchain {
     public CompletableFuture<Void> persistEvent(Event event) throws Exception {
         // TODO COMPROBAR HASH
         this.eventStore.saveEvent(serializer.toJSON(event));
-        blockchainStream.onNext(event);
+        onEventPersisted.onNext(event);
         return CompletableFuture.completedFuture(null);
     }
 

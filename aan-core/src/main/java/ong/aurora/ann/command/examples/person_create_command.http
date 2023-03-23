@@ -1,0 +1,12 @@
+POST http://localhost:6001/command/new
+Content-Type: application/json
+
+{
+  "command_name": "person.create",
+  "command_data": {
+    "person_id": "adccb525-ce2a-42d2-8830-4f1e2ec879c6",
+    "person_name": "AAAAA",
+    "person_lastname": "BBBBBB",
+    "person_mail": "mafuentes@gmail.com"
+  }
+}

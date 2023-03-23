@@ -1,6 +1,7 @@
 package ong.aurora.commons.projector.rdb_projector;
 
 import ong.aurora.commons.command.CommandProjectorQueryException;
+import ong.aurora.commons.config.AANConfig;
 import ong.aurora.commons.entity.AANEntity;
 import ong.aurora.commons.entity.EntityValue;
 import ong.aurora.commons.entity.MaterializedEntity;
@@ -30,25 +31,29 @@ public class RDBProjector implements AANProjector {
 
     Map<String, RDBEntity> rdbEntityMap;
 
-    AANSerializer annSerializer;
+    AANSerializer aanSerializer;
+    AANConfig aanConfig;
+    AANModel aanModel;
 
-    public RDBProjector(AANSerializer annSerializer) {
-        this.annSerializer = annSerializer;
+    public RDBProjector(AANSerializer aanSerializer, AANConfig aanConfig, AANModel aanModel) {
+        this.aanSerializer = aanSerializer;
+        this.aanConfig = aanConfig;
+        this.aanModel = aanModel;
     }
 
     @Override
-    public CompletableFuture<Void> startProjector(AANModel model) throws Exception {
+    public CompletableFuture<Void> startProjector() throws Exception {
         RocksDB.loadLibrary();
 
 
         List<AANEntity> proyectorEntities = new ArrayList<>();
 
         proyectorEntities.add(new ANNNodeEntity());
-        proyectorEntities.addAll(model.getModelEntities());
+        proyectorEntities.addAll(aanModel.getModelEntities());
 
         rdbEntityMap = proyectorEntities.stream().collect(Collectors.toMap(entity -> entity.entityName, entity -> {
             try {
-                return new RDBEntity(entity, db, this.annSerializer);
+                return new RDBEntity(entity, db, this.aanSerializer, aanConfig);
             } catch (IOException | RocksDBException e) {
                 log.error("Error initializng RocksDB. Exception: '{}', message: '{}'", e.getCause(), e.getMessage(), e);
                 throw new RuntimeException(e);
@@ -56,7 +61,7 @@ public class RDBProjector implements AANProjector {
         }));
 
         log.info("RocksDB initialized");
-        HostInfo hostInfo = new HostInfo("localhost", 15002);
+        HostInfo hostInfo = new HostInfo("localhost", aanConfig.projectorPort);
         RDBProjectorRestService projectorRestService = new RDBProjectorRestService(hostInfo, this, proyectorEntities);
         projectorRestService.start();
         return CompletableFuture.completedFuture(null);
@@ -119,3 +124,4 @@ public class RDBProjector implements AANProjector {
 //        return Optional.empty();
     }
 }
+

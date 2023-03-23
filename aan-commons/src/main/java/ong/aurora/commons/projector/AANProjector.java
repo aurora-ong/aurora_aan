@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutionException;
 
 public interface AANProjector {
 
-    CompletableFuture<Void> startProjector(AANModel model) throws Exception;
+    CompletableFuture<Void> startProjector() throws Exception;
 
     CompletableFuture<Void> projectEvent(Event event) throws Exception;
 

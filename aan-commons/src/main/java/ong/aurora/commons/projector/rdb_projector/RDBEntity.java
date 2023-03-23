@@ -1,6 +1,7 @@
 package ong.aurora.commons.projector.rdb_projector;
 
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import ong.aurora.commons.config.AANConfig;
 import ong.aurora.commons.entity.AANEntity;
 import ong.aurora.commons.entity.EntityValue;
 import ong.aurora.commons.entity.MaterializedEntity;
@@ -26,11 +27,11 @@ public class RDBEntity<K, V extends EntityValue<V>> {
 
     AANSerializer annSerializer;
 
-    public RDBEntity(AANEntity<K, V> entity, RocksDB rocksDB, AANSerializer annSerializer) throws IOException, RocksDBException {
+    public RDBEntity(AANEntity<K, V> entity, RocksDB rocksDB, AANSerializer annSerializer, AANConfig aanConfig) throws IOException, RocksDBException {
         this.annSerializer = annSerializer;
         this.entity = entity;
 
-        String basePath = "/tmp/aan";
+        String basePath = "/tmp/aan".concat("_").concat(aanConfig.nodeId).concat("/");
         final Options options = new Options();
         options.setCreateIfMissing(true);
 

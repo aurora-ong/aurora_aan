@@ -21,7 +21,7 @@ public class EventData<K, V extends EntityValue<V>> {
     }
 
     public String eventName() {
-        return this.eventEntity.entityName.concat(".created");
+        return this.eventEntity.entityName;
     }
 
     public Map<String, Object> eventData() {

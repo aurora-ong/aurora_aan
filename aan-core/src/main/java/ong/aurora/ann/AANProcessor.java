@@ -55,9 +55,7 @@ public class AANProcessor {
 
                 Event event = new Event(this.aanBlockchain.blockCount(), eventData.eventName(), eventData.eventData(), validationTime, aanBlockchain.lastEventHash().orElse(null), command);
 
-                updateEventStore(event).get();
-                // TODO MOVER
-//                aanProjector.projectEvent(event).get();
+                this.aanBlockchain.persistEvent(event);
 
                 eventNumber++;
             }
@@ -78,11 +76,5 @@ public class AANProcessor {
         return CompletableFuture.completedFuture(null);
 
     }
-
-    CompletableFuture<Void> updateEventStore(Event event) throws Exception {
-        logger.info("Actualizando store {}", event);
-        return this.aanBlockchain.persistEvent(event);
-    }
-
 
 }

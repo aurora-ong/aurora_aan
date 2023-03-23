@@ -4,25 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ p2p framework done">
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/ANNBlockchain.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/AANBlockchain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/ANNSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/AANSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/jackson/ANNJacksonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/serialization/jackson/AANJacksonSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/store/file/FileEventStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/store/file/FileEventStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANConfig.java" afterDir="false" />
+    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ clear db on startup">
+      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/examples/person.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/command/examples/person_create_command.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/AANBlockchain.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/AANBlockchain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/event/EventData.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/event/EventData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/AANProjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/AANProjector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/ksa_projector/KSAProjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/ksa_projector/KSAProjector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/RDBEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/RDBEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/RDBProjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/RDBProjector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/examples/aan_node.http" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/examples/aan_node.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/PeerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/PeerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANFSM.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANFSM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANState.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/AANState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Initial.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Initial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Starter.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/fsm/Starter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/identity/ANNNodeIdentity.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/identity/ANNNodeIdentity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/AANProtocol.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/AANProtocol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pHostNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/p2p/p2pHostNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/config/AANConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/config/AANConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetwork.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aurora_aan.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_info/node1/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node1/event_store.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_info/node2/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node2/event_store.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_info/node3/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node3/event_store.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,9 +70,9 @@
       <list>
         <option value="Record" />
         <option value="Interface" />
-        <option value="HTTP Request" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="HTTP Request" />
       </list>
     </option>
   </component>
@@ -88,6 +93,7 @@
   </component>
   <component name="HttpClientSelectedEnvironments">
     <file url="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/post-requests.http" environment="test" />
+    <file url="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/get-requests.http" environment="test" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -109,7 +115,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;Z:/AURORA/aurora/aurora_aan/node_info/node1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;Z:/AURORA/aurora/aurora_aan/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/examples&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
@@ -120,6 +126,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="Z:\AURORA\aurora\aurora_aan\aan-commons\src\main\java\ong\aurora\commons\projector\rdb_projector\examples" />
       <recent name="Z:\AURORA\aurora\aurora_aan\node_info\node1" />
       <recent name="Z:\AURORA\aurora\aurora_aan\aan-core\src\main" />
     </key>
@@ -131,98 +138,21 @@
       <recent name="ong.aurora.ann" />
     </key>
   </component>
-  <component name="RunManager" selected="Shell Script.kafka cluster up">
-    <configuration name="ANNCore (H1)" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <envs>
-        <env name="ANN_NODE_COMMAND_API_PORT" value="6000" />
-        <env name="ANN_NODE_ID" value="node1" />
-        <env name="ANN_NODE_INFO_PATH" value="./node_info/" />
-      </envs>
-      <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.ANNCore" />
-      <module name="aan-core.main" />
-      <option name="VM_PARAMETERS" value="--enable-preview" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ANNCore (H2)" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <envs>
-        <env name="ANN_NODE_COMMAND_API_PORT" value="6001" />
-        <env name="ANN_NODE_ID" value="node2" />
-        <env name="ANN_NODE_INFO_PATH" value="./node_info/" />
-      </envs>
-      <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.ANNCore" />
-      <module name="aan-core.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ANNCore (H3)" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <envs>
-        <env name="ANN_NODE_COMMAND_API_PORT" value="6003" />
-        <env name="ANN_NODE_ID" value="node3" />
-        <env name="ANN_NODE_INFO_PATH" value="./node_info/" />
-      </envs>
-      <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.ANNCore" />
-      <module name="aan-core.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ANNCore (H4)" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <envs>
-        <env name="ANN_NODE_COMMAND_API_PORT" value="6004" />
-        <env name="ANN_NODE_ID" value="node4" />
-        <env name="ANN_NODE_INFO_PATH" value="./node_info/" />
-      </envs>
-      <option name="MAIN_CLASS_NAME" value="ong.aurora.ann.ANNCore" />
-      <module name="aan-core.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="new_command | NUEVO COME" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/new_command.http" requestIdentifier="NUEVO COME" runType="Run single request">
+  <component name="RunDashboard">
+    <option name="excludedTypes">
+      <set>
+        <option value="HttpClient.HttpRequestRunConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.ANNCore (H1)">
+    <configuration name="person | Obtener todos" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/examples/person.http" requestIdentifier="Obtener todos" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="Starter" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <option name="ACTIVE_PROFILES" />
-      <envs>
-        <env name="ANN_NODE_COMMAND_API_PORT" value="6000" />
-        <env name="ANN_NODE_ID" value="node1" />
-        <env name="ANN_NODE_KEY_PRIVATE" value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCuiAqv2JWaTLhLJrZVtXh5Cim11yBFkZAvcxVC4CQAErf8w9RENRsLN8bFpIqxj4fkljLyrc7wSv9Y+ZhMz6NTRkRzZZev26U7J6l0JELJwGoL131NrB88yNAlnWOqz9PNid/gNEBNDw/pLWgs4u33c/N1PPTsKmMqDJHA7eEDVZ9pADSmoczMc7dbWwLilp7Jd3cFxGt6o/xE0uaYHGApzi0580xrNLWBNMxe4hWAjDShgDPy8NjsSMJSP89FI6J4rLemhRLBtUYagr+YMm4FH8TcEFSFY3LJOJZESXcS4hv3QOg+a8dqKxwdHcxykEoJnet3cY4LslglAgBSSOhDAgMBAAECggEAAcU0EHPMPmTPrxT8rmQqvjEWe/v9r89YRewVTETuVYEYDjHUalIIuSTJmOSUSCQ5I+Q/FiWPeMFD5c1uhIanajgQb8doaPUyi0p+XemBxXKA3dJ0aWZsyrCq9PnEGi9zAlq328TQfA//PYJyr37THKIfUR5zpSn+PNe22BnzIQObqrqsVwoI6DA8LuKKY6TQs3kcMoKdw8HkuN5viPS5oB49y7tQYAxIJMELl8EGfREnWhVjeXLwCnvaOD8gIejiXlk0fQ5qobrvYE1yX6t/GzLK3viJci4NN57lJGj8+dgfvcFVX1ElTLV7+sK6qMhQOMxX7tD7Tx+ZOcn4+DyrQQKBgQDwrOrYkS6ysAW79E85q/b9O1yNdD+FjJJXWaueNoasq6KU/Sv06miYVEkReEdLH3SMiPR6YKD1MMfnN2vbYPBQwu/cJazFEorsIsrqdOf9qrk2hZc4ryxMzrn4gT+EEurIDwJMD5LGq8vOynhXBSSWC4+5egF+FTKWNaBSLd83/QKBgQC5pPTbNEvz2FveG2XP7W5HXgWe0mEknMeFMYeDJpUlq9jGt2/Ki57a5/OqTwpgUBDR+v43AwGP7hWQUg7INv2XZZS9zhENOWsP9IpZsh8LoR1cOBz22Qywe+sap7z7ceYjuXjSNptelKm1rq/882Qgtnc/cZG4MWGx/yrshWn1PwKBgGVVyUQKTQk7iA6NXVZBC6uv9NYyXhSTDYLt5I6nEqldUwU8W+exUvzgcCuE4y/EPMR3XcixKtRSB7lY4nbqKAU5LtkYm9gWaJvoQlvZgVyTJ4zHTta1Gwfz+uWhNeccN/KoLyVrYTd5WkTlhynMpozurUNBFaPKtRP93FT9r4DZAoGBAJEFZ7IFvH+UuM9dH7+6freJn2JefjyXrNVDx9SQQ1rWT9WMXuwe/c2L/TFB5Z0vbrRaGlTnKEVDe9zt/VYyfw/R7swHOhLWk+g25A0FtHLlPYZY32eGTv9fDl4YQu06IMovjU7KEb1k7N5cxGYZzFIxuB37nhYBnYvrBaEW55sJAoGAW+a3wm5WrRJbU9kB5IislN3gk1GiuYHGapxMTY+EieL78w7PkUg4ML3nYlt6eZ1QNjt1OdnEs7KdrnZm2VVK8ff1dZKIbYjPfBQye+CKHCgmhJkpsAU7JWDe0FD4Xdnz6g43IibuwBovXuAg1TtXB+ucSDkEhIcmsKf00N/fDSo=" />
-        <env name="ANN_NODE_KEY_PUBLIC" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArogKr9iVmky4Sya2VbV4eQoptdcgRZGQL3MVQuAkABK3/MPURDUbCzfGxaSKsY+H5JYy8q3O8Er/WPmYTM+jU0ZEc2WXr9ulOyepdCRCycBqC9d9TawfPMjQJZ1jqs/TzYnf4DRATQ8P6S1oLOLt93PzdTz07CpjKgyRwO3hA1WfaQA0pqHMzHO3W1sC4paeyXd3BcRreqP8RNLmmBxgKc4tOfNMazS1gTTMXuIVgIw0oYAz8vDY7EjCUj/PRSOieKy3poUSwbVGGoK/mDJuBR/E3BBUhWNyyTiWREl3EuIb90DoPmvHaiscHR3McpBKCZ3rd3GOC7JYJQIAUkjoQwIDAQAB" />
-      </envs>
-      <module name="aan-core.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="ong.aurora.ann.fsm.Starter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ong.aurora.ann.fsm.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="person | Obtener trace" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/examples/person.http" index="3" requestIdentifier="Obtener trace" runType="Run single request">
+      <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yaml.aan-projector: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="aan-projector" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yaml" />
-        </settings>
-      </deployment>
+    <configuration name="person_create_command | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/command/examples/person_create_command.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
     <list>
@@ -230,20 +160,15 @@
       <item itemvalue="Application.ANNCore (H2)" />
       <item itemvalue="Application.ANNCore (H3)" />
       <item itemvalue="Application.ANNCore (H4)" />
-      <item itemvalue="Application.ProjectorKSA" />
-      <item itemvalue="Docker.docker-compose.yaml.aan-projector: Compose Deployment" />
-      <item itemvalue="HTTP Request.new_command | NUEVO COME" />
-      <item itemvalue="Shell Script.aan-commands producer" />
-      <item itemvalue="Shell Script.aan-events consumer" />
-      <item itemvalue="Shell Script.kafka cluster down" />
-      <item itemvalue="Shell Script.kafka cluster up" />
-      <item itemvalue="Spring Boot.Starter" />
+      <item itemvalue="HTTP Request.person | Obtener todos" />
+      <item itemvalue="HTTP Request.person | Obtener trace" />
+      <item itemvalue="HTTP Request.person_create_command | #1" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.Starter" />
-        <item itemvalue="HTTP Request.new_command | NUEVO COME" />
-        <item itemvalue="Docker.docker-compose.yaml.aan-projector: Compose Deployment" />
+        <item itemvalue="HTTP Request.person | Obtener todos" />
+        <item itemvalue="HTTP Request.person_create_command | #1" />
+        <item itemvalue="HTTP Request.person | Obtener trace" />
       </list>
     </recent_temporary>
   </component>
@@ -292,6 +217,8 @@
       <workItem from="1675691287590" duration="20000" />
       <workItem from="1675947868232" duration="5177000" />
       <workItem from="1676072964221" duration="4557000" />
+      <workItem from="1679316290919" duration="12000" />
+      <workItem from="1679576517816" duration="3773000" />
     </task>
     <task id="LOCAL-00001" summary="++ gradle fix">
       <created>1670288482182</created>

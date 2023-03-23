@@ -1,0 +1,21 @@
+### Obtener todos
+GET http://localhost:8002/person/all
+Accept: application/json
+
+### Obtener uno
+GET http://localhost:15002/person/one
+Accept: application/json
+Content-Type: application/json
+
+{
+  "person_id": "adccb525-ce2a-42d2-8830-4f1e2ec879c3"
+}
+
+### Obtener trace
+GET http://localhost:8001/person/trace
+Accept: application/json
+Content-Type: application/json
+
+{
+  "person_id": "adccb525-ce2a-42d2-8830-4f1e2ec879c3"
+}
