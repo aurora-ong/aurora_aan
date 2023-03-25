@@ -80,8 +80,6 @@ public class ANNCore {
         });
 
 
-
-
         // OBTENER NODOS ACTIVOS
 
         List<MaterializedEntity<ANNNodeValue>> allNodeList = aanProjector.queryAll(new ANNNodeEntity());

@@ -4,30 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ clear db on startup">
-      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/examples/person.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/command/examples/person_create_command.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/aan-commons.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/AANBlockchain.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/AANBlockchain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/event/EventData.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/event/EventData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/AANProjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/AANProjector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/ksa_projector/KSAProjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/ksa_projector/KSAProjector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/RDBEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/RDBEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/RDBProjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/RDBProjector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/examples/aan_node.http" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/examples/aan_node.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/aan-core.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/aan-core.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANProcessor.java" afterDir="false" />
+    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ jueves 23/03/2023">
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/config/AANConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/config/AANConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetwork.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aurora_aan.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-kafka/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-kafka/scripts/console-commands-topic.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-kafka/scripts/create-topics.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-kafka/scripts/reset-cluster.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-kafka/seed-data/aan-command/aan-command-seed-authorization_consume" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-kafka/seed-data/aan-command/aan-command-seed-authorization_create" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-kafka/seed-data/aan-command/aan-command-seed-member_add" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-kafka/seed-data/aan-command/aan-command-seed-person_create" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-kafka/seed-data/aan-command/aan-command-seed-uo_create" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/src/main/java/ong/aurora/projector/EntityProjector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/src/main/java/ong/aurora/projector/ProjectorKSA.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/src/main/java/ong/aurora/projector/RestService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/src/main/resources/logback.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_info/node1/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node1/event_store.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_info/node2/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node2/event_store.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_info/node3/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node3/event_store.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +220,8 @@
       <workItem from="1675947868232" duration="5177000" />
       <workItem from="1676072964221" duration="4557000" />
       <workItem from="1679316290919" duration="12000" />
-      <workItem from="1679576517816" duration="3773000" />
+      <workItem from="1679576517816" duration="4467000" />
+      <workItem from="1679706111209" duration="311000" />
     </task>
     <task id="LOCAL-00001" summary="++ gradle fix">
       <created>1670288482182</created>
@@ -276,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675645012202</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="++ jueves 23/03/2023">
+      <created>1679580341797</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679580341797</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,6 +312,7 @@
     <MESSAGE value="++ p2p framework done" />
     <MESSAGE value="++ update config" />
     <MESSAGE value="++ fsm spring initial" />
-    <option name="LAST_COMMIT_MESSAGE" value="++ fsm spring initial" />
+    <MESSAGE value="++ jueves 23/03/2023" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ jueves 23/03/2023" />
   </component>
 </project>

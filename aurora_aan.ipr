@@ -216,7 +216,6 @@
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.test.iml" filepath="$PROJECT_DIR$/aan-processor-ksa/aan-processor-ksa.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.main.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" filepath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" />
     </modules>
