@@ -12,9 +12,9 @@ import rx.subjects.PublishSubject;
 
 import java.util.concurrent.CompletableFuture;
 
-public class libp2pProtocol extends ProtocolHandler<libp2pNetworkPeer> {
+public class Libp2pProtocol extends ProtocolHandler<libp2pNetworkPeer> {
 
-    private static final Logger log = LoggerFactory.getLogger(libp2pProtocol.class);
+    private static final Logger log = LoggerFactory.getLogger(Libp2pProtocol.class);
 
     public static final String announce = "/aurora/aan/0.1.0";
 
@@ -22,7 +22,7 @@ public class libp2pProtocol extends ProtocolHandler<libp2pNetworkPeer> {
 
     AANSerializer annSerializer;
 
-    public libp2pProtocol(PublishSubject<AANNetworkPeer> onNetworkConnection, AANSerializer annSerializer) {
+    public Libp2pProtocol(PublishSubject<AANNetworkPeer> onNetworkConnection, AANSerializer annSerializer) {
         super(Long.MAX_VALUE, Long.MAX_VALUE);
         this.onNetworkConnection = onNetworkConnection;
         this.annSerializer = annSerializer;

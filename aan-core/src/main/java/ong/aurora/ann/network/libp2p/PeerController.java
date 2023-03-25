@@ -4,7 +4,7 @@ import io.libp2p.core.Stream;
 import io.libp2p.protocol.ProtocolMessageHandler;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import ong.aurora.ann.network.AANNetworkPeerStatusType;
+import ong.aurora.ann.network.AANNetworkNodeStatusType;
 import ong.aurora.commons.serialization.AANSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +26,7 @@ public class PeerController implements ProtocolMessageHandler<ByteBuf> {
 
     AANSerializer annSerializer;
 
-    public BehaviorSubject<AANNetworkPeerStatusType> connectionStatus =  BehaviorSubject.create(AANNetworkPeerStatusType.DISCONNECTED);
+    public BehaviorSubject<AANNetworkNodeStatusType> connectionStatus =  BehaviorSubject.create(AANNetworkNodeStatusType.DISCONNECTED);
 
     public PublishSubject<Object> peerMessageSubject = PublishSubject.create();
 
@@ -77,7 +77,7 @@ public class PeerController implements ProtocolMessageHandler<ByteBuf> {
         log.info("Nueva conexión establecida con {} {}", stream.remotePeerId(), stream.getConnection().remoteAddress());
         stream.getProtocol().thenAccept(s -> log.info("Protocolo: {}", s));
         this.stream = stream;
-        connectionStatus.onNext(AANNetworkPeerStatusType.CONNECTED);
+        connectionStatus.onNext(AANNetworkNodeStatusType.CONNECTED);
         this.ready.complete(this);
     }
 
@@ -100,13 +100,13 @@ public class PeerController implements ProtocolMessageHandler<ByteBuf> {
     @Override
     public void onClosed(@NotNull Stream stream) {
         log.info("onClosed");
-        connectionStatus.onNext(AANNetworkPeerStatusType.DISCONNECTED);
+        connectionStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
     }
 
     @Override
     public void onException(@Nullable Throwable cause) {
         log.info("onException", cause);
-        connectionStatus.onNext(AANNetworkPeerStatusType.DISCONNECTED);
+        connectionStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
     }
 
 

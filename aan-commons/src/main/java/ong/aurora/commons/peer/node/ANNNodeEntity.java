@@ -4,11 +4,11 @@ import ong.aurora.commons.entity.AANEntity;
 import ong.aurora.commons.entity.MaterializedEntity;
 import ong.aurora.commons.event.Event;
 
-public class ANNNodeEntity extends AANEntity<AANNodeKey, ANNNodeValue> {
+public class ANNNodeEntity extends AANEntity<AANNodeKey, AANNodeValue> {
 
 
     public ANNNodeEntity() {
-        super("aan_node", AANNodeKey.class, ANNNodeValue.class);
+        super("aan_node", AANNodeKey.class, AANNodeValue.class);
     }
 
     @Override
@@ -17,12 +17,12 @@ public class ANNNodeEntity extends AANEntity<AANNodeKey, ANNNodeValue> {
     }
 
     @Override
-    public ANNNodeValue valueFromEvent(Event event) {
-        return ANNNodeValue.fromEvent(event);
+    public AANNodeValue valueFromEvent(Event event) {
+        return AANNodeValue.fromEvent(event);
     }
 
     @Override
-    public MaterializedEntity<ANNNodeValue> materializeFromEvent(Event event) {
+    public MaterializedEntity<AANNodeValue> materializeFromEvent(Event event) {
 
         return new MaterializedEntity<>(this.valueFromEvent(event), event.eventTimestamp(), event.eventTimestamp());
     }

@@ -4,32 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ jueves 23/03/2023">
+    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ removed projector ksa module">
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/config/AANConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/config/AANConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/ANNNodeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/ANNNodeEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/ANNNodeValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/AANNodeValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/model/v_0_0_1/command/node/add/AddNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/model/v_0_0_1/command/node/add/AddNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-kafka/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-kafka/scripts/console-commands-topic.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-kafka/scripts/create-topics.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-kafka/scripts/reset-cluster.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-kafka/seed-data/aan-command/aan-command-seed-authorization_consume" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-kafka/seed-data/aan-command/aan-command-seed-authorization_create" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-kafka/seed-data/aan-command/aan-command-seed-member_add" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-kafka/seed-data/aan-command/aan-command-seed-person_create" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-kafka/seed-data/aan-command/aan-command-seed-uo_create" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/aan-projector-ksa.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/src/main/java/ong/aurora/projector/EntityProjector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/src/main/java/ong/aurora/projector/ProjectorKSA.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/src/main/java/ong/aurora/projector/RestService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-projector-ksa/src/main/resources/logback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetwork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkPeer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkPeer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkPeerStatusType.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkNodeStatusType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/PeerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/PeerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pBinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/Libp2pBinding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetwork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetworkPeer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetworkPeer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pProtocol.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/Libp2pProtocol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aurora_aan.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_info/node1/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node1/event_store.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +73,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="fsm" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -222,6 +214,7 @@
       <workItem from="1679316290919" duration="12000" />
       <workItem from="1679576517816" duration="4467000" />
       <workItem from="1679706111209" duration="311000" />
+      <workItem from="1679707942227" duration="12638000" />
     </task>
     <task id="LOCAL-00001" summary="++ gradle fix">
       <created>1670288482182</created>

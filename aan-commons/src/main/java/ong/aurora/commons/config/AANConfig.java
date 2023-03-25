@@ -25,7 +25,7 @@ public class AANConfig {
 
     public Integer commandPort;
 
-    public Integer networkNodePort;
+    public Integer networkPort;
 
     public Integer projectorPort;
 
@@ -38,18 +38,18 @@ public class AANConfig {
                 ", publicKey=" + publicKey +
                 ", blockchainFilePath='" + blockchainFilePath + '\'' +
                 ", commandPort=" + commandPort +
-                ", networkNodePort=" + networkNodePort +
+                ", networkNodePort=" + networkPort +
                 ", projectorPort=" + projectorPort +
                 '}';
     }
 
-    private AANConfig(String nodeId, PublicKey nodeKeyPublic, PrivateKey nodeKeyPrivate, String blockchainFilePath, Integer commandPort, Integer networkNodePort, Integer projectorPort) {
+    private AANConfig(String nodeId, PublicKey nodeKeyPublic, PrivateKey nodeKeyPrivate, String blockchainFilePath, Integer commandPort, Integer networkPort, Integer projectorPort) {
         this.nodeId = nodeId;
         this.publicKey = nodeKeyPublic;
         this.privateKey = nodeKeyPrivate;
         this.blockchainFilePath = blockchainFilePath;
         this.commandPort = commandPort;
-        this.networkNodePort = networkNodePort;
+        this.networkPort = networkPort;
         this.projectorPort = projectorPort;
         log.info("Configuración cargada {}", this);
     }

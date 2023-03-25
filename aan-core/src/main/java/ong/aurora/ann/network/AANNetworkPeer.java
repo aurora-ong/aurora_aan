@@ -1,5 +1,6 @@
 package ong.aurora.ann.network;
 
+import rx.Observable;
 import rx.subjects.PublishSubject;
 
 public interface AANNetworkPeer {
@@ -10,6 +11,6 @@ public interface AANNetworkPeer {
 
     PublishSubject<Object> onPeerMessage();
 
-    PublishSubject<Void> onPeerDisconected();
+    Observable<Void> onPeerDisconected();
 
 }
