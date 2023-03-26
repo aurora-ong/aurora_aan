@@ -28,8 +28,6 @@ public class libp2pNetwork implements AANNetwork {
 
     Libp2pBinding libp2pBinding;
 
-    BehaviorSubject<List<PeerController>> networkPeers = BehaviorSubject.create(List.of());
-
     AANBlockchain hostBlockchain;
 
     PublishSubject<AANNetworkPeer> onNetworkConnection = PublishSubject.create();

@@ -9,7 +9,7 @@ public interface AANNetworkPeer {
 
     void sendMessage(Object object);
 
-    PublishSubject<Object> onPeerMessage();
+    Observable<Object> onPeerMessage();
 
     Observable<Void> onPeerDisconected();
 

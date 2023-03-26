@@ -1,6 +1,5 @@
 package ong.aurora.ann.network;
 
-import ong.aurora.ann.AANProcessor;
 import ong.aurora.commons.peer.node.AANNodeValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
