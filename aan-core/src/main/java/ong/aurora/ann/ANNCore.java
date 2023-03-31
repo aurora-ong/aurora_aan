@@ -144,7 +144,7 @@ public class ANNCore {
             });
 
             // CREAR NETWORK PEERS
-            List<AANNetworkNode> networkNodes1 = annNodeValues.stream().filter(aanNodeValue -> !aanNodeValue.nodeId().equals(aanConfig.nodeId)).map(nodeValue -> new AANNetworkNode(nodeValue, null)).toList();
+            List<AANNetworkNode> networkNodes1 = annNodeValues.stream().filter(aanNodeValue -> !aanNodeValue.nodeId().equals(aanConfig.nodeId)).map(nodeValue -> new AANNetworkNode(nodeValue, null, aanBlockchain)).toList();
 //            networkNodes1.forEach(aanNetwork::establishConnection);
 
             networkNodes.onNext(networkNodes1);
@@ -157,7 +157,7 @@ public class ANNCore {
 
             if (networkNodes.getValue().isEmpty()) {
                 // CREAR NETWORK PEER Y PUSHEAR
-                AANNetworkNode networkNode = new AANNetworkNode(null, incomingPeer);
+                AANNetworkNode networkNode = new AANNetworkNode(null, incomingPeer, aanBlockchain);
                 networkNodes.onNext(List.of(networkNode));
             }
 

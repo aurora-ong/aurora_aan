@@ -6,6 +6,7 @@ import ong.aurora.commons.serialization.AANSerializer;
 import ong.aurora.commons.store.ANNEventStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;
 
 import java.nio.charset.StandardCharsets;
@@ -20,12 +21,15 @@ public class AANBlockchain {
 
     AANSerializer serializer;
 
+    BehaviorSubject<Event> lastEvent;
+
 
     private static final Logger log = LoggerFactory.getLogger(AANBlockchain.class);
 
     public AANBlockchain(ANNEventStore eventStore, AANSerializer annSerializer) {
         this.eventStore = eventStore;
         this.serializer = annSerializer;
+        this.lastEvent = BehaviorSubject.create(this.lastEvent().orElse(null));
     }
 
     public CompletableFuture<Void> verifyIntegrity() {
