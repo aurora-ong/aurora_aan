@@ -3,10 +3,7 @@ package ong.aurora.ann;
 import com.google.common.net.HostAndPort;
 import ong.aurora.ann.command.CommandPool;
 import ong.aurora.ann.command.CommandRestService;
-import ong.aurora.ann.network.AANNetwork;
-import ong.aurora.ann.network.AANNetworkNode;
-import ong.aurora.ann.network.AANNetworkNodeStatusType;
-import ong.aurora.ann.network.AANNetworkPeer;
+import ong.aurora.ann.network.*;
 import ong.aurora.ann.network.libp2p.libp2pNetwork;
 import ong.aurora.commons.blockchain.AANBlockchain;
 import ong.aurora.commons.command.CommandProjectorQueryException;
@@ -15,6 +12,7 @@ import ong.aurora.commons.entity.MaterializedEntity;
 import ong.aurora.commons.model.AANModel;
 import ong.aurora.commons.peer.node.ANNNodeEntity;
 import ong.aurora.commons.peer.node.AANNodeValue;
+import ong.aurora.commons.peer.node.ANNNodeStatus;
 import ong.aurora.commons.projector.AANProjector;
 import ong.aurora.commons.projector.rdb_projector.RDBProjector;
 import ong.aurora.commons.serialization.AANSerializer;
@@ -157,13 +155,10 @@ public class ANNCore {
 
             if (networkNodes.getValue().isEmpty()) {
                 // CREAR NETWORK PEER Y PUSHEAR
-                AANNetworkNode networkNode = new AANNetworkNode(null, incomingPeer, aanBlockchain);
+                AANNetworkNode networkNode = new AANNetworkNode(new AANNodeValue("unknown", "Desconocido", "", "", "", ANNNodeStatus.ACTIVE), incomingPeer, aanBlockchain);
+                networkNode.attachConnection(incomingPeer);
                 networkNodes.onNext(List.of(networkNode));
-            }
-
-
-            if (!networkNodes.getValue().isEmpty()) {
-
+            } else {
                 Optional<AANNetworkNode> networkNodeOptional = networkNodes.getValue().stream().filter(aanNetworkNode -> aanNetworkNode.aanNodeValue.nodeSignature().equals(incomingPeer.getPeerIdentity())).findAny();
 
                 if (networkNodeOptional.isPresent()) {
@@ -174,7 +169,6 @@ public class ANNCore {
                 }
             }
 
-
         });
 
 
@@ -183,7 +177,7 @@ public class ANNCore {
             log.info("\n======= networkNodes actualizados =======");
             annNodeValues.forEach(annNodeValue -> {
                 log.info(annNodeValue.toString());
-                aanNetwork.establishConnection(annNodeValue);
+//                aanNetwork.establishConnection(annNodeValue);
             });
             log.info("\n==============");
 
@@ -205,6 +199,8 @@ public class ANNCore {
             o.forEach(aanNetworkNode -> log.info(aanNetworkNode.toString()));
             log.info("==============");
         });
+
+        new AANNetworkHost(networkNodes, aanNetwork);
 
     }
 }

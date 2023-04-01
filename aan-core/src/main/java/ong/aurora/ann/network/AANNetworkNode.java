@@ -68,7 +68,7 @@ public class AANNetworkNode {
             }
         });
         this.nodeStatus.onNext(AANNetworkNodeStatusType.CONNECTED);
-        sendBlockchain();
+//        sendBlockchain();
     }
 
     public Observable<AANNetworkNode> onStatusChange() {
