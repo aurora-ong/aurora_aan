@@ -2,8 +2,8 @@ package ong.aurora.model.v_0_0_1.command.node.add;
 
 import ong.aurora.commons.command.*;
 import ong.aurora.commons.event.EventData;
-import ong.aurora.commons.peer.node.ANNNodeEntity;
-import ong.aurora.commons.peer.node.ANNNodeStatus;
+import ong.aurora.commons.peer.node.AANNodeEntity;
+import ong.aurora.commons.peer.node.AANNodeStatus;
 import ong.aurora.commons.peer.node.AANNodeValue;
 import ong.aurora.commons.projector.AANProjector;
 import org.slf4j.Logger;
@@ -35,7 +35,7 @@ public class AddNode implements AANCommand {
 
         try {
 
-            EventData eventData = EventData.updateEntity(new ANNNodeEntity(), new AANNodeValue(commandData.nodeId(), commandData.nodeName(), commandData.nodeHostname(), commandData.nodeSignature(), commandData.nodePort(), ANNNodeStatus.ACTIVE));
+            EventData eventData = EventData.updateEntity(new AANNodeEntity(), new AANNodeValue(commandData.nodeId(), commandData.nodeName(), commandData.nodeHostname(), commandData.nodeSignature(), commandData.nodePort(), AANNodeStatus.ACTIVE));
             eventQueue.add(eventData);
             return eventQueue;
         } catch (Exception e) {

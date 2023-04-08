@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 
@@ -51,9 +52,9 @@ public class AANProcessor {
             for (EventData eventData : resultEvent) {
                 logger.info("Procesando evento {}/{}", eventNumber, resultEvent.size());
 
-                logger.info("Último evento: {}", aanBlockchain.lastEventHash().orElse(null));
+                logger.info("Siguiente hash: {}",aanBlockchain.nextBlockHash());
 
-                Event event = new Event(this.aanBlockchain.blockCount(), eventData.eventName(), eventData.eventData(), validationTime, aanBlockchain.lastEventHash().orElse(null), command);
+                Event event = new Event(this.aanBlockchain.blockCount(), eventData.eventName(), eventData.eventData(), validationTime, aanBlockchain.nextBlockHash(), command);
 
                 this.aanBlockchain.persistEvent(event);
 

@@ -7,7 +7,6 @@ import ong.aurora.commons.store.ANNEventStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rx.subjects.BehaviorSubject;
-import rx.subjects.PublishSubject;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
@@ -21,7 +20,7 @@ public class AANBlockchain {
 
     AANSerializer serializer;
 
-    BehaviorSubject<Event> lastEvent;
+    public BehaviorSubject<Event> lastEventStream;
 
 
     private static final Logger log = LoggerFactory.getLogger(AANBlockchain.class);
@@ -29,7 +28,7 @@ public class AANBlockchain {
     public AANBlockchain(ANNEventStore eventStore, AANSerializer annSerializer) {
         this.eventStore = eventStore;
         this.serializer = annSerializer;
-        this.lastEvent = BehaviorSubject.create(this.lastEvent().orElse(null));
+        this.lastEventStream = BehaviorSubject.create(eventStream().max(Comparator.comparingLong(Event::eventId)).orElse(null));
     }
 
     public CompletableFuture<Void> verifyIntegrity() {
@@ -37,7 +36,7 @@ public class AANBlockchain {
 
         eventStream().reduce((event, event2) -> {
 
-            log.info("Verificando integridad \n{}\n{}", event, event2);
+            log.debug("Verificando integridad \n{}\n{}", event, event2);
             if ((event.eventId()) != (event2.eventId() - 1)) {
                 log.error("!! Cadena inválida {} != {}", event.eventId(), (event2.eventId() - 1));
                 throw new RuntimeException("Blockchain inválida");
@@ -63,24 +62,30 @@ public class AANBlockchain {
         return this.eventStore.readEventStore().map(s -> serializer.fromJSON(s, Event.class));
     }
 
+//    public Optional<Event> lastEventt() {
+//        return this.eventStream().max(Comparator.comparingLong(Event::eventId));
+//    }
+
     public Optional<Event> lastEvent() {
-        return this.eventStream().max(Comparator.comparingLong(Event::eventId));
+        return Optional.of(this.lastEventStream.getValue());
     }
 
-    public PublishSubject<Event> onEventPersisted = PublishSubject.create();
 
-    public Optional<String> lastEventHash() {
-        return this.lastEvent().map(this::eventHash);
-    }
 
     public CompletableFuture<Void> persistEvent(Event event) throws Exception {
         // TODO COMPROBAR HASH
         this.eventStore.saveEvent(serializer.toJSON(event));
-        onEventPersisted.onNext(event);
+//        onEventPersisted.onNext(event);
+        lastEventStream.onNext(event);
         return CompletableFuture.completedFuture(null);
     }
 
-    public String eventHash(Event event) {
-        return Hashing.sha256().hashString(serializer.toJSON(event), StandardCharsets.UTF_8).toString();
+    public String nextBlockHash() { // TODO
+
+        if (this.lastEvent().isEmpty()) {
+            return "null";
+        }
+
+        return Hashing.sha256().hashString(serializer.toJSON(this), StandardCharsets.UTF_8).toString();
     }
 }

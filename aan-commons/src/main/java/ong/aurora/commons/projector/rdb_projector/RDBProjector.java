@@ -7,7 +7,7 @@ import ong.aurora.commons.entity.EntityValue;
 import ong.aurora.commons.entity.MaterializedEntity;
 import ong.aurora.commons.event.Event;
 import ong.aurora.commons.model.AANModel;
-import ong.aurora.commons.peer.node.ANNNodeEntity;
+import ong.aurora.commons.peer.node.AANNodeEntity;
 import ong.aurora.commons.projector.AANProjector;
 import ong.aurora.commons.serialization.AANSerializer;
 import org.apache.kafka.streams.state.HostInfo;
@@ -48,7 +48,7 @@ public class RDBProjector implements AANProjector {
 
         List<AANEntity> proyectorEntities = new ArrayList<>();
 
-        proyectorEntities.add(new ANNNodeEntity());
+        proyectorEntities.add(new AANNodeEntity());
         proyectorEntities.addAll(aanModel.getModelEntities());
 
         rdbEntityMap = proyectorEntities.stream().collect(Collectors.toMap(entity -> entity.entityName, entity -> {

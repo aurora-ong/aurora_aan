@@ -91,8 +91,8 @@ public class libp2pNetwork implements AANNetwork {
             Multiaddr add = Multiaddr.fromString("/dns4/".concat(aanNetworkNode.aanNodeValue.nodeHostname()).concat("/tcp/".concat(aanNetworkNode.aanNodeValue.nodePort()).concat("/p2p/".concat(peerId.toString()))));
             this.libp2pBinding.dial(this.libp2pHost, add).getController().get();
         } catch (Exception e) {
-            log.info("Error al tratar de conectarse a {} en {}:{}", aanNetworkNode.aanNodeValue.nodeId(), aanNetworkNode.aanNodeValue.nodeHostname(), aanNetworkNode.aanNodeValue.nodePort());
-            log.info("Error {}", e.getMessage());
+            log.info("Error al tratar de conectarse a {} en {}:{} {}", aanNetworkNode.aanNodeValue.nodeId(), aanNetworkNode.aanNodeValue.nodeHostname(), aanNetworkNode.aanNodeValue.nodePort(), e.getMessage());
+//            log.info("Error {}", e.getMessage());
         }
     }
 

@@ -12,6 +12,7 @@ import rx.Observable;
 import rx.subjects.BehaviorSubject;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class AANNetworkNode {
@@ -20,9 +21,13 @@ public class AANNetworkNode {
     private static final Logger logger = LoggerFactory.getLogger(AANNetworkNode.class);
     public AANNodeValue aanNodeValue;
 
-    BehaviorSubject<AANNetworkNodeStatusType> nodeStatus = BehaviorSubject.create(AANNetworkNodeStatusType.DISCONNECTED);
+    private BehaviorSubject<AANNetworkNodeStatusType> nodeStatus = BehaviorSubject.create(AANNetworkNodeStatusType.DISCONNECTED);
 
-    Long nodeBlockchainIndex = -1L;
+    AANNetworkNodeStatusType currentStatus() {
+        return nodeStatus.getValue();
+    }
+
+    Long nodeBlockchainIndex;
 
     @Override
     public String toString() {
@@ -55,7 +60,7 @@ public class AANNetworkNode {
             this.nodeStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
         });
         this.peerConnection.onPeerMessage().subscribe(o -> {
-            logger.info("[{}] Procesando mensaje {}", this.aanNodeValue.nodeId(), o);
+            logger.info("[{}] Procesando mensaje {}", this.aanNodeValue.nodeId(), o.getClass());
             if (o instanceof BlockchainRequest message) {
                 responder(message);
             }
@@ -82,15 +87,23 @@ public class AANNetworkNode {
         return cf;
     }
 
-    private void sendBlockchain() {
-        logger.info("Informando blockchain {}", this.aanBlockchain.lastEvent().orElse(null));
-        peerConnection.sendMessage(new BlockchainRespond(this.aanBlockchain.lastEvent().map(Event::eventId).orElse(-1L)));
+    private void blockchainRequest() {
+        logger.info("Enviando BlockchainRequest");
+        peerConnection.sendMessage(new BlockchainRequest());
+    }
+
+
+    public void sendBlockchain(Optional<Event> event) {
+        logger.info("Informando blockchain {}", event.orElse(null));
+        peerConnection.sendMessage(new BlockchainRespond(event.map(Event::eventId).orElse(-1L)));
     }
 
     private void requestBlock() {
         peerConnection.sendMessage(new BlockchainRequest());
 
     }
+
+
 
     private void sendBlock() {
         try {
@@ -104,32 +117,40 @@ public class AANNetworkNode {
     }
 
     private void responder(BlockchainRequest message) {
-        logger.info("Responder blockchainRequest con {}", this.aanBlockchain.lastEvent().orElse(null));
+        logger.info("[Mensaje] BlockchainRequest {}", this.aanBlockchain.lastEvent().orElse(null));
         peerConnection.sendMessage(new BlockchainRespond(this.aanBlockchain.lastEvent().map(Event::eventId).orElse(-1L)));
     }
 
     private void responder(BlockchainRespond message) {
-        logger.info("Respuesta blockchain {}", message);
-        this.nodeBlockchainIndex = message.blockchainIndex();
-        Long thisBlockchainIndex = aanBlockchain.lastEvent().map(event -> event.eventId()).orElse(-1L);
-        if (!Objects.equals(message.blockchainIndex(), thisBlockchainIndex)) {
-            this.nodeStatus.onNext(AANNetworkNodeStatusType.BALANCING);
-            if(thisBlockchainIndex > this.nodeBlockchainIndex) {
-                sendBlock();
-            }
-        } else {
-            this.nodeStatus.onNext(AANNetworkNodeStatusType.READY);
+        logger.info("Respondiendo BlockchainRespond {}", message);
+        if (!Objects.equals(this.nodeBlockchainIndex, message.blockchainIndex())) {
+            this.nodeBlockchainIndex = message.blockchainIndex();
+            this.nodeStatus.onNext(this.nodeStatus.getValue());
+
         }
+//        Long thisBlockchainIndex = aanBlockchain.lastEvent().map(event -> event.eventId()).orElse(-1L);
+//        if (!Objects.equals(message.blockchainIndex(), thisBlockchainIndex)) {
+//            this.nodeStatus.onNext(AANNetworkNodeStatusType.BALANCING);
+//            if(thisBlockchainIndex > this.nodeBlockchainIndex) {
+//                sendBlock();
+//            }
+//        } else {
+//            this.nodeStatus.onNext(AANNetworkNodeStatusType.READY);
+//        }
     }
 
     private void responder(RespondBlock message) {
         logger.info("Respuesta balancing block {}", message);
         try {
             this.aanBlockchain.persistEvent(message.event()).join();
-            sendBlockchain();
+//            sendBlockchain();
         } catch (Exception e) {
         }
 
+    }
+
+    public void closeNode() {
+        this.peerConnection.closeConnection();
     }
 
 }

@@ -11,7 +11,7 @@ import ong.aurora.commons.entity.EntityValue;
 import ong.aurora.commons.entity.MaterializedEntity;
 import ong.aurora.commons.event.Event;
 import ong.aurora.commons.model.AANModel;
-import ong.aurora.commons.peer.node.ANNNodeEntity;
+import ong.aurora.commons.peer.node.AANNodeEntity;
 import ong.aurora.commons.projector.AANProjector;
 import ong.aurora.commons.serialization.JsonSerdes;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -63,7 +63,7 @@ public class KSAProjector implements AANProjector {
     public CompletableFuture<Void> startProjector() throws Exception {
         logger.info("Cargando projector-ksa");
 
-        List<AANEntity> aanEntities = List.of(new ANNNodeEntity());
+        List<AANEntity> aanEntities = List.of(new AANNodeEntity());
 
         List<AANEntity> proyectorEntities = new ArrayList<>();
         proyectorEntities.addAll(aanEntities);

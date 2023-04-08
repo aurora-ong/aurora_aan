@@ -13,7 +13,7 @@ public record AANNodeValue(
         @JsonProperty("node_hostname") String nodeHostname,
         @JsonProperty("node_port") String nodePort,
         @JsonProperty("node_signature") String nodeSignature,
-        @JsonProperty("node_status") ANNNodeStatus nodeStatus
+        @JsonProperty("node_status") AANNodeStatus nodeStatus
 
 ) implements EntityValue<AANNodeValue> {
 

@@ -4,22 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ removed projector ksa module">
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/config/AANConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/config/AANConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/ANNNodeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/ANNNodeEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/ANNNodeValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/AANNodeValue.java" afterDir="false" />
+    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ update">
+      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/model/v_0_0_1/command/node/update_status/UpdateNodeStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/model/v_0_0_1/command/node/update_status/UpdateNodeStatusCommandData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/command/examples/node_update_status_command.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/ReconnectTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/AANBlockchain.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/blockchain/AANBlockchain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/AANNodeValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/AANNodeValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/ANNNodeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/AANNodeEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/ANNNodeStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/peer/node/AANNodeStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/ksa_projector/KSAProjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/ksa_projector/KSAProjector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/RDBProjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/RDBProjector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/store/ANNEventStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/store/ANNEventStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/model/v_0_0_1/AuroraOM.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/model/v_0_0_1/AuroraOM.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/model/v_0_0_1/command/node/add/AddNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/model/v_0_0_1/command/node/add/AddNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/AANProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetwork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkHost.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkHost.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkPeer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkPeer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkPeerStatusType.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkNodeStatusType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/PeerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/PeerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pBinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/Libp2pBinding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/Libp2pProtocol.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/Libp2pProtocol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetwork.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetworkPeer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetworkPeer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pProtocol.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/Libp2pProtocol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aurora_aan.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/resources/logback.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_info/node1/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node1/event_store.log" afterDir="false" />
     </list>
@@ -65,15 +72,15 @@
         <option value="Record" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="HTTP Request" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="aan_network" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -99,37 +106,42 @@
     <option name="showLibraryContents" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;Z:/AURORA/aurora/aurora_aan/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/examples&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;b246a30b1e40a8a38bb8321e752970d7&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "Z:/AURORA/aurora/aurora_aan/aan-core/src/main/java/ong/aurora/ann/command/examples",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "spring.configuration.checksum": "b246a30b1e40a8a38bb8321e752970d7"
   }
-}</component>
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="Z:\AURORA\aurora\aurora_aan\aan-core\src\main\java\ong\aurora\ann\command\examples" />
+      <recent name="Z:\AURORA\aurora\aurora_aan\aan-commons\src\main\java\ong\aurora\model\v_0_0_1\command\node\update_state" />
       <recent name="Z:\AURORA\aurora\aurora_aan\aan-commons\src\main\java\ong\aurora\commons\projector\rdb_projector\examples" />
       <recent name="Z:\AURORA\aurora\aurora_aan\node_info\node1" />
       <recent name="Z:\AURORA\aurora\aurora_aan\aan-core\src\main" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ong.aurora.ann.network" />
       <recent name="ong.aurora.ann.fsm" />
       <recent name="ong.aurora.ann.p2p.fsm" />
       <recent name="ong.aurora.ann.p2p" />
       <recent name="ong.aurora.ann.p2p.msg" />
-      <recent name="ong.aurora.ann" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -140,6 +152,9 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.ANNCore (H1)">
+    <configuration name="node_update_status_command | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/command/examples/node_update_status_command.http" requestIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="person | Obtener todos" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/aan-commons/src/main/java/ong/aurora/commons/projector/rdb_projector/examples/person.http" requestIdentifier="Obtener todos" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -154,12 +169,14 @@
       <item itemvalue="Application.ANNCore (H2)" />
       <item itemvalue="Application.ANNCore (H3)" />
       <item itemvalue="Application.ANNCore (H4)" />
+      <item itemvalue="HTTP Request.node_update_status_command | #1" />
       <item itemvalue="HTTP Request.person | Obtener todos" />
       <item itemvalue="HTTP Request.person | Obtener trace" />
       <item itemvalue="HTTP Request.person_create_command | #1" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.node_update_status_command | #1" />
         <item itemvalue="HTTP Request.person | Obtener todos" />
         <item itemvalue="HTTP Request.person_create_command | #1" />
         <item itemvalue="HTTP Request.person | Obtener trace" />
@@ -214,7 +231,13 @@
       <workItem from="1679316290919" duration="12000" />
       <workItem from="1679576517816" duration="4467000" />
       <workItem from="1679706111209" duration="311000" />
-      <workItem from="1679707942227" duration="12638000" />
+      <workItem from="1679707942227" duration="13861000" />
+      <workItem from="1679930822647" duration="26000" />
+      <workItem from="1680182013245" duration="2000" />
+      <workItem from="1680308682476" duration="8481000" />
+      <workItem from="1680786155872" duration="6000" />
+      <workItem from="1680886119488" duration="13423000" />
+      <workItem from="1680961347755" duration="3601000" />
     </task>
     <task id="LOCAL-00001" summary="++ gradle fix">
       <created>1670288482182</created>
@@ -279,7 +302,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679580341797</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="++ update">
+      <created>1679783408480</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679783408480</updated>
+    </task>
+    <task id="LOCAL-00011" summary="++ update">
+      <created>1680311939376</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1680311939376</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,6 +343,7 @@
     <MESSAGE value="++ update config" />
     <MESSAGE value="++ fsm spring initial" />
     <MESSAGE value="++ jueves 23/03/2023" />
-    <option name="LAST_COMMIT_MESSAGE" value="++ jueves 23/03/2023" />
+    <MESSAGE value="++ update" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ update" />
   </component>
 </project>

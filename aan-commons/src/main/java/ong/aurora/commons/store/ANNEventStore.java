@@ -11,4 +11,6 @@ public interface ANNEventStore {
     CompletableFuture<Void> saveEvent(String event) throws IOException, Exception;
 
     Stream<String> readEventStore();
+
+
 }

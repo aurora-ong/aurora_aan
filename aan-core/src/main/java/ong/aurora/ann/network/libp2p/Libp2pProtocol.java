@@ -31,7 +31,7 @@ public class Libp2pProtocol extends ProtocolHandler<libp2pNetworkPeer> {
     @NotNull
     @Override
     protected CompletableFuture<libp2pNetworkPeer> onStartInitiator(@NotNull Stream stream) {
-        log.info("onStartInitiator {}", stream.remotePeerId());
+//        log.info("onStartInitiator {}", stream.remotePeerId());
         CompletableFuture<libp2pNetworkPeer> ready = new CompletableFuture<>();
         libp2pNetworkPeer chatController = new libp2pNetworkPeer(ready, annSerializer);
         stream.pushHandler(chatController);
@@ -45,7 +45,7 @@ public class Libp2pProtocol extends ProtocolHandler<libp2pNetworkPeer> {
     @NotNull
     @Override
     protected CompletableFuture<libp2pNetworkPeer> onStartResponder(@NotNull Stream stream) {
-        log.info("onStartResponder {}", stream.remotePeerId());
+//        log.info("onStartResponder {}", stream.remotePeerId());
 
         CompletableFuture<libp2pNetworkPeer> ready = new CompletableFuture<>();
         libp2pNetworkPeer chatController = new libp2pNetworkPeer(ready, annSerializer);
@@ -60,7 +60,7 @@ public class Libp2pProtocol extends ProtocolHandler<libp2pNetworkPeer> {
     @NotNull
     @Override
     public CompletableFuture<libp2pNetworkPeer> initChannel(@NotNull P2PChannel ch) {
-        log.info("initChannel");
+//        log.info("initChannel");
         return super.initChannel(ch);
     }
 

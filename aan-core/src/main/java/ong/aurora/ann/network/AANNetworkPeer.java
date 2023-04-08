@@ -13,4 +13,5 @@ public interface AANNetworkPeer {
 
     Observable<Void> onPeerDisconected();
 
+    void closeConnection();
 }

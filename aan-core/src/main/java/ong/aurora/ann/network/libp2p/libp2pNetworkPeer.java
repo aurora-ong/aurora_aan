@@ -101,4 +101,9 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
     public Observable<Void> onPeerDisconected() {
         return onPeerDisconnected.asObservable();
     }
+
+    @Override
+    public void closeConnection() {
+        this.stream.close();
+    }
 }
