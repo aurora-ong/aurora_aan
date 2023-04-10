@@ -43,7 +43,7 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
 
     @Override
     public void onActivated(@NotNull Stream stream) {
-        log.info("Nueva conexión establecida con {} {}", stream.remotePeerId(), stream.getConnection().remoteAddress());
+//        log.info("Nueva conexión entrante {} {}", stream.remotePeerId(), stream.getConnection().remoteAddress());
         this.stream = stream;
         connectionStatus.onNext(AANNetworkNodeStatusType.CONNECTED);
         this.ready.complete(this);

@@ -1,0 +1,13 @@
+POST http://localhost:6001/command/new
+Content-Type: application/json
+
+{
+  "command_name": "ann_node.add",
+  "command_data": {
+    "node_id": "node5",
+    "node_name": "Nodo 1",
+    "node_hostname": "localhost",
+    "node_port": "4004",
+    "node_signature": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA20oTrRcwSuLULtd8T4Eu7Jyi3mdnKr2D8N9cw1XhqZGwZ41TU2Io9thITvoXG1TdNnNwyFWBKRcMVgsnul0XaZOWDfzlL6IXiEA2bZEO5EKFzrcjb33s361RV5TrGUrpgOfqAszX3RujJw7hnEiaqW3y1to9ah3M6R5ZdHqTaT86skeVkDAt9pSNY/KQzLSZK0AZ3bgQV/Z1IJjzKR99agzrq8OpsvywJW2I6Vz+r6I+kyLUQ16NIX+veU6NJCRbU+RsmmME4eiUzYGssFPJVdIONa07C7oQJGtgVLw6mXrXaL8qT707+/z0WXRomPHoLa+SfQmZJEwHRjtCB7RzpwIDAQAB"
+  }
+}

@@ -67,9 +67,8 @@ public class AANBlockchain {
 //    }
 
     public Optional<Event> lastEvent() {
-        return Optional.of(this.lastEventStream.getValue());
+        return Optional.ofNullable(this.lastEventStream.getValue());
     }
-
 
 
     public CompletableFuture<Void> persistEvent(Event event) throws Exception {

@@ -1,7 +1,8 @@
 package ong.aurora.ann.network;
 
-import ong.aurora.ann.network.message.BlockchainRequest;
-import ong.aurora.ann.network.message.BlockchainRespond;
+import kotlin.Pair;
+import ong.aurora.ann.network.message.BlockchainReport;
+import ong.aurora.ann.network.message.RequestBlock;
 import ong.aurora.ann.network.message.RespondBlock;
 import ong.aurora.commons.blockchain.AANBlockchain;
 import ong.aurora.commons.event.Event;
@@ -9,11 +10,14 @@ import ong.aurora.commons.peer.node.AANNodeValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rx.Observable;
+import rx.Subscription;
 import rx.subjects.BehaviorSubject;
+import rx.subjects.PublishSubject;
 
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 public class AANNetworkNode {
 
@@ -50,83 +54,128 @@ public class AANNetworkNode {
     }
 
     public void attachConnection(AANNetworkPeer peerConnection) {
-        logger.info("Conexión establecida con {} ({}:{})", this.aanNodeValue.nodeId(), this.aanNodeValue.nodeHostname(), this.aanNodeValue.nodePort());
-//        if (peerConnection != null) {
+        logger.info("Nueva conexión desde {} ({}:{})", this.aanNodeValue.nodeId(), this.aanNodeValue.nodeHostname(), this.aanNodeValue.nodePort());
+
+        //        if (peerConnection != null) {
 //            throw new Exception("Ya se había asignado conexión");
 //        }
 
-        this.peerConnection = peerConnection;
-        this.peerConnection.onPeerDisconected().subscribe(unused -> {
-            this.nodeStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
-        });
-        this.peerConnection.onPeerMessage().subscribe(o -> {
-            logger.info("[{}] Procesando mensaje {}", this.aanNodeValue.nodeId(), o.getClass());
-            if (o instanceof BlockchainRequest message) {
-                responder(message);
+        if (this.peerConnection != null) {
+            try {
+                throw new Exception("Nodo ya se encuentra con una conexión abierta");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-            if (o instanceof BlockchainRespond message) {
-                responder(message);
+        }
+        this.peerConnection = peerConnection;
+        startPeerSubscribers();
+        this.nodeStatus.onNext(AANNetworkNodeStatusType.CONNECTED);
+        logger.info("Conexión establecida con {} ({}:{})", this.aanNodeValue.nodeId(), this.aanNodeValue.nodeHostname(), this.aanNodeValue.nodePort());
+
+    }
+
+
+    Subscription onPeerDisconnectedSubscription;
+    Subscription onPeerMessageSubscription;
+
+    private void startPeerSubscribers() {
+        logger.info("Comenzando subscripción peerConnection");
+        onPeerDisconnectedSubscription = this.peerConnection.onPeerDisconected().subscribe(unused -> {
+
+            this.nodeBlockchainIndex = null;
+            this.peerConnection = null;
+            clearPeerSubscription();
+            this.nodeStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
+
+        });
+        onPeerMessageSubscription = this.peerConnection.onPeerMessage().subscribe(o -> {
+            logger.info("[{}] Procesando mensaje {}", this.aanNodeValue.nodeId(), o.toString());
+            if (o instanceof RequestBlock message) {
+//                onRequestBlock(message);
+                this.onRequestBlockPS.onNext(message.blockchainIndex());
+            }
+            if (o instanceof BlockchainReport message) {
+                onBlockchainReport(message);
             }
 
             if (o instanceof RespondBlock message) {
-                responder(message);
+                this.onRespondBlockPS.onNext(message.event());
             }
         });
-        this.nodeStatus.onNext(AANNetworkNodeStatusType.CONNECTED);
-//        sendBlockchain();
+    }
+
+    private void clearPeerSubscription() {
+        onPeerMessageSubscription.unsubscribe();
+        onPeerDisconnectedSubscription.unsubscribe();
     }
 
     public Observable<AANNetworkNode> onStatusChange() {
         return this.nodeStatus.asObservable().map(aanNetworkNodeStatusType -> this);
     }
 
-    private CompletableFuture<Void> confirmBlockchain() {
-        CompletableFuture<Void> cf = new CompletableFuture<>();
-        peerConnection.sendMessage(new BlockchainRequest());
+//    private CompletableFuture<Void> confirmBlockchain() {
+//        CompletableFuture<Void> cf = new CompletableFuture<>();
+//        peerConnection.sendMessage(new BlockchainRequest());
+//
+//        return cf;
+//    }
 
-        return cf;
-    }
-
-    private void blockchainRequest() {
-        logger.info("Enviando BlockchainRequest");
-        peerConnection.sendMessage(new BlockchainRequest());
-    }
+//    private void blockchainRequest() {
+//        logger.info("Enviando BlockchainRequest");
+//        peerConnection.sendMessage(new BlockchainRequest());
+//    }
 
 
-    public void sendBlockchain(Optional<Event> event) {
+    public void sendBlockchainReport(Optional<Event> event) {
         logger.info("Informando blockchain {}", event.orElse(null));
-        peerConnection.sendMessage(new BlockchainRespond(event.map(Event::eventId).orElse(-1L)));
-    }
-
-    private void requestBlock() {
-        peerConnection.sendMessage(new BlockchainRequest());
-
+        peerConnection.sendMessage(new BlockchainReport(event.map(Event::eventId).orElse(-1L)));
     }
 
 
+    private PublishSubject<Long> onRequestBlockPS = PublishSubject.create();
 
-    private void sendBlock() {
-        try {
-            Event eventt = aanBlockchain.eventStream().filter(event -> event.eventId() == (this.nodeBlockchainIndex +1) ).findFirst().orElseThrow(() -> new Exception("Event not found"));
-            peerConnection.sendMessage(new RespondBlock(eventt));
+    public Observable<Pair<AANNetworkNode, Long>> onRequestBlock() {
+        return onRequestBlockPS.map(aLong -> new Pair<>(this, aLong));
+    }
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
+
+    PublishSubject<Event> onRespondBlockPS = PublishSubject.create();
+
+    public CompletableFuture<Event> sendRequestBlock(Long blockId) {
+
+        CompletableFuture<Event> cc = new CompletableFuture<>();
+
+        peerConnection.sendMessage(new RequestBlock(blockId));
+        onRespondBlockPS.takeFirst(event -> event.eventId() == blockId).subscribe((e) -> {
+            logger.info("LLegó {}", e);
+            cc.complete(e);
+        });
+
+//        onRespondBlockPS.filter(event -> event.eventId() == blockId).single().subscribe(a -> {
+//            logger.info("LLegó 2 {}", a);
+//
+//        });
+
+        return cc;
+    }
+
+
+    public void sendRespondBlock(Event e) {
+        peerConnection.sendMessage(new RespondBlock(e));
 
     }
 
-    private void responder(BlockchainRequest message) {
-        logger.info("[Mensaje] BlockchainRequest {}", this.aanBlockchain.lastEvent().orElse(null));
-        peerConnection.sendMessage(new BlockchainRespond(this.aanBlockchain.lastEvent().map(Event::eventId).orElse(-1L)));
-    }
+//    private void responder(BlockchainRequest message) {
+//        logger.info("[Mensaje] BlockchainRequest {}", this.aanBlockchain.lastEvent().orElse(null));
+//        peerConnection.sendMessage(new BlockchainReport(this.aanBlockchain.lastEvent().map(Event::eventId).orElse(-1L)));
+//    }
 
-    private void responder(BlockchainRespond message) {
-        logger.info("Respondiendo BlockchainRespond {}", message);
+    private void onBlockchainReport(BlockchainReport message) {
+        logger.info("onBlockchainReport {}", message);
         if (!Objects.equals(this.nodeBlockchainIndex, message.blockchainIndex())) {
             this.nodeBlockchainIndex = message.blockchainIndex();
             this.nodeStatus.onNext(this.nodeStatus.getValue());
-
         }
 //        Long thisBlockchainIndex = aanBlockchain.lastEvent().map(event -> event.eventId()).orElse(-1L);
 //        if (!Objects.equals(message.blockchainIndex(), thisBlockchainIndex)) {
@@ -139,15 +188,34 @@ public class AANNetworkNode {
 //        }
     }
 
-    private void responder(RespondBlock message) {
-        logger.info("Respuesta balancing block {}", message);
-        try {
-            this.aanBlockchain.persistEvent(message.event()).join();
-//            sendBlockchain();
-        } catch (Exception e) {
-        }
+    private void onRequestBlock(RequestBlock message) {
+        logger.info("onRequestBlock {}", message);
 
+//        if (!Objects.equals(this.nodeBlockchainIndex, message.blockchainIndex())) {
+//            this.nodeBlockchainIndex = message.blockchainIndex();
+//            this.nodeStatus.onNext(this.nodeStatus.getValue());
+//
+//        }
+//        Long thisBlockchainIndex = aanBlockchain.lastEvent().map(event -> event.eventId()).orElse(-1L);
+//        if (!Objects.equals(message.blockchainIndex(), thisBlockchainIndex)) {
+//            this.nodeStatus.onNext(AANNetworkNodeStatusType.BALANCING);
+//            if(thisBlockchainIndex > this.nodeBlockchainIndex) {
+//                sendBlock();
+//            }
+//        } else {
+//            this.nodeStatus.onNext(AANNetworkNodeStatusType.READY);
+//        }
     }
+
+//    private void responder(RespondBlock message) {
+//        logger.info("Respuesta balancing block {}", message);
+//        try {
+//            this.aanBlockchain.persistEvent(message.event()).join();
+////            sendBlockchain();
+//        } catch (Exception e) {
+//        }
+//
+//    }
 
     public void closeNode() {
         this.peerConnection.closeConnection();

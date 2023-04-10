@@ -132,34 +132,27 @@ public class ANNCore {
 //        });
 
         aanBlockchain.lastEventStream.subscribe(event -> {
-//            if (event == null) {
-//                // QUIZAS ENVIAR VACIO
-//                return;
-//            }
-            log.info("has Value ?? {}", projectorNodes.hasValue());
             if (Objects.equals(Optional.ofNullable(event).map(Event::eventName).orElse(""), "aan_node") || !projectorNodes.hasValue()) {
-                log.info("Nodos actualizados (blockchain)");
                 List<MaterializedEntity<AANNodeValue>> allNodeList = null;
                 try {
                     allNodeList = aanProjector.queryAll(new AANNodeEntity());
                 } catch (CommandProjectorQueryException e) {
                     throw new RuntimeException(e);
                 }
-                log.info("Nodos obtenidos {}", allNodeList);
+                log.info("Nodos actualizados desde proyector", allNodeList);
                 projectorNodes.onNext(allNodeList.stream().map(MaterializedEntity::getEntityValue).toList());
             }
         });
 
         projectorNodes.asObservable().subscribe(annNodeValues -> {
 
-            log.info("\n======= projectorNodes actualizados =======");
+            log.info("======= projectorNodes actualizados =======");
             annNodeValues.forEach(annNodeValue -> log.info(annNodeValue.toString()));
-            log.info("\n==============");
+            log.info("==============");
 
             // CERRAR CONEXIÓN
             if (networkNodes.hasValue()) {
-                networkNodes.getValue().forEach(o -> {
-                });
+                networkNodes.getValue().forEach(AANNetworkNode::closeNode);
             }
 
 
@@ -173,7 +166,7 @@ public class ANNCore {
 
         aanNetwork.onNetworkConnection().subscribe(incomingPeer -> {
 
-            log.info("Nueva conexión {} ", incomingPeer.toString());
+            log.info("Nueva conexión entrante {} ", incomingPeer.getPeerIdentity());
 
             if (networkNodes.getValue().isEmpty()) {
                 // CREAR NETWORK PEER Y PUSHEAR
@@ -197,12 +190,12 @@ public class ANNCore {
 
         networkNodes.asObservable().subscribe(annNodeValues -> {
 
-            log.info("\n======= networkNodes actualizados =======");
+            log.info("======= networkNodes actualizados =======");
             annNodeValues.forEach(annNodeValue -> {
                 log.info(annNodeValue.toString());
 //                aanNetwork.establishConnection(annNodeValue);
             });
-            log.info("\n==============");
+            log.info("==============");
 
 //            aanNetwork.startHost();
 
@@ -223,7 +216,7 @@ public class ANNCore {
 //            log.info("==============");
 //        });
 
-//        new AANNetworkHost(networkNodes, aanNetwork, aanBlockchain);
+        new AANNetworkHost(networkNodes, aanNetwork, aanBlockchain);
 
     }
 }
