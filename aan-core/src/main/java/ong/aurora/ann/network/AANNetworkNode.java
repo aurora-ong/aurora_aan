@@ -17,7 +17,6 @@ import rx.subjects.PublishSubject;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 
 public class AANNetworkNode {
 
@@ -31,14 +30,14 @@ public class AANNetworkNode {
         return nodeStatus.getValue();
     }
 
-    Long nodeBlockchainIndex;
+    Long latestBlockchainIndex;
 
     @Override
     public String toString() {
         return "AANNetworkNode{" +
                 "aanNodeValue=" + aanNodeValue.nodeId() +
                 ", nodeStatus=" + nodeStatus.getValue() +
-                ", blockchainIndex=" + nodeBlockchainIndex +
+                ", blockchainIndex=" + latestBlockchainIndex +
                 ", peerConnection=" + peerConnection +
                 '}';
     }
@@ -79,10 +78,13 @@ public class AANNetworkNode {
     Subscription onPeerMessageSubscription;
 
     private void startPeerSubscribers() {
-        logger.info("Comenzando subscripción peerConnection");
+        logger.info("[{}] Comenzando subscripción peerConnection", aanNodeValue.nodeId());
+        this.nodeStatus.subscribe(nodeStatus -> {
+           logger.info("[{}] nodeStatus actualizado", this);
+        });
         onPeerDisconnectedSubscription = this.peerConnection.onPeerDisconected().subscribe(unused -> {
 
-            this.nodeBlockchainIndex = null;
+            this.latestBlockchainIndex = null;
             this.peerConnection = null;
             clearPeerSubscription();
             this.nodeStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
@@ -147,10 +149,7 @@ public class AANNetworkNode {
         CompletableFuture<Event> cc = new CompletableFuture<>();
 
         peerConnection.sendMessage(new RequestBlock(blockId));
-        onRespondBlockPS.takeFirst(event -> event.eventId() == blockId).subscribe((e) -> {
-            logger.info("LLegó {}", e);
-            cc.complete(e);
-        });
+        onRespondBlockPS.takeFirst(event -> Objects.equals(event.eventId(), blockId)).subscribe(cc::complete);
 
 //        onRespondBlockPS.filter(event -> event.eventId() == blockId).single().subscribe(a -> {
 //            logger.info("LLegó 2 {}", a);
@@ -172,9 +171,10 @@ public class AANNetworkNode {
 //    }
 
     private void onBlockchainReport(BlockchainReport message) {
-        logger.info("onBlockchainReport {}", message);
-        if (!Objects.equals(this.nodeBlockchainIndex, message.blockchainIndex())) {
-            this.nodeBlockchainIndex = message.blockchainIndex();
+        logger.info("onBlockchainReport {} {}", message, this.latestBlockchainIndex);
+        if (!Objects.equals(message.blockchainIndex(), this.latestBlockchainIndex)) {
+            logger.info("onBlockchainReport activado");
+            this.latestBlockchainIndex = message.blockchainIndex();
             this.nodeStatus.onNext(this.nodeStatus.getValue());
         }
 //        Long thisBlockchainIndex = aanBlockchain.lastEvent().map(event -> event.eventId()).orElse(-1L);
