@@ -70,7 +70,7 @@ public class AANNetworkHost {
             }
             return Observable.combineLatest(aanNetworkNodes.stream().map(AANNetworkNode::onStatusChange).toList(), args1 -> (List<AANNetworkNode>) (List<?>) Arrays.stream(args1).toList());
 
-        }).subscribeOn(rx.schedulers.Schedulers.io()).share();
+        }).share();
 
     }
 

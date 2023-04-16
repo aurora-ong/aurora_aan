@@ -218,6 +218,7 @@ public class AANNetworkNode {
 //    }
 
     public void closeNode() {
+        logger.info("[{}] Finalizando conexión {}", this.aanNodeValue.nodeId(), this);
         this.peerConnection.closeConnection();
     }
 

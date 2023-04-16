@@ -65,7 +65,7 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
 
     @Override
     public void onClosed(@NotNull Stream stream) {
-        log.info("onClosed");
+        log.info("Conexión cerrada {}", this.stream.getConnection().secureSession().getRemoteId());
         connectionStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
         this.onPeerDisconnected.onNext(null);
     }
