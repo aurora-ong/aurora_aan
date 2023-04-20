@@ -22,11 +22,16 @@ import ong.aurora.commons.store.file.FileEventStore;
 import ong.aurora.model.v_0_0_1.AuroraOM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rx.Scheduler;
+import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class ANNCore {
 
@@ -131,7 +136,29 @@ public class ANNCore {
 //            log.info("Nodo {}", annNodeValueMaterializedEntity.getEntityValue());
 //        });
 
-        aanBlockchain.lastEventStream.subscribe(event -> {
+        Scheduler scheduler = Schedulers.newThread();
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        Scheduler schedulerExecutor = Schedulers.from(executorService);
+
+        schedulerExecutor.when(observableObservable -> {
+
+            log.info("observableObservable");
+            log.info(observableObservable.toString());
+            return observableObservable.toCompletable();
+
+        });
+
+        // PROJECTOR NODES UPDATE
+        aanBlockchain.lastEventStream
+//                .filter(event -> ) // TODO
+                .doOnEach(notification -> log.info("!! Last Event Stream"))
+                .observeOn(schedulerExecutor)
+//                .toBlocking()
+                .debounce(1, TimeUnit.SECONDS)
+
+                .subscribe(event -> {
             if (Objects.equals(Optional.ofNullable(event).map(Event::eventName).orElse(""), "aan_node") || !projectorNodes.hasValue()) {
                 List<MaterializedEntity<AANNodeValue>> allNodeList = null;
                 try {
@@ -141,10 +168,22 @@ public class ANNCore {
                 }
                 log.info("Nodos actualizados desde proyector", allNodeList);
                 projectorNodes.onNext(allNodeList.stream().map(MaterializedEntity::getEntityValue).toList());
+                // SLEEP
+                try {
+                    log.info("Sleep");
+                    Thread.sleep(100);
+                    log.info("Sleep DONE");
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
-        projectorNodes.asObservable().subscribe(annNodeValues -> {
+        projectorNodes.asObservable()
+                .doOnEach(notification -> log.info("!! Projector nodes"))
+
+                .observeOn(schedulerExecutor)
+                .subscribe(annNodeValues -> {
 
             log.info("======= projectorNodes actualizados =======");
             annNodeValues.forEach(annNodeValue -> log.info(annNodeValue.toString()));
@@ -152,7 +191,7 @@ public class ANNCore {
 
             // CERRAR CONEXIÓN
             if (networkNodes.hasValue()) {
-                networkNodes.getValue().forEach(AANNetworkNode::closeNode);
+                networkNodes.getValue().stream().filter(node -> node.currentStatus() != AANNetworkNodeStatusType.DISCONNECTED).forEach(AANNetworkNode::closeNode);
             }
 
 
@@ -161,10 +200,22 @@ public class ANNCore {
 //            networkNodes1.forEach(aanNetwork::establishConnection);
 
             networkNodes.onNext(networkNodes1);
+
+                    // SLEEP
+                    try {
+                        log.info("Sleep");
+                        Thread.sleep(100);
+                        log.info("Sleep DONE");
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
         });
 
 
-        aanNetwork.onNetworkConnection().subscribe(incomingPeer -> {
+
+        aanNetwork.onNetworkConnection()
+                .observeOn(Schedulers.newThread())
+                .subscribe(incomingPeer -> {
 
             log.info("Nueva conexión entrante {} ", incomingPeer.getPeerIdentity());
 
@@ -188,7 +239,10 @@ public class ANNCore {
         });
 
 
-        networkNodes.asObservable().subscribe(annNodeValues -> {
+        networkNodes.asObservable()
+                .doOnEach(notification -> log.info("!! Network nodes"))
+                .observeOn(schedulerExecutor)
+                .subscribe(annNodeValues -> {
 
             log.info("======= networkNodes actualizados =======");
             annNodeValues.forEach(annNodeValue -> {
@@ -201,22 +255,7 @@ public class ANNCore {
 
         });
 
-//        networkNodes.asObservable().flatMap(aanNetworkNodes -> {
-//            return Observable.combineLatest(aanNetworkNodes.stream().map(AANNetworkNode::onStatusChange).toList(), args1 -> {
-//                List<AANNetworkNode> peerStatusList = (List<AANNetworkNode>) (List<?>) Arrays.stream(args1).toList();
-//                return peerStatusList;
-//            });
-//        }, (aanNetworkNodes, o) -> {
-//
-//            return aanNetworkNodes;
-//
-//        }).subscribe(o -> {
-//            log.info("\n======= Red actualizada =======");
-//            o.forEach(aanNetworkNode -> log.info(aanNetworkNode.toString()));
-//            log.info("==============");
-//        });
-
-        new AANNetworkHost(networkNodes, aanNetwork, aanBlockchain);
+        new AANNetworkHost(networkNodes, aanNetwork, aanBlockchain, schedulerExecutor);
 
     }
 }

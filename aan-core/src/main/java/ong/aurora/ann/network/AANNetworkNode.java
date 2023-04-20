@@ -26,7 +26,7 @@ public class AANNetworkNode {
 
     private BehaviorSubject<AANNetworkNodeStatusType> nodeStatus = BehaviorSubject.create(AANNetworkNodeStatusType.DISCONNECTED);
 
-    AANNetworkNodeStatusType currentStatus() {
+    public AANNetworkNodeStatusType currentStatus() {
         return nodeStatus.getValue();
     }
 
@@ -128,9 +128,9 @@ public class AANNetworkNode {
 //    }
 
 
-    public void sendBlockchainReport(Optional<Event> event) {
-        logger.info("Informando blockchain {}", event.orElse(null));
-        peerConnection.sendMessage(new BlockchainReport(event.map(Event::eventId).orElse(-1L)));
+    public void sendBlockchainReport(Long eventId) {
+        logger.info("Informando blockchain {}", eventId);
+        peerConnection.sendMessage(new BlockchainReport(eventId));
     }
 
 

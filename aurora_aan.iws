@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ update">
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/command/examples/node_update_status_command.http" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/command/examples/node_update_status_command.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkHost.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkHost.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_info/node2/event_store.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_info/node3/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node3/event_store.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_info/node2/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node2/event_store.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,6 +229,9 @@
       <workItem from="1681486436835" duration="48000" />
       <workItem from="1681486605693" duration="11000" />
       <workItem from="1681580259630" duration="5000" />
+      <workItem from="1681663168261" duration="8685000" />
+      <workItem from="1681951636142" duration="77000" />
+      <workItem from="1681951768886" duration="5763000" />
     </task>
     <task id="LOCAL-00001" summary="++ gradle fix">
       <created>1670288482182</created>
@@ -306,7 +310,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680311939376</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="++ update">
+      <created>1681612781595</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1681612781595</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,5 +346,55 @@
     <MESSAGE value="++ jueves 23/03/2023" />
     <MESSAGE value="++ update" />
     <option name="LAST_COMMIT_MESSAGE" value="++ update" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java</url>
+          <line>172</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java</url>
+          <line>187</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java</url>
+          <line>182</line>
+          <properties>
+            <option name="lambda-ordinal" value="0" />
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java</url>
+          <line>155</line>
+          <properties>
+            <option name="lambda-ordinal" value="0" />
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java</url>
+          <line>205</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java</url>
+          <line>242</line>
+          <properties>
+            <option name="lambda-ordinal" value="0" />
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java</url>
+          <line>246</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

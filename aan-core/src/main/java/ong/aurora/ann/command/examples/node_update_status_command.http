@@ -1,11 +1,11 @@
-POST http://localhost:6000/command/new
+POST http://localhost:6001/command/new
 Content-Type: application/json
 
 {
   "command_name": "ann_node.update.status",
   "command_data": {
-    "node_id": "node3",
-    "node_status": "ACTIVE"
+    "node_id": "node5",
+    "node_status": "INACTIVE"
 
   }
 }
