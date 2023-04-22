@@ -60,6 +60,9 @@ public class AANNetworkNode {
 //        }
 
         if (this.peerConnection != null) {
+//            this.peerConnection.closeConnection(); // TODO AVERIGUAR PORQUE OCURRE
+//            this.peerConnection = peerConnection;
+            logger.error("[{}] Nodo ya se encuentra con una conexión abierta",  this.aanNodeValue.nodeId());
             try {
                 throw new Exception("Nodo ya se encuentra con una conexión abierta");
             } catch (Exception e) {
@@ -79,9 +82,6 @@ public class AANNetworkNode {
 
     private void startPeerSubscribers() {
         logger.info("[{}] Comenzando subscripción peerConnection", aanNodeValue.nodeId());
-        this.nodeStatus.subscribe(nodeStatus -> {
-           logger.info("[{}] nodeStatus actualizado", this);
-        });
         onPeerDisconnectedSubscription = this.peerConnection.onPeerDisconected().subscribe(unused -> {
 
             this.latestBlockchainIndex = null;
@@ -129,8 +129,13 @@ public class AANNetworkNode {
 
 
     public void sendBlockchainReport(Long eventId) {
-        logger.info("Informando blockchain {}", eventId);
-        peerConnection.sendMessage(new BlockchainReport(eventId));
+//        logger.info("Informando blockchain {}", eventId);
+        if (nodeStatus.getValue() != AANNetworkNodeStatusType.DISCONNECTED) {
+            peerConnection.sendMessage(new BlockchainReport(eventId));
+
+        } else {
+            logger.info("Intentando enviar mensaje a nodo desconectado");
+        }
     }
 
 
@@ -165,27 +170,11 @@ public class AANNetworkNode {
 
     }
 
-//    private void responder(BlockchainRequest message) {
-//        logger.info("[Mensaje] BlockchainRequest {}", this.aanBlockchain.lastEvent().orElse(null));
-//        peerConnection.sendMessage(new BlockchainReport(this.aanBlockchain.lastEvent().map(Event::eventId).orElse(-1L)));
-//    }
-
     private void onBlockchainReport(BlockchainReport message) {
-        logger.info("onBlockchainReport {} {}", message, this.latestBlockchainIndex);
         if (!Objects.equals(message.blockchainIndex(), this.latestBlockchainIndex)) {
-            logger.info("onBlockchainReport activado");
             this.latestBlockchainIndex = message.blockchainIndex();
             this.nodeStatus.onNext(this.nodeStatus.getValue());
         }
-//        Long thisBlockchainIndex = aanBlockchain.lastEvent().map(event -> event.eventId()).orElse(-1L);
-//        if (!Objects.equals(message.blockchainIndex(), thisBlockchainIndex)) {
-//            this.nodeStatus.onNext(AANNetworkNodeStatusType.BALANCING);
-//            if(thisBlockchainIndex > this.nodeBlockchainIndex) {
-//                sendBlock();
-//            }
-//        } else {
-//            this.nodeStatus.onNext(AANNetworkNodeStatusType.READY);
-//        }
     }
 
     private void onRequestBlock(RequestBlock message) {

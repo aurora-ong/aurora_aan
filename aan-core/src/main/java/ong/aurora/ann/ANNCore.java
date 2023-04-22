@@ -113,11 +113,14 @@ public class ANNCore {
 ////        }
 ////
 //
-        // INICIAR REST COMMAND
+        // COMMAND POOL REST SERVICE
+
         CommandPool commandPool = new CommandPool();
 
         CommandRestService commandRestService = new CommandRestService(HostAndPort.fromParts("127.0.0.1", aanConfig.commandPort), aanProcessor, commandPool);
         commandRestService.start();
+
+        // AAN NETWORK
 
         AANNetwork aanNetwork = new libp2pNetwork(aanConfig, aanSerializer, aanBlockchain);
         aanNetwork.startHost().join();
@@ -125,59 +128,77 @@ public class ANNCore {
         BehaviorSubject<List<AANNetworkNode>> networkNodes = BehaviorSubject.create();
         BehaviorSubject<List<AANNodeValue>> projectorNodes = BehaviorSubject.create();
 
-//        // OBTENER NODOS ACTIVOS (INICIAL)
-//
-//        List<MaterializedEntity<AANNodeValue>> allNodeList = aanProjector.queryAll(new ANNNodeEntity());
-//        log.info("Nodos obtenidos {}", allNodeList);
-//
-//        projectorNodes.onNext(allNodeList.stream().map(MaterializedEntity::getEntityValue).toList());
-
-//        allNodeList.forEach(annNodeValueMaterializedEntity -> {
-//            log.info("Nodo {}", annNodeValueMaterializedEntity.getEntityValue());
-//        });
-
-        Scheduler scheduler = Schedulers.newThread();
-
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
         Scheduler schedulerExecutor = Schedulers.from(executorService);
 
-        schedulerExecutor.when(observableObservable -> {
-
-            log.info("observableObservable");
-            log.info(observableObservable.toString());
-            return observableObservable.toCompletable();
-
-        });
-
         // PROJECTOR NODES UPDATE
         aanBlockchain.lastEventStream
-//                .filter(event -> ) // TODO
-                .doOnEach(notification -> log.info("!! Last Event Stream"))
                 .observeOn(schedulerExecutor)
-//                .toBlocking()
-                .debounce(1, TimeUnit.SECONDS)
-
+                .filter(event -> Objects.equals(Optional.ofNullable(event).map(Event::eventName).orElse(""), "aan_node"))
+                .throttleLast(1, TimeUnit.SECONDS, schedulerExecutor)
+                .doOnSubscribe(() -> {
+                    try {
+                        List<MaterializedEntity<AANNodeValue>> allNodeList = aanProjector.queryAll(new AANNodeEntity());
+                        projectorNodes.onNext(allNodeList.stream().map(MaterializedEntity::getEntityValue).toList());
+                    } catch (CommandProjectorQueryException e) {
+                        // TODO FATAL
+                        throw new RuntimeException(e);
+                    }
+                })
                 .subscribe(event -> {
-            if (Objects.equals(Optional.ofNullable(event).map(Event::eventName).orElse(""), "aan_node") || !projectorNodes.hasValue()) {
-                List<MaterializedEntity<AANNodeValue>> allNodeList = null;
-                try {
-                    allNodeList = aanProjector.queryAll(new AANNodeEntity());
-                } catch (CommandProjectorQueryException e) {
-                    throw new RuntimeException(e);
-                }
-                log.info("Nodos actualizados desde proyector", allNodeList);
-                projectorNodes.onNext(allNodeList.stream().map(MaterializedEntity::getEntityValue).toList());
-                // SLEEP
-                try {
-                    log.info("Sleep");
-                    Thread.sleep(100);
-                    log.info("Sleep DONE");
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+                    try {
+                        List<MaterializedEntity<AANNodeValue>> allNodeList = aanProjector.queryAll(new AANNodeEntity());
+                        log.info("Nodos actualizados desde proyector {}", allNodeList);
+                        projectorNodes.onNext(allNodeList.stream().map(MaterializedEntity::getEntityValue).toList());
+                    } catch (CommandProjectorQueryException e) {
+                        throw new RuntimeException(e);
+                    }
+
+
+                });
+
+        // PROJECTOR NODES UPDATE
+//        aanBlockchain.lastEventStream
+////                .filter(event -> ) // TODO
+////                .doOnEach(notification -> log.info("!! Last Event Stream"))
+//                .observeOn(schedulerExecutor)
+////                .toBlocking()
+////                .debounce(1, TimeUnit.SECONDS)
+////                .throttleLast(1, TimeUnit.SECONDS, schedulerExecutor)
+//                .filter(event -> Objects.equals(Optional.ofNullable(event).map(Event::eventName).orElse(""), "aan_node"))
+//                .map(event -> {
+//                    List<MaterializedEntity<AANNodeValue>> allNodeList = List.of();
+//                    try {
+//                        allNodeList = aanProjector.queryAll(new AANNodeEntity());
+//
+//                    } catch (CommandProjectorQueryException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    return allNodeList.stream().map(MaterializedEntity::getEntityValue).toList();
+//                })
+//                .
+//                .doOnNext(projectorNodes -> {
+//
+//
+//                    // CERRAR CONEXIÓN
+//                    if (networkNodes.hasValue()) {
+//                        networkNodes.getValue().stream().filter(node -> node.currentStatus() != AANNetworkNodeStatusType.DISCONNECTED).forEach(AANNetworkNode::closeNode);
+//                    }
+//                })
+////                .doOnEach(notification -> log.info("!! Last Event Stream 2"), schedulerExecutor)
+//
+//                .doOnSubscribe(() -> {
+//                    log.info("++ doOnSubscribe");
+//
+//                })
+//                .subscribe(event -> {
+//                    log.info("++ Last Event Stream 3");
+//                    // CERRAR CONEXIÓN
+//                    if (networkNodes.hasValue()) {
+//                        networkNodes.getValue().stream().filter(node -> node.currentStatus() != AANNetworkNodeStatusType.DISCONNECTED).forEach(AANNetworkNode::closeNode);
+//                    }
+//                });
 
         projectorNodes.asObservable()
                 .doOnEach(notification -> log.info("!! Projector nodes"))
@@ -185,58 +206,47 @@ public class ANNCore {
                 .observeOn(schedulerExecutor)
                 .subscribe(annNodeValues -> {
 
-            log.info("======= projectorNodes actualizados =======");
-            annNodeValues.forEach(annNodeValue -> log.info(annNodeValue.toString()));
-            log.info("==============");
+                    log.info("======= projectorNodes actualizados =======");
+                    annNodeValues.forEach(annNodeValue -> log.info(annNodeValue.toString()));
+                    log.info("==============");
 
-            // CERRAR CONEXIÓN
-            if (networkNodes.hasValue()) {
-                networkNodes.getValue().stream().filter(node -> node.currentStatus() != AANNetworkNodeStatusType.DISCONNECTED).forEach(AANNetworkNode::closeNode);
-            }
-
-
-            // CREAR NETWORK PEERS
-            List<AANNetworkNode> networkNodes1 = annNodeValues.stream().filter(aanNodeValue -> aanNodeValue.nodeStatus() == AANNodeStatus.ACTIVE).filter(aanNodeValue -> !aanNodeValue.nodeId().equals(aanConfig.nodeId)).map(nodeValue -> new AANNetworkNode(nodeValue, null, aanBlockchain)).toList();
-//            networkNodes1.forEach(aanNetwork::establishConnection);
-
-            networkNodes.onNext(networkNodes1);
-
-                    // SLEEP
-                    try {
-                        log.info("Sleep");
-                        Thread.sleep(100);
-                        log.info("Sleep DONE");
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                    // CERRAR CONEXIÓN
+                    if (networkNodes.hasValue()) {
+                        networkNodes.getValue().stream().filter(node -> node.currentStatus() != AANNetworkNodeStatusType.DISCONNECTED).forEach(AANNetworkNode::closeNode);
                     }
-        });
 
+
+                    // CREAR NUEVOS NETWORK PEERS
+                    List<AANNetworkNode> networkNodes1 = annNodeValues.stream().filter(aanNodeValue -> aanNodeValue.nodeStatus() == AANNodeStatus.ACTIVE).filter(aanNodeValue -> !aanNodeValue.nodeId().equals(aanConfig.nodeId)).map(nodeValue -> new AANNetworkNode(nodeValue, null, aanBlockchain)).toList();
+                    networkNodes.onNext(networkNodes1);
+
+                });
 
 
         aanNetwork.onNetworkConnection()
                 .observeOn(Schedulers.newThread())
                 .subscribe(incomingPeer -> {
 
-            log.info("Nueva conexión entrante {} ", incomingPeer.getPeerIdentity());
+                    log.info("Nueva conexión entrante {} ", incomingPeer.getPeerIdentity());
 
-            if (networkNodes.getValue().isEmpty()) {
-                // CREAR NETWORK PEER Y PUSHEAR
-                AANNetworkNode networkNode = new AANNetworkNode(new AANNodeValue("unknown", "Desconocido", "", "", "", AANNodeStatus.ACTIVE), incomingPeer, aanBlockchain);
-                networkNode.attachConnection(incomingPeer);
-                networkNodes.onNext(List.of(networkNode));
-            } else {
-                Optional<AANNetworkNode> networkNodeOptional = networkNodes.getValue().stream().filter(aanNetworkNode -> aanNetworkNode.aanNodeValue.nodeSignature().equals(incomingPeer.getPeerIdentity())).findAny();
+                    if (networkNodes.getValue().isEmpty()) {
+                        // CREAR NETWORK PEER Y PUSHEAR
+                        AANNetworkNode networkNode = new AANNetworkNode(new AANNodeValue("unknown", "Desconocido", "", "", "", AANNodeStatus.ACTIVE), incomingPeer, aanBlockchain);
+                        networkNode.attachConnection(incomingPeer);
+                        networkNodes.onNext(List.of(networkNode));
+                    } else {
+                        Optional<AANNetworkNode> networkNodeOptional = networkNodes.getValue().stream().filter(aanNetworkNode -> aanNetworkNode.aanNodeValue.nodeSignature().equals(incomingPeer.getPeerIdentity())).findAny();
 
-                if (networkNodeOptional.isPresent()) {
-                    AANNetworkNode networkNode = networkNodeOptional.get();
-                    networkNode.attachConnection(incomingPeer);
-                } else {
-                    log.info("No se pudo encontrar ningún networkNode para {}, cerrando conexión", incomingPeer.getPeerIdentity());
-                    incomingPeer.closeConnection();
-                }
-            }
+                        if (networkNodeOptional.isPresent()) {
+                            AANNetworkNode networkNode = networkNodeOptional.get();
+                            networkNode.attachConnection(incomingPeer);
+                        } else {
+                            log.info("No se pudo encontrar ningún networkNode para {}, cerrando conexión", incomingPeer.getPeerIdentity());
+                            incomingPeer.closeConnection();
+                        }
+                    }
 
-        });
+                });
 
 
         networkNodes.asObservable()
@@ -244,16 +254,16 @@ public class ANNCore {
                 .observeOn(schedulerExecutor)
                 .subscribe(annNodeValues -> {
 
-            log.info("======= networkNodes actualizados =======");
-            annNodeValues.forEach(annNodeValue -> {
-                log.info(annNodeValue.toString());
+                    log.info("======= networkNodes actualizados =======");
+                    annNodeValues.forEach(annNodeValue -> {
+                        log.info(annNodeValue.toString());
 //                aanNetwork.establishConnection(annNodeValue);
-            });
-            log.info("==============");
+                    });
+                    log.info("==============");
 
 //            aanNetwork.startHost();
 
-        });
+                });
 
         new AANNetworkHost(networkNodes, aanNetwork, aanBlockchain, schedulerExecutor);
 

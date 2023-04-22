@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import rx.Observable;
 import rx.Scheduler;
 import rx.Subscription;
+import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
 
 import java.util.Arrays;
@@ -32,43 +33,39 @@ public class AANNetworkHost {
 
     Subscription x, z;
 
+    Scheduler schedulerExecutor2 = Schedulers.from(Executors.newSingleThreadExecutor());
+
     public AANNetworkHost(BehaviorSubject<List<AANNetworkNode>> networkNodes, AANNetwork aanNetwork, AANBlockchain aanBlockchain, Scheduler schedulerExecutor) {
         this.networkNodes = networkNodes;
         this.aanNetwork = aanNetwork;
         this.aanBlockchain = aanBlockchain;
+//
+//        ExecutorService executorService = Executors.newSingleThreadExecutor();
+//
+//        schedulerExecutor2 = Schedulers.from(executorService);
 
-        // CONNECTION LISTENER
+
+        // RECONNECTION LISTENER
         networkStatusListener()
                 .observeOn(rx.schedulers.Schedulers.newThread())
                 .subscribe(this::connectionListener);
-
-//        networkStatusListener()
-//
-//                .observeOn(rx.schedulers.Schedulers.newThread())
-//                .subscribe(this::connectionListener);
 
         // BLOCKCHAIN UPDATER
         x = Observable.combineLatest(networkStatusListener(), aanBlockchain.lastEventStream, Pair::new)
                 .observeOn(rx.schedulers.Schedulers.io())
                 .subscribe(this::blockchainUpdate);
-//
-//        Scheduler scheduler = Schedulers.boundedElastic();
-//        Scheduler.Worker worker = scheduler.createWorker();
-
 
         // BALANCEADOR DE BLOQUES
         z = Observable.combineLatest(networkStatusListener(), aanBlockchain.lastEventStream, Pair::new)
                 .observeOn(schedulerExecutor)
-
                 .subscribe(this::doBlockchainBalance);
-////
+
+        //
         this.networkBlockchainRequestListener()
                 .observeOn(rx.schedulers.Schedulers.io())
                 .subscribe(this::onBlockchainUpdateRequest);
 
         // NETWORK LISTENER
-
-
         networkStatusListener()
                 .observeOn(rx.schedulers.Schedulers.io())
                 .subscribe(this::connectionPrinter);
@@ -76,14 +73,20 @@ public class AANNetworkHost {
     }
 
     Observable<List<AANNetworkNode>> networkStatusListener() {
+        return networkNodes.asObservable()
+                .switchMap(aanNetworkNodes -> {
+                    if (aanNetworkNodes.isEmpty()) {
+                        return Observable.never();
+                    }
+                    return Observable.combineLatest(aanNetworkNodes.stream().map(AANNetworkNode::onStatusChange).toList(), args1 -> (List<AANNetworkNode>) (List<?>) Arrays.stream(args1).toList());
 
-        return networkNodes.asObservable().switchMap(aanNetworkNodes -> {
-            if (aanNetworkNodes.isEmpty()) {
-                return Observable.never();
-            }
-            return Observable.combineLatest(aanNetworkNodes.stream().map(AANNetworkNode::onStatusChange).toList(), args1 -> (List<AANNetworkNode>) (List<?>) Arrays.stream(args1).toList());
+                })
 
-        }).share();
+                .doOnNext(aanNetworkNodes -> logger.info("++ networkStatus updated"))
+                .observeOn(schedulerExecutor2)
+                .throttleLast(1, TimeUnit.SECONDS, schedulerExecutor2)
+                .doOnNext(aanNetworkNodes -> logger.info("++ networkStatus updated throttled"))
+                .share();
 
     }
 
@@ -92,7 +95,6 @@ public class AANNetworkHost {
     }
 
     private void doBlockchainBalance(Pair<List<AANNetworkNode>, Event> pair) {
-        logger.info("[blockchainBalance] Ejecutando");
 
         List<AANNetworkNode> aanNetworkNodes = pair.component1();
 
@@ -110,14 +112,15 @@ public class AANNetworkHost {
         if (n.isPresent()) {
             logger.info("[blockchainBalance] Solicitando evento {} a {}", currentEventIndex + 1, n.get().aanNodeValue.nodeId());
 //                Event a = n.get().sendRequestBlock(currentEventIndex + 1).orTimeout(5, TimeUnit.SECONDS).join();
-            Event a = n.get().sendRequestBlock(currentEventIndex + 1).orTimeout(5, TimeUnit.SECONDS).join();
             try {
-                logger.info("Sleep blockchainBalance");
+//                Event a = n.get().sendRequestBlock(currentEventIndex + 1).orTimeout(5, TimeUnit.SECONDS).join();
+                Event a = n.get().sendRequestBlock(currentEventIndex + 1).join();
 
-                Thread.sleep(1000);
+//                logger.info("Sleep blockchainBalance");
+//                Thread.sleep(1000);
                 aanBlockchain.persistEvent(a).join();
-                Thread.sleep(1000);
-                logger.info(" -- Sleep blockchainBalance");
+//                Thread.sleep(1000);
+//                logger.info(" -- Sleep blockchainBalance");
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -172,10 +175,8 @@ public class AANNetworkHost {
     private void blockchainUpdate(Pair<List<AANNetworkNode>, Event> pair) {
         logger.info("[blockchainUpdate] Ejecutando");
         List<AANNetworkNode> networkNodeList = pair.component1();
-//        Event currentEvent = pair.component2();
 
-        Long eventId = Optional.ofNullable(pair.component2()).map(event -> event.eventId()).orElse(-1L);
-
+        Long eventId = Optional.ofNullable(pair.component2()).map(Event::eventId).orElse(-1L);
 
         List<AANNetworkNode> notificableNodes = networkNodeList.stream().filter(aanNetworkNode -> aanNetworkNode.currentStatus() != AANNetworkNodeStatusType.DISCONNECTED).toList();
 
