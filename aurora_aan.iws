@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ update">
+    <list default="true" id="501911d6-086a-49b4-9876-938aebb52bfb" name="Changes" comment="++ blokchain updater stable">
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/ANNCore.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkHost.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkHost.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkPeer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/AANNetworkPeer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetworkPeer.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/libp2p/libp2pNetworkPeer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aurora_aan.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/message/BlockchainReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/message/BlockchainUpdaterBlockResponseMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/message/RequestBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/message/BlockchainBalancerBlockRequestMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/message/RespondBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/aan-core/src/main/java/ong/aurora/ann/network/message/BlockchainBalancerBlockResponseMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aurora_aan.iws" beforeDir="false" afterPath="$PROJECT_DIR$/aurora_aan.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_info/node2/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node2/event_store.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_info/node3/event_store.log" beforeDir="false" afterPath="$PROJECT_DIR$/node_info/node3/event_store.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +239,9 @@
       <workItem from="1681951768886" duration="5763000" />
       <workItem from="1682000521313" duration="3056000" />
       <workItem from="1682011001538" duration="23000" />
-      <workItem from="1682117978536" duration="12088000" />
+      <workItem from="1682117978536" duration="13325000" />
+      <workItem from="1682601450090" duration="8140000" />
+      <workItem from="1682694382048" duration="11105000" />
     </task>
     <task id="LOCAL-00001" summary="++ gradle fix">
       <created>1670288482182</created>
@@ -320,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681612781595</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="++ jueves 20/04/2023">
+      <created>1682187966926</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1682187966926</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,6 +362,8 @@
     <MESSAGE value="++ fsm spring initial" />
     <MESSAGE value="++ jueves 23/03/2023" />
     <MESSAGE value="++ update" />
-    <option name="LAST_COMMIT_MESSAGE" value="++ update" />
+    <MESSAGE value="++ jueves 20/04/2023" />
+    <MESSAGE value="++ blokchain updater stable" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ blokchain updater stable" />
   </component>
 </project>

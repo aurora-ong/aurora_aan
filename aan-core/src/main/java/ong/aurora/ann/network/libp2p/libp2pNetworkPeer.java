@@ -5,14 +5,12 @@ import io.libp2p.protocol.ProtocolMessageHandler;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import ong.aurora.ann.network.AANNetworkPeer;
-import ong.aurora.ann.network.AANNetworkNodeStatusType;
 import ong.aurora.commons.serialization.AANSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rx.Observable;
-import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;
 
 import java.nio.charset.StandardCharsets;
@@ -29,12 +27,7 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
 
     AANSerializer aanSerializer;
 
-    public BehaviorSubject<AANNetworkNodeStatusType> connectionStatus = BehaviorSubject.create(AANNetworkNodeStatusType.DISCONNECTED);
-
-    public PublishSubject<Object> onPeerMessage = PublishSubject.create();
-
-    PublishSubject<Void> onPeerDisconnected = PublishSubject.create();
-
+    PublishSubject<Object> onPeerMessage = PublishSubject.create();
 
     public libp2pNetworkPeer(CompletableFuture<libp2pNetworkPeer> ready, AANSerializer aanSerializer) {
         this.ready = ready;
@@ -45,7 +38,6 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
     public void onActivated(@NotNull Stream stream) {
 //        log.info("Nueva conexión entrante {} {}", stream.remotePeerId(), stream.getConnection().remoteAddress());
         this.stream = stream;
-        connectionStatus.onNext(AANNetworkNodeStatusType.CONNECTED);
         this.ready.complete(this);
     }
 
@@ -65,15 +57,14 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
 
     @Override
     public void onClosed(@NotNull Stream stream) {
-        log.info("Conexión cerrada {}", this.stream.getConnection().secureSession().getRemoteId());
-        connectionStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
-        this.onPeerDisconnected.onNext(null);
+        log.info("Conexión cerrada {}", this.getPeerIdentity());
+        this.onPeerMessage.onCompleted();
     }
 
     @Override
     public void onException(@Nullable Throwable cause) {
         log.info("onException", cause);
-        connectionStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
+        this.onPeerMessage.onCompleted();
     }
 
 
@@ -95,11 +86,6 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
     @Override
     public Observable<Object> onPeerMessage() {
         return onPeerMessage.asObservable();
-    }
-
-    @Override
-    public Observable<Void> onPeerDisconected() {
-        return onPeerDisconnected.asObservable();
     }
 
     @Override
