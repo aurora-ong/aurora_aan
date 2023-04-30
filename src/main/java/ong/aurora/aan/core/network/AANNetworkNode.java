@@ -55,12 +55,12 @@ public class AANNetworkNode {
         logger.info("Nueva conexión desde {} ({}:{})", this.aanNodeValue.nodeId(), this.aanNodeValue.nodeHostname(), this.aanNodeValue.nodePort());
 
         if (this.peerConnection != null) {
+
             logger.error("[{}] Nodo ya se encuentra con una conexión abierta", this.aanNodeValue.nodeId());
-            try {
-                throw new Exception("Nodo ya se encuentra con una conexión abierta");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            throw new RuntimeException("Nodo ya se encuentra con una conexión abierta");
+
+//            peerConnection.closeConnection();
+//            return;
         }
         this.peerConnection = peerConnection;
         this.nodeStatus.onNext(AANNetworkNodeStatusType.CONNECTED);

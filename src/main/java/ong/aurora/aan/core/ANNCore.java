@@ -158,7 +158,7 @@ public class ANNCore {
 
 
         aanNetwork.onNetworkConnection()
-                .observeOn(Schedulers.io())
+                .observeOn(nodeUpdateScheduler)
                 .subscribe(incomingPeer -> {
 
                     log.info("Nueva conexión entrante {} ", incomingPeer.getPeerIdentity());
