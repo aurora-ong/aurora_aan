@@ -57,10 +57,10 @@ public class AANNetworkNode {
         if (this.peerConnection != null) {
 
             logger.error("[{}] Nodo ya se encuentra con una conexión abierta", this.aanNodeValue.nodeId());
-            throw new RuntimeException("Nodo ya se encuentra con una conexión abierta");
+//            throw new RuntimeException("Nodo ya se encuentra con una conexión abierta");
 
-//            peerConnection.closeConnection();
-//            return;
+            peerConnection.closeConnection();
+            return;
         }
         this.peerConnection = peerConnection;
         this.nodeStatus.onNext(AANNetworkNodeStatusType.CONNECTED);
@@ -115,10 +115,11 @@ public class AANNetworkNode {
         this.peerConnection.sendMessage(new BlockchainBalancerBlockRequestMessage(blockId));
         onBlockchainBalancerBlockResponse
                 .takeFirst(event -> Objects.equals(event.eventId(), blockId))
-                .timeout(15, TimeUnit.SECONDS)
-                .doOnError(throwable -> {
-                    logger.info("sendRequestBlock Error detectado {} ", throwable.getCause());
-                })
+//                .timeout(15, TimeUnit.SECONDS)
+//                .onE
+//                .doOnError(throwable -> {
+//                    logger.info("sendRequestBlock Error detectado {} ", throwable.getCause());
+//                })
                 .subscribe(cc::complete);
         return cc;
     }
