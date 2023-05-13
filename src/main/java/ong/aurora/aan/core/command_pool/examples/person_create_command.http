@@ -1,4 +1,4 @@
-POST http://localhost:6001/command/new
+POST http://localhost:6000/command/new
 Content-Type: application/json
 
 {

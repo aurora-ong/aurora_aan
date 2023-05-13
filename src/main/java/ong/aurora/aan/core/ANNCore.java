@@ -93,13 +93,6 @@ public class ANNCore {
             }
         });
 
-        // COMMAND POOL REST SERVICE
-
-        CommandPool commandPool = new CommandPool();
-
-        CommandRestService commandRestService = new CommandRestService(HostAndPort.fromParts("127.0.0.1", aanConfig.commandPort), aanProcessor, commandPool);
-        commandRestService.start();
-
         // AAN NETWORK
 
         AANNetwork aanNetwork = new libp2pNetwork(aanConfig, aanSerializer, aanBlockchain);
@@ -192,7 +185,13 @@ public class ANNCore {
                     log.info("==============");
                 });
 
-        new AANNetworkHost(networkNodes, aanNetwork, aanBlockchain, nodeUpdateScheduler);
+        AANNetworkHost aanHost = new AANNetworkHost(networkNodes, aanNetwork, aanBlockchain, nodeUpdateScheduler, aanProcessor);
+
+        // COMMAND POOL REST SERVICE
+
+        CommandRestService commandRestService = new CommandRestService(HostAndPort.fromParts("127.0.0.1", aanConfig.commandPort), aanHost);
+        commandRestService.start();
+
 
     }
 }

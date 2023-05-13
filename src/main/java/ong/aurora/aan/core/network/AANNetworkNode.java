@@ -2,9 +2,11 @@ package ong.aurora.aan.core.network;
 
 import kotlin.Pair;
 import ong.aurora.aan.blockchain.AANBlockchain;
+import ong.aurora.aan.command.Command;
 import ong.aurora.aan.core.network.message.BlockchainBalancerBlockRequestMessage;
 import ong.aurora.aan.core.network.message.BlockchainBalancerBlockResponseMessage;
 import ong.aurora.aan.core.network.message.BlockchainUpdaterBlockResponseMessage;
+import ong.aurora.aan.core.network.message.SendCommandMessage;
 import ong.aurora.aan.event.Event;
 import ong.aurora.aan.node.AANNodeValue;
 import org.slf4j.Logger;
@@ -16,7 +18,6 @@ import rx.subjects.PublishSubject;
 
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 
 public class AANNetworkNode {
 
@@ -55,24 +56,12 @@ public class AANNetworkNode {
         logger.info("Nueva conexión desde {} ({}:{})", this.aanNodeValue.nodeId(), this.aanNodeValue.nodeHostname(), this.aanNodeValue.nodePort());
 
         if (this.peerConnection != null) {
-
             logger.error("[{}] Nodo ya se encuentra con una conexión abierta", this.aanNodeValue.nodeId());
-//            throw new RuntimeException("Nodo ya se encuentra con una conexión abierta");
-
-            peerConnection.closeConnection();
-            return;
+            this.terminateNodeConnection();
         }
         this.peerConnection = peerConnection;
         this.nodeStatus.onNext(AANNetworkNodeStatusType.CONNECTED);
-        onPeerMessageSubscription = this.peerConnection.onPeerMessage().doOnCompleted(() -> {
-            logger.info("[{}] Finalizando conexión {}", this.aanNodeValue.nodeId(), this.peerConnection.getPeerIdentity());
-            this.currentBlockchainIndex = null;
-            this.nodeStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
-            this.peerConnection = null;
-            if (onPeerMessageSubscription != null) {
-                onPeerMessageSubscription.unsubscribe();
-            }
-        }).subscribe(o -> {
+        onPeerMessageSubscription = this.peerConnection.onPeerMessage().doOnCompleted(this::terminateNodeConnection).subscribe(o -> {
             logger.info("[{}] Procesando mensaje {}", this.aanNodeValue.nodeId(), o.toString());
 
             if (o instanceof BlockchainUpdaterBlockResponseMessage message) {
@@ -85,6 +74,11 @@ public class AANNetworkNode {
 
             if (o instanceof BlockchainBalancerBlockResponseMessage message) {
                 this.onBlockchainBalancerBlockResponse.onNext(message.event());
+            }
+
+
+            if (o instanceof SendCommandMessage message) {
+                this.onCommandRequest.onNext(message.command());
             }
         });
         logger.info("Conexión establecida con {} ({}:{})", this.aanNodeValue.nodeId(), this.aanNodeValue.nodeHostname(), this.aanNodeValue.nodePort());
@@ -103,9 +97,14 @@ public class AANNetworkNode {
     }
 
     private final PublishSubject<Long> onBlockchainBalancerBlockRequest = PublishSubject.create();
+    private final PublishSubject<Command> onCommandRequest = PublishSubject.create();
 
     public Observable<Pair<AANNetworkNode, Long>> onBlockchainBalancerBlockRequestStream() {
         return onBlockchainBalancerBlockRequest.map(aLong -> new Pair<>(this, aLong));
+    }
+
+    public Observable<Pair<AANNetworkNode, Command>> onCommandRequestStream() {
+        return onCommandRequest.map(command -> new Pair<>(this, command));
     }
 
     PublishSubject<Event> onBlockchainBalancerBlockResponse = PublishSubject.create();
@@ -125,9 +124,8 @@ public class AANNetworkNode {
     }
 
 
-    public void sendRespondBlock(Event e) {
+    public void sendBlockchainBalancerRespondBlock(Event e) {
         this.peerConnection.sendMessage(new BlockchainBalancerBlockResponseMessage(e));
-
     }
 
     private void onBlockchainUpdaterBlockResponse(BlockchainUpdaterBlockResponseMessage message) {
@@ -139,15 +137,22 @@ public class AANNetworkNode {
 
     public void terminateNodeConnection() {
         logger.info("[{}] Finalizando conexión {}", this.aanNodeValue.nodeId(), this);
+        this.currentBlockchainIndex = null;
+        this.nodeStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
         this.peerConnection.closeConnection();
+        if (onPeerMessageSubscription != null) {
+            onPeerMessageSubscription.unsubscribe();
+        }
     }
 
-//    private void sendPeerMessage(Object m) {
-//        if (nodeStatus.getValue() != AANNetworkNodeStatusType.DISCONNECTED && this.peerConnection != null) {
-//            peerConnection.sendMessage(m);
-//        } else {
-//            logger.info("[{}] Intentando enviar mensaje a nodo desconectado {}", this.aanNodeValue.nodeId(), m.getClass());
-//        }
-//    }
+    public void sendCommand(Command c) {
+        this.peerConnection.sendMessage(new SendCommandMessage(c));
+    }
+
+
+
+    public void sendPeerMessage(AANNetworkMessage m) {
+        peerConnection.sendMessage(m);
+    }
 
 }

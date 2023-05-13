@@ -1,4 +1,6 @@
 package ong.aurora.aan.core.network.message;
 
-public record BlockchainUpdaterBlockResponseMessage(Long blockchainIndex) {
+import ong.aurora.aan.core.network.AANNetworkMessage;
+
+public record BlockchainUpdaterBlockResponseMessage(Long blockchainIndex) implements AANNetworkMessage {
 }

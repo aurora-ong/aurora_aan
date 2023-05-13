@@ -1,6 +1,8 @@
 package ong.aurora.aan.core.command_pool;
 
 import ong.aurora.aan.command.Command;
+import rx.Observable;
+import rx.subjects.BehaviorSubject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +10,19 @@ import java.util.List;
 public class CommandPool {
 
 
-    List<CommandIntent> commandIntentList = new ArrayList<>();
+    BehaviorSubject<List<CommandIntent>> commandIntentList = BehaviorSubject.create(new ArrayList<>());
+
+
 
     public void addCommand(Command command) {
 
-        commandIntentList.add(new CommandIntent(command, CommandStatus.PENDING));
+        commandIntentList.getValue().add(new CommandIntent(command));
+        commandIntentList.onNext(commandIntentList.getValue());
 
+    }
+
+    public Observable<List<CommandIntent>> pollCommands() {
+        return this.commandIntentList;
     }
 
 

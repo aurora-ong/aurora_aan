@@ -6,7 +6,7 @@ public interface AANNetworkPeer {
 
     String getPeerIdentity();
 
-    void sendMessage(Object object);
+    void sendMessage(AANNetworkMessage message);
 
     Observable<Object> onPeerMessage();
 

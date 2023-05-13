@@ -4,6 +4,7 @@ import io.libp2p.core.Stream;
 import io.libp2p.protocol.ProtocolMessageHandler;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import ong.aurora.aan.core.network.AANNetworkMessage;
 import ong.aurora.aan.core.network.AANNetworkPeer;
 import ong.aurora.aan.serialization.AANSerializer;
 import org.jetbrains.annotations.NotNull;
@@ -74,7 +75,7 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
     }
 
     @Override
-    public void sendMessage(Object message) {
+    public void sendMessage(AANNetworkMessage message) {
 //        log.info("Enviar mensaje a {} {}", this.stream.remotePeerId(), message);
         String messages = aanSerializer.toJSON(message);
         libp2pMessage p2PMessage = new libp2pMessage(message.getClass(), messages);
