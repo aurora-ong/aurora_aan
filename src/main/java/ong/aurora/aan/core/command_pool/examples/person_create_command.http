@@ -4,8 +4,8 @@ Content-Type: application/json
 {
   "command_name": "person.create",
   "command_data": {
-    "person_id": "adccb525-ce2a-42d2-8830-4f1e2ec879c6",
-    "person_name": "AAAAA",
+    "person_id": "adccb525-ce2a-42d2-8830-4f1e2ec879c5",
+    "person_name": "Test 1A",
     "person_lastname": "BBBBBB",
     "person_mail": "mafuentes@gmail.com"
   }

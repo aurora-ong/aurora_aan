@@ -3,10 +3,8 @@ package ong.aurora.aan.core.network;
 import kotlin.Pair;
 import ong.aurora.aan.blockchain.AANBlockchain;
 import ong.aurora.aan.command.Command;
-import ong.aurora.aan.command.CommandData;
 import ong.aurora.aan.core.AANProcessor;
 import ong.aurora.aan.core.command_pool.CommandIntent;
-import ong.aurora.aan.core.command_pool.CommandPool;
 import ong.aurora.aan.core.command_pool.CommandStatus;
 import ong.aurora.aan.core.command_pool.CreateCommandData;
 import ong.aurora.aan.core.network.message.SendCommandMessage;
@@ -37,6 +35,8 @@ public class AANNetworkHost {
     AANProcessor aanProcessor;
 
     Scheduler networkStatusScheduler = Schedulers.from(Executors.newSingleThreadExecutor());
+
+    BehaviorSubject<Boolean> networkLocked = BehaviorSubject.create(false);
 
     public AANNetworkHost(BehaviorSubject<List<AANNetworkNode>> networkNodes, AANNetwork aanNetwork, AANBlockchain aanBlockchain, Scheduler schedulerExecutor, AANProcessor aanProcessor) {
         this.networkNodes = networkNodes;
@@ -93,13 +93,13 @@ public class AANNetworkHost {
         this.networkCommandListener()
                 .observeOn(rx.schedulers.Schedulers.io())
                 .subscribe(aanNetworkNodeCommandPair -> {
-                    if (!commandList.getValue().stream().anyMatch(commandIntent -> commandIntent.getCommandId().equals(aanNetworkNodeCommandPair.component2().commandId()))) {
+                    if (commandList.getValue().stream().noneMatch(commandIntent -> commandIntent.getCommandId().equals(aanNetworkNodeCommandPair.component2().commandId()))) {
                         logger.info("[{}] Nuevo comando recibido {}", aanNetworkNodeCommandPair.component1().aanNodeValue.nodeId(), aanNetworkNodeCommandPair.component2());
                         List<CommandIntent> commandIntentList = commandList.getValue();
                         commandIntentList.add(new CommandIntent(aanNetworkNodeCommandPair.component2()));
                         commandList.onNext(commandIntentList);
                         // GOSSIP MODEL
-                        this.broadcast(new SendCommandMessage(aanNetworkNodeCommandPair.component2()));
+                        this.networkBroadcast(new SendCommandMessage(aanNetworkNodeCommandPair.component2()));
                     } else {
                         logger.info("Comando ya recibido, ignorando");
                     }
@@ -110,7 +110,7 @@ public class AANNetworkHost {
         // COMMAND LISTENER
         this.commandList
                 .subscribe(commandList -> {
-                    logger.info("======= Comandos actualizados =======");
+                    logger.info("======= Comandos actualizados ({}) =======", commandList.size());
                     commandList.forEach(commandIntent -> logger.info(commandIntent.toString()));
                     logger.info("=======");
                 });
@@ -132,7 +132,7 @@ public class AANNetworkHost {
                             this.commandList.onNext(this.commandList.getValue());
 
                         } catch (Exception exception) {
-                            logger.info("Comando procesado {}", commandIntent);
+                            logger.error("Error al procesar comando {}", commandIntent);
                         }
                     });
 
@@ -158,12 +158,20 @@ public class AANNetworkHost {
 
     }
 
-    Observable<List<AANNetworkNode>> networkReadyListener() {
+    Observable<Boolean> networkReadyListener() {
         return networkStatusListener()
-                .filter(aanNetworkNodes -> aanNetworkNodes.stream().allMatch(node -> node.currentStatus() == AANNetworkNodeStatusType.CONNECTED));
-        // TODO COMBINAR CON BLOCKCHAIN
-        // TODO COMPROBAR QUE TIENEN EL MISMO INDEX
+                .withLatestFrom(this.aanBlockchain.lastEventStream, Pair::new)
+                .map(pair -> {
+                    List<AANNetworkNode> aanNetworkNodes = pair.getFirst();
+                    long currentEventIndex = Optional.ofNullable(pair.component2()).map(Event::eventId).orElse(-1L);
 
+                    if (!aanNetworkNodes.stream().allMatch(aanNetworkNode -> aanNetworkNode.currentStatus() == AANNetworkNodeStatusType.CONNECTED)) {
+                        return false;
+                    }
+
+                    return aanNetworkNodes.stream().allMatch(aanNetworkNode -> aanNetworkNode.nodeBlockchainIndex.compareTo(currentEventIndex) == 0);
+
+                });
     }
 
     Observable<Pair<AANNetworkNode, Long>> networkBlockchainRequestListener() {
@@ -176,16 +184,30 @@ public class AANNetworkHost {
 
     private void blockchainBalancer(Pair<List<AANNetworkNode>, Event> pair) {
 
-        List<AANNetworkNode> aanNetworkNodes = pair.component1();
-
-        if (aanNetworkNodes.stream().allMatch(aanNetworkNode -> aanNetworkNode.currentStatus() == AANNetworkNodeStatusType.DISCONNECTED)) {
-            logger.info("[blockchainBalance] No hay nodos disponibles");
+        if (this.networkLocked.getValue()) {
+            logger.info("[blockchainBalance] Red lista. Ignorando");
             return;
         }
 
+        List<AANNetworkNode> aanNetworkNodes = pair.component1();
+
         long currentEventIndex = Optional.ofNullable(pair.component2()).map(Event::eventId).orElse(-1L);
 
-        Optional<AANNetworkNode> nodeOptional = aanNetworkNodes.stream().filter(aanNetworkNode -> aanNetworkNode.currentStatus() == AANNetworkNodeStatusType.CONNECTED).filter(aanNetworkNode -> aanNetworkNode.currentBlockchainIndex != null).filter(aanNetworkNode -> aanNetworkNode.currentBlockchainIndex > currentEventIndex).findFirst();
+        // TODO QUIZÁS CENTRALIZAR
+        boolean allNodesConnected = aanNetworkNodes.stream().allMatch(aanNetworkNode -> aanNetworkNode.currentStatus() == AANNetworkNodeStatusType.CONNECTED);
+
+
+        // TODO SOLUCIONAR CASO INDEX == -1
+        boolean allNodesIndex = aanNetworkNodes.stream().allMatch(aanNetworkNode -> aanNetworkNode.nodeBlockchainIndex.compareTo(currentEventIndex) == 0);
+
+        if (allNodesConnected && allNodesIndex) {
+            logger.info("[blockchainBalance] Blockchain balanceada. Red lista");
+            this.networkLocked.onNext(true);
+            return;
+        }
+
+        // ENCONTRAR UN NODO QUE PUEDA PROPORCIONARNOS EL SIGUIENTE BLOQUE
+        Optional<AANNetworkNode> nodeOptional = aanNetworkNodes.stream().filter(aanNetworkNode -> aanNetworkNode.currentStatus() == AANNetworkNodeStatusType.CONNECTED).filter(aanNetworkNode -> aanNetworkNode.nodeBlockchainIndex != null).filter(aanNetworkNode -> aanNetworkNode.nodeBlockchainIndex > currentEventIndex).findFirst();
 
         if (nodeOptional.isPresent()) {
             logger.info("[blockchainBalance] Solicitando evento {} a {}", currentEventIndex + 1, nodeOptional.get().aanNodeValue.nodeId());
@@ -194,10 +216,10 @@ public class AANNetworkHost {
                 aanBlockchain.persistEvent(a).join();
 
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                logger.error("Error al balancear bloque {} desde nodo {}", currentEventIndex + 1, nodeOptional.get().aanNodeValue.nodeId());
             }
         } else {
-            logger.info("[blockchainBalance] Blockchain balanceada");
+            logger.info("[blockchainBalance] Blockchain balanceada parcialmente");
         }
     }
 
@@ -213,7 +235,7 @@ public class AANNetworkHost {
             logger.info("[networkConnection] Reconexión activada");
 
             return Observable
-                    .interval(1, 15, TimeUnit.SECONDS)
+                    .interval(5, 15, TimeUnit.SECONDS)
                     .doOnNext(aLong -> {
                         logger.info("[networkConnection] Intentando reconectar ({} intento)", aLong + 1);
                         this.networkNodes.getValue().stream().filter(aanNetworkNode -> aanNetworkNode.currentStatus() == AANNetworkNodeStatusType.DISCONNECTED).forEach(aanNetwork::establishConnection);
@@ -275,13 +297,14 @@ public class AANNetworkHost {
         Command command = new Command(UUID.randomUUID().toString(), Instant.now(), commandData.commandName(), commandData.commandData());
 
 
-        this.networkNodes.getValue().stream().forEach(aanNetworkNode -> aanNetworkNode.sendCommand(command));
+//        this.networkNodes.getValue().stream().forEach(aanNetworkNode -> aanNetworkNode.sendCommand(command));
 
+        networkBroadcast(new SendCommandMessage(command));
 
         return commandId;
     }
 
-    void broadcast(AANNetworkMessage message) {
+    private void networkBroadcast(AANNetworkMessage message) {
         this.networkNodes.getValue().stream().filter(aanNetworkNode -> aanNetworkNode.currentStatus() == AANNetworkNodeStatusType.CONNECTED).forEach(aanNetworkNode -> aanNetworkNode.sendPeerMessage(message));
     }
 

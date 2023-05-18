@@ -31,14 +31,14 @@ public class AANNetworkNode {
         return nodeStatus.getValue();
     }
 
-    Long currentBlockchainIndex;
+    Long nodeBlockchainIndex = -1L;
 
     @Override
     public String toString() {
         return "AANNetworkNode{" +
                 "aanNodeValue=" + aanNodeValue.nodeId() +
                 ", nodeStatus=" + nodeStatus.getValue() +
-                ", blockchainIndex=" + currentBlockchainIndex +
+                ", blockchainIndex=" + nodeBlockchainIndex +
                 '}';
     }
 
@@ -129,15 +129,15 @@ public class AANNetworkNode {
     }
 
     private void onBlockchainUpdaterBlockResponse(BlockchainUpdaterBlockResponseMessage message) {
-        if (!Objects.equals(message.blockchainIndex(), this.currentBlockchainIndex)) {
-            this.currentBlockchainIndex = message.blockchainIndex();
+        if (message.blockchainIndex().compareTo(this.nodeBlockchainIndex) != 0) {
+            this.nodeBlockchainIndex = message.blockchainIndex();
             this.nodeStatus.onNext(this.nodeStatus.getValue());
         }
     }
 
     public void terminateNodeConnection() {
         logger.info("[{}] Finalizando conexión {}", this.aanNodeValue.nodeId(), this);
-        this.currentBlockchainIndex = null;
+        this.nodeBlockchainIndex = -1L;
         this.nodeStatus.onNext(AANNetworkNodeStatusType.DISCONNECTED);
         this.peerConnection.closeConnection();
         if (onPeerMessageSubscription != null) {

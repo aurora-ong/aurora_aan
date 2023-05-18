@@ -29,4 +29,12 @@ public class CommandIntent {
     public void setCommandStatus(CommandStatus commandStatus) {
         this.commandStatus = commandStatus;
     }
+
+    @Override
+    public String toString() {
+        return "CommandIntent{" +
+                "commandId=" + commandData.commandId() +
+                ", commandStatus=" + commandStatus +
+                '}';
+    }
 }
