@@ -198,7 +198,12 @@ public class AANNetworkHost {
 
 
         // TODO SOLUCIONAR CASO INDEX == -1
-        boolean allNodesIndex = aanNetworkNodes.stream().allMatch(aanNetworkNode -> aanNetworkNode.nodeBlockchainIndex.compareTo(currentEventIndex) == 0);
+        // TODO CONSIDERAR NODOS ANONIMOS
+        // TODO CONSIDERAR RED CON UN NODO
+        logger.info("[blockchainBalance] allNodes");
+        aanNetworkNodes.forEach(aanNetworkNode -> logger.info(aanNetworkNode.toString()));
+        logger.info("allNodes currentEventIndex {}", currentEventIndex);
+        boolean allNodesIndex = aanNetworkNodes.stream().allMatch(aanNetworkNode -> aanNetworkNode.nodeBlockchainIndex.compareTo(currentEventIndex) == 0 && aanNetworkNode.nodeBlockchainIndex.compareTo(-1L) != 0);
 
         if (allNodesConnected && allNodesIndex) {
             logger.info("[blockchainBalance] Blockchain balanceada. Red lista");
@@ -210,13 +215,13 @@ public class AANNetworkHost {
         Optional<AANNetworkNode> nodeOptional = aanNetworkNodes.stream().filter(aanNetworkNode -> aanNetworkNode.currentStatus() == AANNetworkNodeStatusType.CONNECTED).filter(aanNetworkNode -> aanNetworkNode.nodeBlockchainIndex != null).filter(aanNetworkNode -> aanNetworkNode.nodeBlockchainIndex > currentEventIndex).findFirst();
 
         if (nodeOptional.isPresent()) {
-            logger.info("[blockchainBalance] Solicitando evento {} a {}", currentEventIndex + 1, nodeOptional.get().aanNodeValue.nodeId());
+            logger.info("[blockchainBalance] Solicitando evento {} a {}", currentEventIndex + 1, nodeOptional.get().nodeId());
             try {
                 Event a = nodeOptional.get().sendRequestBlock(currentEventIndex + 1).join();
                 aanBlockchain.persistEvent(a).join();
 
             } catch (Exception e) {
-                logger.error("Error al balancear bloque {} desde nodo {}", currentEventIndex + 1, nodeOptional.get().aanNodeValue.nodeId());
+                logger.error("Error al balancear bloque {} desde nodo {}", currentEventIndex + 1, nodeOptional.get().nodeId());
             }
         } else {
             logger.info("[blockchainBalance] Blockchain balanceada parcialmente");
@@ -238,7 +243,7 @@ public class AANNetworkHost {
                     .interval(5, 15, TimeUnit.SECONDS)
                     .doOnNext(aLong -> {
                         logger.info("[networkConnection] Intentando reconectar ({} intento)", aLong + 1);
-                        this.networkNodes.getValue().stream().filter(aanNetworkNode -> aanNetworkNode.currentStatus() == AANNetworkNodeStatusType.DISCONNECTED).forEach(aanNetwork::establishConnection);
+                        this.networkNodes.getValue().stream().filter(aanNetworkNode -> !aanNetworkNode.isAnonymous()).filter(aanNetworkNode -> aanNetworkNode.currentStatus() == AANNetworkNodeStatusType.DISCONNECTED).forEach(aanNetwork::establishConnection);
 
                     });
 
@@ -252,7 +257,7 @@ public class AANNetworkHost {
 
         Long eventId = Optional.ofNullable(pair.component2()).map(Event::eventId).orElse(-1L);
 
-        List<AANNetworkNode> notificableNodes = networkNodeList.stream().filter(aanNetworkNode -> aanNetworkNode.currentStatus() != AANNetworkNodeStatusType.DISCONNECTED).toList();
+        List<AANNetworkNode> notificableNodes = networkNodeList.stream().filter(aanNetworkNode -> aanNetworkNode.currentStatus() != AANNetworkNodeStatusType.DISCONNECTED).filter(aanNetworkNode -> !aanNetworkNode.isAnonymous()).toList();
 
         if (notificableNodes.isEmpty()) {
             logger.info("[blockchainUpdater] No hay nodos para enviar actualización");

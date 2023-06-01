@@ -82,6 +82,9 @@ public class libp2pNetwork implements AANNetwork {
 
     @Override
     public void establishConnection(AANNetworkNode aanNetworkNode) {
+        if (aanNetworkNode.isAnonymous()) {
+            throw new RuntimeException("No se puede establecer conexión con un nodo anónimo");
+        }
 
         try {
             RsaPublicKey rsaPublicKey = new RsaPublicKey(Utils.publicKeyFromString(aanNetworkNode.aanNodeValue.nodeSignature()));

@@ -157,12 +157,12 @@ public class ANNCore {
                     log.info("Nueva conexión entrante {} ", incomingPeer.getPeerIdentity());
 
                     if (networkNodes.getValue().isEmpty()) {
-                        // CREAR NETWORK PEER Y PUSHEAR
-                        AANNetworkNode networkNode = new AANNetworkNode(new AANNodeValue("unknown", "Desconocido", "", "", "", AANNodeStatus.ACTIVE), aanBlockchain);
+                        // CREAR NETWORK PEER ANÓNIMO
+                        AANNetworkNode networkNode = new AANNetworkNode(aanBlockchain);
                         networkNode.attachConnection(incomingPeer);
                         networkNodes.onNext(List.of(networkNode));
                     } else {
-                        Optional<AANNetworkNode> networkNodeOptional = networkNodes.getValue().stream().filter(aanNetworkNode -> aanNetworkNode.aanNodeValue.nodeSignature().equals(incomingPeer.getPeerIdentity())).findAny();
+                        Optional<AANNetworkNode> networkNodeOptional = networkNodes.getValue().stream().filter(aanNetworkNode -> !aanNetworkNode.isAnonymous()).filter(aanNetworkNode -> aanNetworkNode.aanNodeValue.nodeSignature().equals(incomingPeer.getPeerIdentity())).findAny();
 
                         if (networkNodeOptional.isPresent()) {
                             AANNetworkNode networkNode = networkNodeOptional.get();

@@ -48,7 +48,7 @@ public class libp2pNetworkPeer implements ProtocolMessageHandler<ByteBuf>, AANNe
 
         try {
             libp2pMessage aanMessage = aanSerializer.fromJSON(rawData.toString(StandardCharsets.UTF_8), libp2pMessage.class);
-//            log.info("Mensaje recibido desde {} {}", this.stream.getConnection().secureSession().getRemoteId(), aanMessage);
+            log.info("Mensaje recibido desde {} {}", this.stream.getConnection().secureSession().getRemoteId(), aanMessage);
             Object a = aanSerializer.fromJSON(aanMessage.encodedMessage(), aanMessage.messageType());
             onPeerMessage.onNext(a);
         } catch (Exception e) {
