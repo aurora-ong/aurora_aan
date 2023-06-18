@@ -7,8 +7,6 @@ import ong.aurora.aan.model.v_0_0_1.command.authorization.consume.AuthorizationC
 import ong.aurora.aan.model.v_0_0_1.command.authorization.create.AuthorizationCreate;
 import ong.aurora.aan.model.v_0_0_1.command.init.InitCommand;
 import ong.aurora.aan.model.v_0_0_1.command.member.add.AddMember;
-import ong.aurora.aan.model.v_0_0_1.command.node.add.AddNode;
-import ong.aurora.aan.model.v_0_0_1.command.node.update_status.UpdateNodeStatus;
 import ong.aurora.aan.model.v_0_0_1.command.ou.create.CreateOU;
 import ong.aurora.aan.model.v_0_0_1.command.person.create.CreatePerson;
 import ong.aurora.aan.model.v_0_0_1.entity.authorization.AuthorizationEntity;
@@ -27,7 +25,7 @@ public class AuroraOM implements AANModel {
 
     @Override
     public List<AANCommand> getModelCommands() {
-        return List.of(new CreatePerson(), new CreateOU(), new AddMember(), new AuthorizationCreate(), new AuthorizationConsume(), new AddNode(), new UpdateNodeStatus());
+        return List.of(new CreatePerson(), new CreateOU(), new AddMember(), new AuthorizationCreate(), new AuthorizationConsume());
     }
 
     @Override

@@ -1,39 +1,42 @@
 package ong.aurora.aan.core;
 
-import com.google.common.net.HostAndPort;
 import ong.aurora.aan.blockchain.AANBlockchain;
+import ong.aurora.aan.command.Command;
 import ong.aurora.aan.command.CommandProjectorQueryException;
 import ong.aurora.aan.config.AANConfig;
-import ong.aurora.aan.core.command_pool.CommandPool;
-import ong.aurora.aan.core.command_pool.CommandRestService;
 import ong.aurora.aan.core.network.AANNetwork;
-import ong.aurora.aan.core.network.AANNetworkHost;
 import ong.aurora.aan.core.network.AANNetworkNode;
 import ong.aurora.aan.core.network.AANNetworkNodeStatusType;
 import ong.aurora.aan.core.network.libp2p.libp2pNetwork;
+import ong.aurora.aan.core.network.node.command.add.AddNodeCommandData;
+import ong.aurora.aan.core.network.node.entity.AANNodeEntity;
+import ong.aurora.aan.core.network.node.entity.AANNodeStatus;
+import ong.aurora.aan.core.network.node.entity.AANNodeValue;
 import ong.aurora.aan.entity.MaterializedEntity;
 import ong.aurora.aan.event.Event;
 import ong.aurora.aan.model.AANModel;
 import ong.aurora.aan.model.v_0_0_1.AuroraOM;
-import ong.aurora.aan.node.AANNodeEntity;
-import ong.aurora.aan.node.AANNodeStatus;
-import ong.aurora.aan.node.AANNodeValue;
 import ong.aurora.aan.projector.AANProjector;
 import ong.aurora.aan.projector.rdb_projector.RDBProjector;
 import ong.aurora.aan.serialization.AANSerializer;
 import ong.aurora.aan.serialization.jackson.AANJacksonSerializer;
 import ong.aurora.aan.store.file.FileEventStore;
+import ong.aurora.aan.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
+import static java.lang.System.exit;
 
 public class ANNCore {
 
@@ -48,7 +51,7 @@ public class ANNCore {
 
         AANConfig aanConfig = AANConfig.fromEnviroment();
 
-        log.info("Iniciando nodo {}", aanConfig.nodeId);
+        log.info("Iniciando nodo: {} ({})", aanConfig.nodeName, aanConfig.nodeId);
 
         AANBlockchain aanBlockchain = new AANBlockchain(new FileEventStore(aanConfig.blockchainFilePath), aanSerializer);
 
@@ -117,6 +120,7 @@ public class ANNCore {
                         throw new RuntimeException(e);
                     }
                 })
+//                .skip(1)
                 .subscribe(event -> {
                     try {
                         List<MaterializedEntity<AANNodeValue>> allNodeList = aanProjector.queryAll(new AANNodeEntity());
@@ -130,7 +134,6 @@ public class ANNCore {
                 });
 
         projectorNodes.asObservable()
-                .doOnEach(notification -> log.info("!! Projector nodes"))
                 .observeOn(nodeUpdateScheduler)
                 .subscribe(annNodeValues -> {
 
@@ -144,7 +147,11 @@ public class ANNCore {
                     }
 
                     // CREAR NUEVOS NETWORK PEERS
-                    List<AANNetworkNode> networkNodes1 = annNodeValues.stream().filter(aanNodeValue -> aanNodeValue.nodeStatus() == AANNodeStatus.ACTIVE).filter(aanNodeValue -> !aanNodeValue.nodeId().equals(aanConfig.nodeId)).map(nodeValue -> new AANNetworkNode(nodeValue, aanBlockchain)).toList();
+                    List<AANNetworkNode> networkNodes1 = annNodeValues.stream()
+                            .filter(aanNodeValue -> aanNodeValue.nodeStatus() == AANNodeStatus.ACTIVE)
+                            .filter(aanNodeValue -> !aanNodeValue.nodeId().equals(aanConfig.nodeId))
+                            .map(nodeValue -> new AANNetworkNode(nodeValue, aanBlockchain))
+                            .toList();
                     networkNodes.onNext(networkNodes1);
 
                 });
@@ -177,7 +184,6 @@ public class ANNCore {
 
 
         networkNodes.asObservable()
-                .doOnEach(notification -> log.info("!! Network nodes"))
                 .observeOn(nodeUpdateScheduler)
                 .subscribe(annNodeValues -> {
                     log.info("======= networkNodes actualizados =======");
@@ -185,12 +191,56 @@ public class ANNCore {
                     log.info("==============");
                 });
 
-        AANNetworkHost aanHost = new AANNetworkHost(networkNodes, aanNetwork, aanBlockchain, nodeUpdateScheduler, aanProcessor);
+        if (aanBlockchain.isEmpty()) {
+            boolean initializeNode = Utils.requestConfirmation("Este nodo no se encuentra inicializado, ¿desea iniciarlo?");
 
-        // COMMAND POOL REST SERVICE
+            if (initializeNode) {
 
-        CommandRestService commandRestService = new CommandRestService(HostAndPort.fromParts("127.0.0.1", aanConfig.commandPort), aanHost);
-        commandRestService.start();
+                String config = String.format("""
+                        node_id: %s,
+                        node_name: %s,
+                        node_hostname: %s,
+                        node_port: %s,
+                        node_signature: %s,
+                        """, aanConfig.nodeId, aanConfig.nodeName, aanConfig.nodeHostname, aanConfig.nodePort, aanConfig.publicKey);
+
+                log.info("Inicializando nodo con la siguiente configuración: \n{}", config);
+
+                boolean confirmConfig = Utils.requestConfirmation("¿Desea proceder?");
+
+                if (confirmConfig) {
+                    log.info("Inicializando nodo...");
+                    Command command = new Command(
+                            UUID.randomUUID().toString(),
+                            Instant.now(),
+                            "ann_node.add",
+                            new AddNodeCommandData(
+                                    aanConfig.nodeId,
+                                    aanConfig.nodeName,
+                                    aanConfig.nodeHostname,
+                                    aanConfig.nodePort.toString(),
+                                    "sadsd"
+                            ).toMap()
+                    );
+                    aanProcessor.process(command).join();
+                    log.info("Nodo inicializado correctamente");
+                } else {
+                    log.error("Modifica la configuración y vuelve a intentarlo.");
+                    exit(0);
+                }
+            } else {
+                log.info("Esperando conexiones entrantes...");
+            }
+
+        }
+
+//        AANNetworkHost aanHost = new AANNetworkHost(networkNodes, aanNetwork, aanBlockchain, nodeUpdateScheduler, aanProcessor);
+//        AANNetworkHost2 aanHost = new AANNetworkHost2(projectorNodes, aanNetwork, aanBlockchain, nodeUpdateScheduler, aanProcessor);
+//
+//        // COMMAND POOL REST SERVICE
+//
+//        CommandRestService commandRestService = new CommandRestService(HostAndPort.fromParts("127.0.0.1", aanConfig.commandPort), aanHost);
+//        commandRestService.start();
 
 
     }

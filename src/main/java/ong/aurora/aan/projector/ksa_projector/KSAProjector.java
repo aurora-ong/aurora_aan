@@ -6,14 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ong.aurora.aan.command.CommandProjectorQueryException;
+import ong.aurora.aan.core.network.node.entity.AANNodeEntity;
 import ong.aurora.aan.entity.AANEntity;
+import ong.aurora.aan.entity.EntityValue;
 import ong.aurora.aan.entity.MaterializedEntity;
 import ong.aurora.aan.event.Event;
 import ong.aurora.aan.model.AANModel;
-import ong.aurora.aan.node.AANNodeEntity;
 import ong.aurora.aan.projector.AANProjector;
 import ong.aurora.aan.serialization.JsonSerdes;
-import ong.aurora.aan.entity.EntityValue;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -48,6 +48,8 @@ public class KSAProjector implements AANProjector {
 
     AANModel aanModel;
 
+    List<AANEntity> proyectorEntities = new ArrayList<>();
+
 
     public KSAProjector(String host, String kafkaCluster, AANModel aanModel) {
         this.host = host;
@@ -57,18 +59,14 @@ public class KSAProjector implements AANProjector {
         props.put("bootstrap.servers", kafkaCluster);
         props.put("acks", "all");
         this.producer = new KafkaProducer<>(props, Serdes.Long().serializer(), JsonSerdes.getJSONSerde(Event.class).serializer());
+
+        proyectorEntities.addAll(List.of(new AANNodeEntity()));
+        proyectorEntities.addAll(aanModel.getModelEntities());
     }
 
     @Override
     public CompletableFuture<Void> startProjector() throws Exception {
         logger.info("Cargando projector-ksa");
-
-        List<AANEntity> aanEntities = List.of(new AANNodeEntity());
-
-        List<AANEntity> proyectorEntities = new ArrayList<>();
-        proyectorEntities.addAll(aanEntities);
-        proyectorEntities.addAll(aanModel.getModelEntities());
-
 
         Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "projector-ksa");

@@ -1,4 +1,4 @@
-package ong.aurora.aan.model.v_0_0_1.command.node.update_status;
+package ong.aurora.aan.core.network.node.command.update_status;
 
 import ong.aurora.aan.command.AANCommand;
 import ong.aurora.aan.command.Command;
@@ -6,10 +6,10 @@ import ong.aurora.aan.command.CommandProjectorQueryException;
 import ong.aurora.aan.command.CommandValidationException;
 import ong.aurora.aan.entity.MaterializedEntity;
 import ong.aurora.aan.event.EventData;
-import ong.aurora.aan.node.AANNodeEntity;
-import ong.aurora.aan.node.AANNodeKey;
-import ong.aurora.aan.node.AANNodeStatus;
-import ong.aurora.aan.node.AANNodeValue;
+import ong.aurora.aan.core.network.node.entity.AANNodeEntity;
+import ong.aurora.aan.core.network.node.entity.AANNodeKey;
+import ong.aurora.aan.core.network.node.entity.AANNodeStatus;
+import ong.aurora.aan.core.network.node.entity.AANNodeValue;
 import ong.aurora.aan.projector.AANProjector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package ong.aurora.aan.model.v_0_0_1.command.node.update_status;
+package ong.aurora.aan.core.network.node.command.update_status;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ong.aurora.aan.command.CommandData;

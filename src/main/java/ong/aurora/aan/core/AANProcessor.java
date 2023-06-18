@@ -2,6 +2,8 @@ package ong.aurora.aan.core;
 
 import ong.aurora.aan.blockchain.AANBlockchain;
 import ong.aurora.aan.command.*;
+import ong.aurora.aan.core.network.node.command.add.AddNode;
+import ong.aurora.aan.core.network.node.command.update_status.UpdateNodeStatus;
 import ong.aurora.aan.event.Event;
 import ong.aurora.aan.event.EventData;
 import ong.aurora.aan.model.AANModel;
@@ -10,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 
@@ -21,10 +25,15 @@ public class AANProcessor {
     AANBlockchain aanBlockchain;
     AANProjector aanProjector;
 
+    List<AANCommand> aanCommandList = new ArrayList<>();
+
+
     public AANProcessor(AANBlockchain aanBlockchain, AANModel aanModel, AANProjector aanProjector) {
         this.aanBlockchain = aanBlockchain;
         this.aanModel = aanModel;
         this.aanProjector = aanProjector;
+        aanCommandList.addAll(this.aanModel.getModelCommands());
+        aanCommandList.addAll(List.of(new AddNode(), new UpdateNodeStatus()));
     }
 
     public CompletableFuture<Void> process(Command command) {
@@ -34,7 +43,7 @@ public class AANProcessor {
         try {
 
             // OBTENER PROCESADOR DE COMANDO
-            AANCommand commandProcessor = this.aanModel.getModelCommands().stream().filter(aanCommand -> aanCommand.commandName().equals(command.commandName())).findFirst().orElseThrow(() -> new CommandNotFoundException(command.commandName()));
+            AANCommand commandProcessor = aanCommandList.stream().filter(aanCommand -> aanCommand.commandName().equals(command.commandName())).findFirst().orElseThrow(() -> new CommandNotFoundException(command.commandName()));
 
             logger.info("Validando comando");
 

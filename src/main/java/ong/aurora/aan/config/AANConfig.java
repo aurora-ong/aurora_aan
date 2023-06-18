@@ -17,6 +17,10 @@ public class AANConfig {
 
     public String nodeId;
 
+    public String nodeName;
+
+    public String nodeHostname;
+
     public PrivateKey privateKey;
 
     public PublicKey publicKey;
@@ -25,33 +29,35 @@ public class AANConfig {
 
     public Integer commandPort;
 
-    public Integer networkPort;
+    public Integer nodePort;
 
     public Integer projectorPort;
 
 
     @Override
     public String toString() {
-        return "AANConfig{" +
-                "nodeId='" + nodeId + '\'' +
-                ", privateKey=" + privateKey +
-                ", publicKey=" + publicKey +
-                ", blockchainFilePath='" + blockchainFilePath + '\'' +
-                ", commandPort=" + commandPort +
-                ", networkNodePort=" + networkPort +
-                ", projectorPort=" + projectorPort +
-                '}';
+        return  "nodeId=" + nodeId + "\n" +
+                "nodeName=" + nodeName + "\n" +
+                "nodeHostname=" + nodeHostname + "\n" +
+                "privateKey=" + privateKey.getEncoded() + "\n" +
+                "publicKey=" + publicKey.getEncoded() + "\n" +
+                "blockchainFilePath='" + blockchainFilePath + "\n" +
+                "commandPort=" + commandPort + "\n" +
+                "networkNodePort=" + nodePort + "\n" +
+                "projectorPort=" + projectorPort;
     }
 
-    private AANConfig(String nodeId, PublicKey nodeKeyPublic, PrivateKey nodeKeyPrivate, String blockchainFilePath, Integer commandPort, Integer networkPort, Integer projectorPort) {
+    private AANConfig(String nodeId, String nodeName, String nodeHostname, PublicKey nodeKeyPublic, PrivateKey nodeKeyPrivate, String blockchainFilePath, Integer commandPort, Integer nodePort, Integer projectorPort) {
         this.nodeId = nodeId;
+        this.nodeName = nodeName;
+        this.nodeHostname = nodeHostname;
         this.publicKey = nodeKeyPublic;
         this.privateKey = nodeKeyPrivate;
         this.blockchainFilePath = blockchainFilePath;
         this.commandPort = commandPort;
-        this.networkPort = networkPort;
+        this.nodePort = nodePort;
         this.projectorPort = projectorPort;
-        log.info("Configuración cargada {}", this);
+        log.info("Configuración cargada:\n\n{}\n", this);
     }
 
     public static AANConfig fromEnviroment() {
@@ -60,7 +66,13 @@ public class AANConfig {
 
         Map<String, String> env = System.getenv();
 
+        log.debug("ENV CONFIG \n{}\n", env);
+
         String nodeId = env.get("AAN_NODE_ID");
+
+        String nodeName = env.get("AAN_NODE_NAME");
+
+        String nodeHostname = env.get("AAN_NODE_HOSTNAME");
 
         String nodeKeyPublicString = env.get("AAN_NODE_KEY_PUBLIC");
 
@@ -71,15 +83,23 @@ public class AANConfig {
         String commandPortString = env.get("AAN_COMMAND_PORT");
         int commandPort = 6000;
 
-        String networkPortString = env.get("AAN_NETWORK_PORT");
-        int networkPort = 4000;
+        String networkPortString = env.get("AAN_NODE_PORT");
+        int nodePort = 4000;
 
         String projectorPortString = env.get("AAN_PROJECTOR_PORT");
         int projectorPort = 8000;
 
 
         if (nodeId == null || nodeId.isEmpty()) {
-            throw new RuntimeException("Debe proporcionarse un identificador de nodo");
+            throw new RuntimeException("Debe proporcionarse un identificador para este nodo");
+        }
+
+        if (nodeName == null || nodeName.isEmpty()) {
+            throw new RuntimeException("Debe proporcionarse un nombre para este nodo");
+        }
+
+        if (nodeHostname == null || nodeHostname.isEmpty()) {
+            throw new RuntimeException("Debe proporcionarse un hostname para este nodo");
         }
 
         if (nodeKeyPublicString == null || nodeKeyPublicString.isEmpty()) {
@@ -100,14 +120,14 @@ public class AANConfig {
         }
 
         if (networkPortString != null && !networkPortString.isEmpty()) {
-            networkPort = Integer.parseInt(networkPortString);
+            nodePort = Integer.parseInt(networkPortString);
         }
 
         if (projectorPortString != null && !projectorPortString.isEmpty()) {
             projectorPort = Integer.parseInt(projectorPortString);
         }
 
-        return new AANConfig(nodeId, nodeKeyPublic, nodeKeyPrivate, blockchainFilePath, commandPort, networkPort, projectorPort);
+        return new AANConfig(nodeId, nodeName, nodeHostname, nodeKeyPublic, nodeKeyPrivate, blockchainFilePath, commandPort, nodePort, projectorPort);
     }
 
     private static PublicKey publicKeyFromString(String publicKey) {

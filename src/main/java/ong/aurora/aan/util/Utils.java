@@ -6,6 +6,7 @@ import java.security.KeyFactory;
 import java.security.PublicKey;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
+import java.util.Scanner;
 
 public class Utils {
 
@@ -19,5 +20,23 @@ public class Utils {
         } catch (Exception e) {
             throw new RuntimeException("Clave pública inválida {}", e);
         }
+    }
+
+    public static boolean requestConfirmation(String message) {
+        do {
+            Scanner s = new Scanner(System.in);
+            System.out.printf("%s Y/n%n", message);
+
+            String r = s.nextLine();
+            if (r.equals("Y")) {
+                return true;
+            } else if (r.equals("n")) {
+                return false;
+            } else {
+                System.out.println("Opción inválida. Intente nuevamente");
+
+            }
+        } while (true);
+
     }
 }

@@ -8,7 +8,7 @@ import ong.aurora.aan.core.network.message.BlockchainBalancerBlockResponseMessag
 import ong.aurora.aan.core.network.message.BlockchainUpdaterBlockResponseMessage;
 import ong.aurora.aan.core.network.message.SendCommandMessage;
 import ong.aurora.aan.event.Event;
-import ong.aurora.aan.node.AANNodeValue;
+import ong.aurora.aan.core.network.node.entity.AANNodeValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rx.Observable;

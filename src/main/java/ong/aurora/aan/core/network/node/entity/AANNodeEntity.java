@@ -1,4 +1,4 @@
-package ong.aurora.aan.node;
+package ong.aurora.aan.core.network.node.entity;
 
 import ong.aurora.aan.entity.MaterializedEntity;
 import ong.aurora.aan.entity.AANEntity;

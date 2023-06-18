@@ -1,4 +1,4 @@
-package ong.aurora.aan.model.v_0_0_1.command.node.add;
+package ong.aurora.aan.core.network.node.command.add;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ong.aurora.aan.command.CommandData;

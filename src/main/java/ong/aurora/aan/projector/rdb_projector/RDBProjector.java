@@ -1,13 +1,13 @@
 package ong.aurora.aan.projector.rdb_projector;
 
 import ong.aurora.aan.command.CommandProjectorQueryException;
-import ong.aurora.aan.entity.MaterializedEntity;
 import ong.aurora.aan.config.AANConfig;
+import ong.aurora.aan.core.network.node.entity.AANNodeEntity;
 import ong.aurora.aan.entity.AANEntity;
 import ong.aurora.aan.entity.EntityValue;
+import ong.aurora.aan.entity.MaterializedEntity;
 import ong.aurora.aan.event.Event;
 import ong.aurora.aan.model.AANModel;
-import ong.aurora.aan.node.AANNodeEntity;
 import ong.aurora.aan.projector.AANProjector;
 import ong.aurora.aan.serialization.AANSerializer;
 import org.apache.kafka.streams.state.HostInfo;
@@ -35,21 +35,20 @@ public class RDBProjector implements AANProjector {
     AANConfig aanConfig;
     AANModel aanModel;
 
+    List<AANEntity> proyectorEntities = new ArrayList<>();
+
+
     public RDBProjector(AANSerializer aanSerializer, AANConfig aanConfig, AANModel aanModel) {
         this.aanSerializer = aanSerializer;
         this.aanConfig = aanConfig;
         this.aanModel = aanModel;
+        proyectorEntities.addAll(List.of(new AANNodeEntity()));
+        proyectorEntities.addAll(aanModel.getModelEntities());
     }
 
     @Override
     public CompletableFuture<Void> startProjector() throws Exception {
         RocksDB.loadLibrary();
-
-
-        List<AANEntity> proyectorEntities = new ArrayList<>();
-
-        proyectorEntities.add(new AANNodeEntity());
-        proyectorEntities.addAll(aanModel.getModelEntities());
 
         rdbEntityMap = proyectorEntities.stream().collect(Collectors.toMap(entity -> entity.entityName, entity -> {
             try {

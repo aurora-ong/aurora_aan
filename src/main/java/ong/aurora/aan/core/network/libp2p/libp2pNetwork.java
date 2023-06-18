@@ -44,7 +44,7 @@ public class libp2pNetwork implements AANNetwork {
                     return null;
                 })
                 .network(networkConfigBuilder -> {
-                    String add = "/dns4/".concat("localhost").concat("/tcp/".concat(aanConfig.networkPort.toString()));
+                    String add = "/dns4/".concat("localhost").concat("/tcp/".concat(aanConfig.nodePort.toString()));
                     networkConfigBuilder.listen(add);
                     return null;
                 })

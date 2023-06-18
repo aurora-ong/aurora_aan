@@ -1,4 +1,4 @@
-package ong.aurora.aan.node;
+package ong.aurora.aan.core.network.node.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ong.aurora.aan.event.Event;
