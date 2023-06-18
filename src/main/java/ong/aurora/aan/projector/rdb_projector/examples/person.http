@@ -1,5 +1,5 @@
 ### Obtener todos
-GET http://localhost:8002/person/all
+GET http://localhost:8000/person/all
 Accept: application/json
 
 ### Obtener uno
@@ -12,10 +12,10 @@ Content-Type: application/json
 }
 
 ### Obtener trace
-GET http://localhost:8001/person/trace
+GET http://localhost:8000/person/trace
 Accept: application/json
 Content-Type: application/json
 
 {
-  "person_id": "adccb525-ce2a-42d2-8830-4f1e2ec879c3"
+  "person_id": "d30fb777-4f8d-4c9f-91e6-31db890c9fa3"
 }

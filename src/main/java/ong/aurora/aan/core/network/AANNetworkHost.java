@@ -304,7 +304,9 @@ public class AANNetworkHost {
 
 //        this.networkNodes.getValue().stream().forEach(aanNetworkNode -> aanNetworkNode.sendCommand(command));
 
+
         networkBroadcast(new SendCommandMessage(command));
+        logger.info("Nuevo comando aceptado {}", command);
 
         return commandId;
     }

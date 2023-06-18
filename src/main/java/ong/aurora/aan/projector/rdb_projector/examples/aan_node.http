@@ -1,5 +1,5 @@
 ### Obtener todos
-GET http://localhost:8002/aan_node/all
+GET http://localhost:8000/aan_node/all
 Accept: application/json
 
 ### Obtener uno
