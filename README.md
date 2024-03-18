@@ -2,7 +2,6 @@
 # AURORA-AAN
 - [![Java](https://img.shields.io/badge/Java-17-blue?style=flat-square&logo=java)](https://docs.oracle.com/en/java/)
 - [![Docker](https://img.shields.io/badge/Docker-Latest-blue?style=flat-square&logo=docker)](https://www.docker.com/)
-- [![Kafka](https://img.shields.io/badge/Apache%20Kafka-Latest-white?style=flat-square&logo=apache-kafka)](https://kafka.apache.org/)
 - [![RocksDB](https://img.shields.io/badge/RocksDB-7.10.2-yellow?style=flat-square&logo=rocksdb)](https://rocksdb.org/)
 - [![RxJava](https://img.shields.io/badge/RxJava-1.3.8-red?style=flat-square&logo=reactivex)](https://github.com/ReactiveX/RxJava)
 - [![Javalin](https://img.shields.io/badge/Javalin-4.6.1-blue?style=flat-square&logo=javalin)](https://javalin.io/)
